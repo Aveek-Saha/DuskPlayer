@@ -1,0 +1,58 @@
+{
+  "name": "music-player",
+  "version": "1.0.0",
+  "homepage": "https://aveek-saha.github.io",
+  "description": "A music player for your desktop",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "pack": "build --dir",
+    "dist": "build"
+  },
+  "build": {
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "maintainer": "Aveek <aveek.s98@gmail.com>",
+      "icon": "build/512x512.png"
+    },
+    "win": {
+      "target": "squirrel",
+      "icon": "build/icon.ico"
+    }
+  },
+  "author": "Aveek Saha",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^1.8.4",
+    "electron-builder": "^20.6.2",
+    "electron-packager": "^11.1.0"
+  },
+  "dependencies": {
+    "angular": "^1.6.9",
+    "angular-route": "^1.6.9",
+    "bootstrap": "4.0.0",
+    "howler": "^2.0.9",
+    "jquery": "^3.3.1",
+    "jsmediatags": "^3.8.1",
+    "path": "^0.12.7",
+    "popper.js": "^1.14.1"
+  }
+}

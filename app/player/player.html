@@ -1,0 +1,52 @@
+<div class="row">
+    
+    <!-- <div id="picture"></div> -->
+    <div class="col-md-12 text-center">
+        <div id="title">
+            <h1 id="track"> {{trackName}} </h1>
+            <h3 id="artist"> {{trackArtist}} </h3><br>
+
+        </div>
+    </div>
+        
+    <div class="col-md-12 text-center">
+        <div id="timer">0:00 &nbsp;</div>
+        <div id="duration">&nbsp; {{timer}} </div>
+        <div id="bar" ng-hide="songPlaying"></div>
+        <!-- <div id="waveform" ng-show="songPlaying" ng-click="seekToTime($event)"></div> -->
+
+        <div class="progress" id="seek" ng-click="seekToTime($event)">
+            <div class="progress-bar bg-danger" role="progressbar" id="progress" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+        <!-- <div id="progress"></div> -->
+    <div class="col-md-12 text-center">
+        <div id="loading"></div>
+        <button type="button" id="prevBtn" class="btn btn-primary-outline btn-lg" ng-click="prevSong()">
+                <i class="fas fa-step-backward fa-lg fa-inverse"></i>
+        </button>
+        <button type="button" id="playBtn" class="btn btn-primary-outline btn-lg" ng-show="!songPlaying" ng-click="playMusic()">
+            <i class="fas fa-play fa-2x fa-inverse"></i>
+        </button>
+        <button type="button" id="pauseBtn" class="btn btn-primary-outline btn-lg" ng-show="songPlaying" ng-click="playMusic()">
+            <i class="fas fa-pause fa-2x fa-inverse"></i>
+        </button>
+        <button type="button" id="nextBtn" class="btn btn-primary-outline btn-lg" ng-click="nextSong()">
+            <i class="fas fa-step-forward fa-lg fa-inverse"></i>
+        </button>
+
+    </div><br>
+    <div class="col-md-12" id="outerCtrl">
+        <button type="button" id="playlistBtn" class="btn btn-primary-outline btn-lg justify-content-start" ng-click="showPlaylist()">
+            <i class="fas fa-list fa-lg fa-inverse"></i>
+        </button>
+        <div class="slidecontainer justify-content-end">
+            <input type="range" min="0" max="100" value="100" class="slider" id="myRange">
+          </div>
+    </div>
+    <div id="playlist" ng-show="playListVisible">
+            <div id="list">
+                <div class="list-song" ng-repeat="song in player.playlist" ng-click="playPlaylistSong($index)">{{song.name}}</div>
+            </div>
+        </div>
+</div>
