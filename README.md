@@ -11,7 +11,7 @@ Clone the repository, then navigate to it on your terminal and run ```npm instal
 
 # Features
 <ul>
-  <li>Supports: mp3, opus, ogg, wav, aac, "4a, webm.</li>
+  <li>Supports: mp3, opus, ogg, wav, aac, m4a, webm.</li>
   <li>Quickly switch tracks in the same folder, from the playlist button.</li>
   <li>Fine tune the volume from the volume slider</li>
   <li>Reads ID3 tags and displays the artist and album art (if they exist)</li>
