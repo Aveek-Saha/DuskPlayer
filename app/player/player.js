@@ -102,6 +102,8 @@ angular.module('Player.player',['ngRoute', 'angular-siri-wave'])
 
           index = typeof index === 'number' ? index : self.index;
           var data = self.playlist[index];
+          $scope.trackName = data.name;
+          $scope.trackArtist = "";
           console.log(data);
           new jsmediatags.Reader(data.file)
             .setTagsToRead(["title", "artist","picture"])
@@ -110,10 +112,6 @@ angular.module('Player.player',['ngRoute', 'angular-siri-wave'])
                 if (tag.tags.title){
                   $scope.trackName = tag.tags.title;
                   $scope.trackArtist = tag.tags.artist
-                }
-                else {
-                  $scope.trackName = data.name;
-                  $scope.trackArtist = "";
                 }
                 var image = tag.tags.picture;
                 if (image) {
