@@ -1,7 +1,5 @@
 # Music Player
 
-[![Travis](https://img.shields.io/travis/USER/REPO.svg?style=for-the-badge)](https://github.com/Aveek-Saha/MusicPlayer)
-
 This is a music player built on electron, using Node for the backend, Howler for handling music playback, Express for routing, Angularjs and Bootstrap for the frontend, and jsmediatags to retrieve the ID3 tags.
 
 # How to use
