@@ -59,6 +59,7 @@ function openFolderDialog(){
   dialog.showOpenDialog(win,{
     properties: ['openDirectory']
   },function(filePath){
+    if(!filePath) return;
     fs.readdir(filePath[0], function (err, files){
       var arr = [];
       for(var i = 0; i < files.length; i++){
