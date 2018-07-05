@@ -20,3 +20,5 @@ Clone the repository, then navigate to it on your terminal and run ```npm instal
   <li>Fine tune the volume from the volume slider</li>
   <li>Reads ID3 tags and displays the artist and album art (if they exist)</li>
 </ul>
+
+<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
