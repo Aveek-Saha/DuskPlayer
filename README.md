@@ -3,7 +3,7 @@
 [![GitHub license](https://img.shields.io/github/license/Aveek-Saha/MusicPlayer.svg?style=for-the-badge)](https://github.com/Aveek-Saha/MusicPlayer/blob/master/LICENSE) [![npm](https://img.shields.io/npm/v/npm.svg?style=for-the-badge)](https://github.com/Aveek-Saha/MusicPlayer)  [![Github All Releases](https://img.shields.io/github/downloads/Aveek-Saha/MusicPlayer/total.svg?style=for-the-badge)](https://github.com/Aveek-Saha/MusicPlayer)
 
 
-This is a music player built on electron, using Node for the backend, Howler for handling music playback, Express for routing, Angularjs and Bootstrap for the frontend, and jsmediatags to retrieve the ID3 tags.
+This is a music player built on electron, using Node for the backend, Howler for handling music playback, Express for routing, AngularJS and Bootstrap for the frontend, and jsmediatags to retrieve the ID3 tags.
 
 # How to use
 ### 1. The application
