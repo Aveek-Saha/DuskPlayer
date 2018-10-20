@@ -5,7 +5,9 @@
 
 
 
-This is a music player built on electron, using Node for the backend, Howler for handling music playback, Express for routing, AngularJS and Bootstrap for the frontend, and jsmediatags to retrieve the ID3 tags.
+This is a music player built on electron, using Node for the backend, Howler for handling music playback, Express for routing, AngularJS and Bootstrap for the frontend, and jsmediatags to retrieve the ID3 tags. 
+
+This can also serve as a starting point to impliment your own front-end/UI to the Player.
 
 # How to use
 ### 1. The application
