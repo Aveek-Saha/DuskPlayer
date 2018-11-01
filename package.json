@@ -1,6 +1,6 @@
 {
-  "name": "music-player",
-  "version": "1.0.0",
+  "name": "DuskPlayer",
+  "version": "2.0.0",
   "homepage": "https://aveek-saha.github.io",
   "description": "A music player for your desktop",
   "main": "main.js",
@@ -31,7 +31,7 @@
         "deb"
       ],
       "maintainer": "Aveek <aveek.s98@gmail.com>",
-      "icon": "build/512x512.png"
+      "icon": "build"
     },
     "win": {
       "target": "squirrel",
@@ -42,13 +42,13 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^1.8.4",
-    "electron-builder": "^20.6.2",
+    "electron-builder": "19.47.1",
     "electron-packager": "^11.1.0"
   },
   "dependencies": {
     "angular": "^1.6.9",
     "angular-route": "^1.6.9",
-    "bootstrap": "4.0.0",
+    "bootstrap": "4.1.3",
     "howler": "^2.0.9",
     "jquery": "^3.3.1",
     "jsmediatags": "^3.8.1",
