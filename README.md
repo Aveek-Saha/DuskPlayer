@@ -28,7 +28,7 @@ Clone the repository, then navigate to it on your terminal and run ```npm instal
   <li>Reads ID3 tags and displays the artist and album art (if they exist)</li>
 </ul>
 
-# New Features (v2.0.0)
+# New Features/Changes (v2.0.0)
 * When you open the app, it starts playing music from the directory that you last played music from. This means that you can skip having to select a directory when you open the app.
 * Changed the name to Dusk Player, Music player was too generic.
 * You can now play tracks on shuffle.
