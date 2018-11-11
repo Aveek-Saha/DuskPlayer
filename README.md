@@ -1,11 +1,15 @@
+
 <h1 align="center">
 	<br>
 	 Music Player <img width = "32px" src = "https://raw.githubusercontent.com/Aveek-Saha/MusicPlayer/master/dusk.png">
 
 </h1>
 
-[![Github All Releases](https://img.shields.io/github/downloads/Aveek-Saha/MusicPlayer/total.svg?style=for-the-badge)](https://github.com/Aveek-Saha/MusicPlayer) [![GitHub stars](https://img.shields.io/github/stars/Aveek-Saha/MusicPlayer.svg?style=for-the-badge)](https://github.com/Aveek-Saha/MusicPlayer/stargazers)  [![GitHub forks](https://img.shields.io/github/forks/Aveek-Saha/MusicPlayer.svg?style=for-the-badge)](https://github.com/Aveek-Saha/MusicPlayer/network)
-
+<h3 align="center">
+<img src ="https://img.shields.io/github/downloads/Aveek-Saha/MusicPlayer/total.svg?style=flat-square">
+<img src ="https://img.shields.io/github/stars/Aveek-Saha/MusicPlayer.svg?style=flat-square">
+<img src ="https://img.shields.io/github/forks/Aveek-Saha/MusicPlayer.svg?style=flat-square">
+</h3>
 
 A minimalistic music player, designed for simplicity. Built on electron, using Node for the backend, Howler for handling music playback, Express for routing, AngularJS and Bootstrap for the frontend, and jsmediatags to retrieve the ID3 tags. 
 
