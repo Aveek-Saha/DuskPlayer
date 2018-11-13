@@ -6,9 +6,9 @@
 </h1>
 
 <h3 align="center">
-<img src ="https://img.shields.io/github/downloads/Aveek-Saha/MusicPlayer/total.svg?style=flat-square">
-<img src ="https://img.shields.io/github/stars/Aveek-Saha/MusicPlayer.svg?style=flat-square">
-<img src ="https://img.shields.io/github/forks/Aveek-Saha/MusicPlayer.svg?style=flat-square">
+<img src ="https://img.shields.io/github/downloads/Aveek-Saha/MusicPlayer/total.svg?style=for-the-badge">
+<img src ="https://img.shields.io/github/stars/Aveek-Saha/MusicPlayer.svg?style=for-the-badge">
+<img src ="https://img.shields.io/github/forks/Aveek-Saha/MusicPlayer.svg?style=for-the-badge">
 </h3>
 
 A minimalistic music player, designed for simplicity. Built on electron, uses Howler for handling music playback, AngularJS and Bootstrap for the frontend, and jsmediatags to retrieve the ID3 tags. 
