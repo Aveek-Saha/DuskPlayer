@@ -11,7 +11,7 @@
 <img src ="https://img.shields.io/github/forks/Aveek-Saha/MusicPlayer.svg?style=flat-square">
 </h3>
 
-A minimalistic music player, designed for simplicity. Built on electron, using Node for the backend, Howler for handling music playback, Express for routing, AngularJS and Bootstrap for the frontend, and jsmediatags to retrieve the ID3 tags. 
+A minimalistic music player, designed for simplicity. Built on electron, uses Howler for handling music playback, AngularJS and Bootstrap for the frontend, and jsmediatags to retrieve the ID3 tags. 
 
 This can also serve as a starting point to impliment your own front-end/UI to the Player.
 
