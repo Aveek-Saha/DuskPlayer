@@ -46,12 +46,23 @@
         <div class="slidecontainer justify-content-start">
             <i class="fas fa-volume-down"></i>
             <i class="fas fa-volume-up" style="float: right"></i>
-            <input type="range" min="0" max="100" value="100" class="slider" id="myRange">
+            <input type="range" min="0" max="100" value="100" class="slider" ng-model="!mute" id="myRange">
         </div>
+
 
         <button type="button" id="playlistBtn" class="btn btn-primary-outline btn-lg justify-content-end" ng-click="showPlaylist()">
             <!-- <i class="fas fa-list fa-lg fa-inverse"></i> -->
             <i class="fas fa-bars fa-lg fa-inverse"></i>
+        </button>
+
+        <button type="button" id="checkboxrn" ng-show="mute" class="btn btn-primary-outline btn-lg justify-content-end"
+                ng-click="togglecheckbox()">
+            <i class="fas fa-volume-off fa-lg fa-inverse"></i>
+        </button>
+
+        <button type="button" id="checkboxrn" ng-show="!mute" class="btn btn-primary-outline btn-lg justify-content-end"
+                ng-click="togglecheckbox()">
+            <i class="fas fa-volume-up fa-lg fa-inverse"></i>
         </button>
 
         <button type="button" id="shuffleBtn" ng-show="shuffle" class="btn btn-primary-outline btn-lg justify-content-end"
