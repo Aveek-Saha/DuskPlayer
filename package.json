@@ -53,6 +53,7 @@
     "jquery": "^3.3.1",
     "jsmediatags": "^3.8.1",
     "path": "^0.12.7",
-    "popper.js": "^1.14.1"
+    "popper.js": "^1.14.1",
+    "about-window": "1.12.1"
   }
 }
