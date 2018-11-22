@@ -25,7 +25,7 @@ function createWindow() {
     {
       label: 'Info',
         click: function () {
-            openAboutWindow({ product_name: "Dusk Player", copyright: "By OpenSource Developers", icon_path: join(__dirname, 'build/icon.png'), open_devtools: process.env.NODE_ENV !== 'production',})
+            openAboutWindow({ product_name: "Dusk Player", copyright: "By OpenSource Developers", icon_path: join(__dirname, 'build/icon.png'),})
         }
     }
   ])
