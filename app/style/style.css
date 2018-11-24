@@ -63,6 +63,10 @@ body{
       float: right;
       margin-right:5% 
   }
+#checkboxrn{
+    float: right;
+    margin-right:5%
+}
   .slidecontainer {
       /* display: inline-block; */
       float: left;

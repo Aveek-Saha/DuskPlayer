@@ -12,10 +12,12 @@ angular.module('Player.player', ['ngRoute', 'angular-siri-wave'])
     $scope.songPlaying = false;
     $scope.playListVisible = false;
     $scope.shuffle = false;
+    $scope.mute = false;
     // $scope.playMusic();
 
     var slider = document.getElementById("myRange");
-    var sk = document.getElementById('seek')
+    var sk = document.getElementById('seek');
+    var checkbox = document.getElementById("checkboxrn")
 
     const ipc = require('electron').ipcRenderer;
     const jsmediatags = require("jsmediatags");
@@ -178,9 +180,21 @@ angular.module('Player.player', ['ngRoute', 'angular-siri-wave'])
       }
     }
 
+    $scope.togglecheckbox = function() {
+        if ($scope.mute) {
+            $scope.mute = false;
+            $scope.player.volume(slider.value / 100);
+        }
+        else {
+            $scope.mute = true;
+            $scope.player.volume(0);
+        }
+    }
+
     slider.oninput = function () {
       var val = slider.value / 100;
-      $scope.player.volume(val)
+      $scope.player.volume(val);
+      $scope.mute = false;
     }
 
     var Player = function (playlist) {
