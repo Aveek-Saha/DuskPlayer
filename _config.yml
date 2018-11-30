@@ -1,4 +1,5 @@
 theme: jekyll-theme-cayman
 show_downloads: false
+title: Music Player
 github:
   download_url: https://github.com/Aveek-Saha/MusicPlayer/releases
