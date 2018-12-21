@@ -1,0 +1,12 @@
+# Dependencies
+/node_modules
+
+# IDE - VSCode
+.vscode/*
+.idea/*
+!.vscode/launch.json
+
+# compiled output
+/dist
+/tmp
+/out-tsc
