@@ -15,6 +15,9 @@ A minimalistic music player, designed for simplicity. Built on electron, uses Ho
 
 This can also serve as a starting point to impliment your own front-end/UI to the Player.
 
+### NEW!
+Now toggle between Light and Dark modes, you have to restart the application for the change to take place. (still in beta)
+
 Download here: [Releases](https://github.com/Aveek-Saha/MusicPlayer/releases)
 
 # How to use

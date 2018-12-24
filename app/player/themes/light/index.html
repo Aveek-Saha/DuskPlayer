@@ -1,0 +1,97 @@
+<div class="row">
+
+<style>
+    body{
+        background-color: white;
+        color: black
+    }
+</style>
+    <!-- <div id="picture"></div> -->
+    <div class="col-md-12 text-center">
+        <div id="title">
+            <h1 id="track"> {{trackName}} </h1>
+            <h3 id="artist"> {{trackArtist}} </h3><br>
+
+        </div>
+    </div>
+
+    <div class="col-md-12 text-center">
+        <div id="loading"></div>
+        <button type="button" id="prevBtn" class="btn btn-primary-outline btn-lg" ng-click="prevSong()">
+            <i class="fas fa-step-backward fa-2x"></i>
+        </button>
+        <button type="button" id="playBtn" class="btn btn-primary-outline btn-lg" ng-show="!songPlaying" ng-click="playMusic()">
+            <!-- <i class="fas fa-play fa-2x  "></i> -->
+            <i class="far fa-play-circle fa-4x"></i>
+        </button>
+        <button type="button" id="pauseBtn" class="btn btn-primary-outline btn-lg" ng-show="songPlaying" ng-click="playMusic()">
+            <!-- <i class="fas fa-pause fa-2x  "></i> -->
+            <i class="far fa-pause-circle fa-4x  "></i>
+
+        </button>
+        <button type="button" id="nextBtn" class="btn btn-primary-outline btn-lg" ng-click="nextSong()">
+            <i class="fas fa-step-forward fa-2x  "></i>
+        </button>
+
+    </div>
+
+    <div class="col-md-12 text-center">
+        <div id="timer">0:00 </div>
+        <div id="duration">{{timer}} </div><br>
+        <!-- <div id="bar" ng-hide="songPlaying"></div> -->
+        <!-- <div id="waveform" ng-show="songPlaying" ng-click="seekToTime($event)"></div> -->
+
+        <div class="progress" id="seek" ng-click="seekToTime($event)">
+            <div class="progress-bar bg-danger" role="progressbar" id="progress"></div>
+        </div>
+    </div>
+    <!-- <div id="progress"></div> -->
+    <br>
+    <div class="col-md-12" id="outerCtrl">
+
+        <div class="slidecontainer justify-content-start">
+            <i class="fas fa-volume-down"></i>
+            <i class="fas fa-volume-up" style="float: right"></i>
+            <input type="range" min="0" max="100" value="100" class="slider" id="myRange">
+        </div>
+
+
+        <button type="button" id="playlistBtn" class="btn btn-primary-outline btn-lg justify-content-end" ng-click="showPlaylist()">
+            <!-- <i class="fas fa-list fa-lg  "></i> -->
+            <i class="fas fa-bars fa-lg  "></i>
+        </button>
+
+        <button type="button" id="shuffleBtn" ng-show="shuffle" class="btn btn-primary-outline btn-lg justify-content-end"
+            ng-click="toggleShuffle()">
+            <i class="fas fa-random fa-lg  "></i>
+        </button>
+
+        <button type="button" id="shuffleBtn" ng-show="!shuffle" class="btn btn-primary-outline btn-lg justify-content-end"
+            ng-click="toggleShuffle()">
+            <i class="fas fa-sync-alt fa-lg  "></i>
+        </button>
+
+        
+        <button type="button" id="checkboxrn" ng-show="mute" class="btn btn-primary-outline btn-lg justify-content-end"
+                ng-click="togglecheckbox()">
+            <i class="fas fa-volume-off fa-lg  "></i>
+        </button>
+
+        <button type="button" id="checkboxrn" ng-show="!mute" class="btn btn-primary-outline btn-lg justify-content-end"
+                ng-click="togglecheckbox()">
+            <i class="fas fa-volume-up fa-lg  "></i>
+        </button>
+
+
+    </div>
+
+    <div id="playlist" ng-show="playListVisible" class="list-group style-3">
+        <a href="" class="list-group-item list-group-item-action list" ng-repeat="song in player.playlist" ng-click="playPlaylistSong($index)">{{song.name}}</a>
+    </div>
+
+    <!-- <div id="playlist" ng-show="playListVisible">
+            <div id="list">
+                <div class="list-song" ng-repeat="song in player.playlist" ng-click="playPlaylistSong($index)">{{song.name}}</div>
+            </div>
+        </div> -->
+</div>

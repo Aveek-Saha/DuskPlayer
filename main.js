@@ -14,6 +14,17 @@ function createWindow() {
     height: 620,
     icon: __dirname + '/dusk.png' })
 
+    var light = false
+
+  fs.readFile('theme.txt', 'utf-8', function (err, buf) {
+    if (err)
+      return
+    var temp = buf.toString();
+    if (temp == "light")
+      light = true
+    // console.log(temp);
+  });
+
   var menu = Menu.buildFromTemplate([
     {
       label: 'Folders',
@@ -21,6 +32,31 @@ function createWindow() {
       click: function () {
         openFolderDialog()
       }
+    },
+    {
+      label: 'Theme',
+      submenu:[
+        {
+          label: 'Toggle', 
+          type: "checkbox",
+          checked: light,
+          click: function () {
+            var theme = ""
+            if(light){
+              theme = "dark"
+              light = false
+            }
+            else{
+              theme = "light"
+              light = true
+            }
+            fs.writeFile('theme.txt', theme, function (err, data) {
+                if (err) console.log(err);
+              });
+            // win.webContents.send('theme-change', msg)
+          }
+        }
+      ]
     },
     {
       label: 'Info',

@@ -3,6 +3,8 @@ angular.module('Player.player', ['ngRoute'])
   .config(['$routeProvider', ($routeProvider) => {
     $routeProvider.when('/player', {
       templateUrl: 'player/player.html', controller: 'Playerctrl'
+    }).when('/player/light', {
+      templateUrl: 'player/themes/light/index.html', controller: 'Playerctrl'
     })
   }])
   .controller('Playerctrl', ['$scope', '$location', function ($scope, $location) {
@@ -13,6 +15,7 @@ angular.module('Player.player', ['ngRoute'])
     $scope.playListVisible = false;
     $scope.shuffle = false;
     $scope.mute = false;
+    $scope.theme = "dark";
     // $scope.playMusic();
 
     var slider = document.getElementById("myRange");
@@ -22,6 +25,15 @@ angular.module('Player.player', ['ngRoute'])
     const ipc = require('electron').ipcRenderer;
     const jsmediatags = require("jsmediatags");
     const fs = require('fs')
+
+    fs.readFile('theme.txt', 'utf-8', function (err, buf) {
+      if (err)
+        return
+      var temp = buf.toString();
+      if(temp == "light")
+        $location.path('/player/light')
+      console.log(temp);
+    });
 
     fs.readFile('path.txt', 'utf-8', function (err, buf) {
       if (err) {
@@ -56,6 +68,14 @@ angular.module('Player.player', ['ngRoute'])
 
       })
     }
+    function themeChange() {
+      $location.path('/player/light')
+    }
+    ipc.on('theme-change', function (event, arg) {
+      // $location.path('/player/light')
+      
+      themeChange()
+    });
 
     ipc.on('selected-files', function (event, arg) {
       // console.log(arg)
@@ -89,6 +109,7 @@ angular.module('Player.player', ['ngRoute'])
       $scope.musicSelected = true;
       $scope.$apply()
 
+      $scope.playMusic()
       $scope.playMusic()
     }
 
@@ -273,7 +294,7 @@ angular.module('Player.player', ['ngRoute'])
         }
 
         var data = self.playlist[self.index];
-        console.log(data);
+        // console.log(data);
         tag(data);
 
         self.skipTo(index);
@@ -288,7 +309,7 @@ angular.module('Player.player', ['ngRoute'])
         }
 
         var data = self.playlist[index];
-        console.log(data);
+        // console.log(data);
         tag(data);
 
         if (!$scope.songPlaying) {
