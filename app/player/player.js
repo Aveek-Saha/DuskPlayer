@@ -1,5 +1,5 @@
 
-angular.module('Player.player', ['ngRoute', 'angular-siri-wave'])
+angular.module('Player.player', ['ngRoute'])
   .config(['$routeProvider', ($routeProvider) => {
     $routeProvider.when('/player', {
       templateUrl: 'player/player.html', controller: 'Playerctrl'

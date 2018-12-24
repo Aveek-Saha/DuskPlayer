@@ -1,7 +1,6 @@
 angular.module('Player', [
     'ngRoute',
-    'Player.player',
-    'angular-siri-wave'
+    'Player.player'
   ])
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
