@@ -10,9 +10,14 @@ let win
 
 function createWindow() {
   // Create the browser window.
-  win = new BrowserWindow({ width: 1000, 
+  win = new BrowserWindow({ 
+    width: 1000, 
     height: 620,
-    icon: __dirname + '/dusk.png' })
+    icon: __dirname + '/dusk.png',
+    webPreferences: {
+      nodeIntegration: true
+    }
+  })
 
     var light = false
 
@@ -37,8 +42,7 @@ function createWindow() {
       label: 'Theme',
       submenu:[
         {
-          label: 'Toggle', 
-          type: "checkbox",
+          label: 'Toggle',
           checked: light,
           click: function () {
             var theme = ""
