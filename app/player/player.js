@@ -76,25 +76,6 @@ angular.module('Player.player', ['ngRoute'])
       arg.path = filePath;
 
       startPlayer(arg)
-
-      // fs.readdir(filePath[0], function (err, files) {
-      //   var arr = [];
-      //   for (var i = 0; i < files.length; i++) {
-      //     if (files[i].substr(-4) === '.mp3' || files[i].substr(-4) === '.m4a'
-      //       || files[i].substr(-5) === '.webm' || files[i].substr(-4) === '.wav'
-      //       || files[i].substr(-4) === '.aac' || files[i].substr(-4) === '.ogg'
-      //       || files[i].substr(-5) === '.opus') {
-      //       arr.push(files[i]);
-      //     }
-      //   }
-      //   // console.log(filePath);
-      //   var arg = {};
-      //   arg.files = arr;
-      //   arg.path = filePath;
-
-      //   startPlayer(arg)
-
-      // })
     }
     function themeChange() {
       $location.path('/player/light')
