@@ -41,8 +41,8 @@
   "author": "Aveek Saha",
   "license": "MIT",
   "devDependencies": {
-    "electron": "5.0.0",
-    "electron-builder": "19.47.1",
+    "electron": "3.0.13",
+    "electron-builder": "20.38.3",
     "electron-packager": "^11.1.0"
   },
   "dependencies": {
@@ -54,6 +54,7 @@
     "jquery": "^3.4.0",
     "jsmediatags": "^3.8.1",
     "path": "^0.12.7",
-    "popper.js": "^1.14.1"
+    "popper.js": "^1.14.1",
+    "rabin-bindings": "^1.7.4"
   }
 }

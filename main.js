@@ -88,7 +88,7 @@ function createWindow() {
   // });
 
   // Open the DevTools.
-  // win.webContents.openDevTools()
+  win.webContents.openDevTools()
 
   // Emitted when the window is closed.
   win.on('closed', () => {
@@ -120,33 +120,60 @@ function openFolderDialog() {
       fs.writeFile('path.txt', filePath, function (err, data) {
         if (err) console.log(err);
       });
-      // console.log(filePath);
+      // console.log(walkSync(filePath[0]));
 
       scanDir(filePath)
     }
   })
 }
 
+var walkSync = function(dir, filelist) {
+  files = fs.readdirSync(dir);
+  filelist = filelist || [];
+  files.forEach(function(file) {
+    if (fs.statSync(path.join(dir, file)).isDirectory()) {
+      filelist = walkSync(path.join(dir, file), filelist);
+    }
+    else {
+      if (file.substr(-4) === '.mp3' || file.substr(-4) === '.m4a'
+        || file.substr(-5) === '.webm' || file.substr(-4) === '.wav'
+        || file.substr(-4) === '.aac' || file.substr(-4) === '.ogg'
+        || file.substr(-5) === '.opus') {
+        filelist.push(path.join(dir, file));
+      }
+    }
+  });
+  return filelist;
+};
+
 function scanDir(filePath) {
   if (!filePath || filePath[0] == 'undefined') return;
 
-  fs.readdir(filePath[0], function (err, files) {
-    var arr = [];
-    for (var i = 0; i < files.length; i++) {
-      if (files[i].substr(-4) === '.mp3' || files[i].substr(-4) === '.m4a'
-        || files[i].substr(-5) === '.webm' || files[i].substr(-4) === '.wav'
-        || files[i].substr(-4) === '.aac' || files[i].substr(-4) === '.ogg'
-        || files[i].substr(-5) === '.opus') {
-        arr.push(files[i]);
-      }
-    }
-    // console.log(filePath);
-    var objToSend = {};
-    objToSend.files = arr;
-    objToSend.path = filePath;
+  var arr = walkSync(filePath[0]);
 
-    win.webContents.send('selected-files', objToSend)
-    // console.log(win.webContents);
+  var objToSend = {};
+  objToSend.files = arr;
+  objToSend.path = filePath;
 
-  })
+  win.webContents.send('selected-files', objToSend)
+
+  // fs.readdir(filePath[0], function (err, files) {
+  //   var arr = [];
+  //   for (var i = 0; i < files.length; i++) {
+  //     if (files[i].substr(-4) === '.mp3' || files[i].substr(-4) === '.m4a'
+  //       || files[i].substr(-5) === '.webm' || files[i].substr(-4) === '.wav'
+  //       || files[i].substr(-4) === '.aac' || files[i].substr(-4) === '.ogg'
+  //       || files[i].substr(-5) === '.opus') {
+  //       arr.push(files[i]);
+  //     }
+  //   }
+  //   // console.log(filePath);
+  //   var objToSend = {};
+  //   objToSend.files = arr;
+  //   objToSend.path = filePath;
+
+  //   win.webContents.send('selected-files', objToSend)
+  //   // console.log(win.webContents);
+
+  // })
 }

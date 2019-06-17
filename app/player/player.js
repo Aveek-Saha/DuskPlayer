@@ -25,6 +25,7 @@ angular.module('Player.player', ['ngRoute'])
     const ipc = require('electron').ipcRenderer;
     const jsmediatags = require("jsmediatags");
     const fs = require('fs')
+    const path = require('path')
 
     fs.readFile('theme.txt', 'utf-8', function (err, buf) {
       if (err)
@@ -46,27 +47,54 @@ angular.module('Player.player', ['ngRoute'])
 
     });
 
+    var walkSync = function (dir, filelist) {
+      files = fs.readdirSync(dir);
+      filelist = filelist || [];
+      files.forEach(function (file) {
+        if (fs.statSync(path.join(dir, file)).isDirectory()) {
+          filelist = walkSync(path.join(dir, file), filelist);
+        }
+        else {
+          if (file.substr(-4) === '.mp3' || file.substr(-4) === '.m4a'
+            || file.substr(-5) === '.webm' || file.substr(-4) === '.wav'
+            || file.substr(-4) === '.aac' || file.substr(-4) === '.ogg'
+            || file.substr(-5) === '.opus') {
+            filelist.push(path.join(dir, file));
+          }
+        }
+      });
+      return filelist;
+    };
+
     function scanDir(filePath) {
       if (!filePath || filePath[0] == 'undefined') return;
 
-      fs.readdir(filePath[0], function (err, files) {
-        var arr = [];
-        for (var i = 0; i < files.length; i++) {
-          if (files[i].substr(-4) === '.mp3' || files[i].substr(-4) === '.m4a'
-            || files[i].substr(-5) === '.webm' || files[i].substr(-4) === '.wav'
-            || files[i].substr(-4) === '.aac' || files[i].substr(-4) === '.ogg'
-            || files[i].substr(-5) === '.opus') {
-            arr.push(files[i]);
-          }
-        }
-        // console.log(filePath);
-        var arg = {};
-        arg.files = arr;
-        arg.path = filePath;
+      var arr = walkSync(filePath[0]);
 
-        startPlayer(arg)
+      var arg = {};
+      arg.files = arr;
+      arg.path = filePath;
 
-      })
+      startPlayer(arg)
+
+      // fs.readdir(filePath[0], function (err, files) {
+      //   var arr = [];
+      //   for (var i = 0; i < files.length; i++) {
+      //     if (files[i].substr(-4) === '.mp3' || files[i].substr(-4) === '.m4a'
+      //       || files[i].substr(-5) === '.webm' || files[i].substr(-4) === '.wav'
+      //       || files[i].substr(-4) === '.aac' || files[i].substr(-4) === '.ogg'
+      //       || files[i].substr(-5) === '.opus') {
+      //       arr.push(files[i]);
+      //     }
+      //   }
+      //   // console.log(filePath);
+      //   var arg = {};
+      //   arg.files = arr;
+      //   arg.path = filePath;
+
+      //   startPlayer(arg)
+
+      // })
     }
     function themeChange() {
       $location.path('/player/light')
@@ -97,10 +125,13 @@ angular.module('Player.player', ['ngRoute'])
       // var pth = arg.path;
 
       for (let i = 0; i < $scope.songList.files.length; i++) {
+        var len = $scope.songList.files[i].split("/").length - 1
         songArr.push({
-          title: arg.path + '/' + $scope.songList.files[i],
-          file: arg.path + '/' + $scope.songList.files[i],
-          name: $scope.songList.files[i],
+          // title: arg.path + '/' + $scope.songList.files[i],
+          // file: arg.path + '/' + $scope.songList.files[i],
+          title: $scope.songList.files[i],
+          file: $scope.songList.files[i],
+          name: $scope.songList.files[i].split("/")[len],
           howl: null
         });
       }
