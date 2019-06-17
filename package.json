@@ -1,6 +1,6 @@
 {
   "name": "DuskPlayer",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "homepage": "https://aveek-saha.github.io",
   "description": "A music player for your desktop",
   "main": "main.js",
