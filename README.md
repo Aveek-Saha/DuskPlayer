@@ -39,7 +39,7 @@ Clone the repository, then navigate to it on your terminal and run ```npm instal
 * Now choose between a Dark and Light mode!
 * Recursively finds audio files in all sub directories of the chosen directory
 
-# New Features/Changes (v2.0.0)
+# v2.0.0
 * When you open the app, it starts playing music from the directory that you last played music from. This means that you can skip having to select a directory when you open the app.
 * Changed the name to Dusk Player, Music player was too generic.
 * You can now play tracks on shuffle.
