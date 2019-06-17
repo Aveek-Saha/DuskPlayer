@@ -13,10 +13,7 @@
 
 A minimalistic music player, designed for simplicity. Built on electron, uses Howler for handling music playback, AngularJS and Bootstrap for the frontend, and jsmediatags to retrieve the ID3 tags. 
 
-This can also serve as a starting point to impliment your own front-end/UI to the Player.
-
-### NEW!
-Now toggle between Light and Dark modes, you have to restart the application for the change to take place. (still in beta)
+This can also serve as a starting point to impliment your own front-end/UI for a music Player.
 
 Download here: [Releases](https://github.com/Aveek-Saha/MusicPlayer/releases)
 
@@ -34,8 +31,13 @@ Clone the repository, then navigate to it on your terminal and run ```npm instal
   <li>Quickly switch tracks in the same folder, from the playlist button.</li>
   <li>Fine tune the volume from the volume slider</li>
   <li>Plays tracks on Shuffle</li>
+  <li>Choose between a Dark and Light mode</li>
   <li>Reads ID3 tags and displays the artist and album art (if they exist)</li>
 </ul>
+
+# New Features/Changes (v3.0.0)
+* Now choose between a Dark and Light mode!
+* Recursively finds audio files in all sub directories of the chosen directory
 
 # New Features/Changes (v2.0.0)
 * When you open the app, it starts playing music from the directory that you last played music from. This means that you can skip having to select a directory when you open the app.
