@@ -2,7 +2,7 @@ const { app, BrowserWindow, dialog, Menu } = require('electron')
 const path = require('path')
 const url = require('url')
 const join = require('path').join;
-
+const { autoUpdater } = require("electron-updater");
 const fs = require('fs')
 const openAboutWindow = require('about-window').default;
 
@@ -96,7 +96,10 @@ function createWindow() {
   })
 }
 
-app.on('ready', createWindow)
+app.on('ready', () => {
+  createWindow()
+  autoUpdater.checkForUpdatesAndNotify();
+})
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {

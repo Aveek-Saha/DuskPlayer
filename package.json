@@ -11,6 +11,13 @@
     "dist": "build"
   },
   "build": {
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "aveek-saha",
+        "repo": "MusicPlayer"
+      }
+    ],
     "dmg": {
       "contents": [
         {
@@ -50,6 +57,7 @@
     "angular": "^1.6.9",
     "angular-route": "^1.6.9",
     "bootstrap": "4.3.1",
+    "electron-updater": "^4.0.6",
     "howler": "^2.0.9",
     "jquery": "^3.4.0",
     "jsmediatags": "^3.8.1",
