@@ -1,7 +1,7 @@
 
 <h1 align="center">
 	<br>
-	 Music Player <img width = "32px" src = "https://raw.githubusercontent.com/Aveek-Saha/MusicPlayer/master/dusk.png">
+	 Dusk Player <img width = "32px" src = "https://raw.githubusercontent.com/Aveek-Saha/MusicPlayer/master/dusk.png">
 
 </h1>
 
