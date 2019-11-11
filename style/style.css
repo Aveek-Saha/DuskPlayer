@@ -18,6 +18,10 @@ body{
     margin: 3%
 }
 
+.progress-bar{
+    transition: width .2s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
 #timer{
     float: left;
 }
