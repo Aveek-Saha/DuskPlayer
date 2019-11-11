@@ -5,6 +5,9 @@ const join = require('path').join;
 const { autoUpdater } = require("electron-updater");
 const fs = require('fs')
 const openAboutWindow = require('about-window').default;
+const storage = require('electron-json-storage');
+
+const dataPath = storage.getDataPath();
 
 let win
 
@@ -21,13 +24,25 @@ function createWindow() {
 
     var light = false
 
-  fs.readFile('theme.txt', 'utf-8', function (err, buf) {
-    if (err)
-      return
-    var temp = buf.toString();
-    if (temp == "light")
-      light = true
-    // console.log(temp);
+  // fs.readFile('theme.txt', 'utf-8', function (err, buf) {
+  //   if (err)
+  //     return
+  //   var temp = buf.toString();
+  //   if (temp == "light")
+  //     light = true
+  //   // console.log(temp);
+  // });
+
+  storage.has('settings', function (error, hasKey) {
+    if (error) throw error;
+    if (hasKey) {
+      storage.get('settings', function (error, data) {
+        if (error) throw error;
+        console.log(data.theme);
+        if (data.theme == "light")
+          light = true
+      });
+    }
   });
 
   var menu = Menu.buildFromTemplate([
@@ -54,10 +69,13 @@ function createWindow() {
               theme = "light"
               light = true
             }
-            fs.writeFile('theme.txt', theme, function (err, data) {
-                if (err) console.log(err);
-              });
+            // fs.writeFile('theme.txt', theme, function (err, data) {
+            //     if (err) console.log(err);
+            //   });
             // win.webContents.send('theme-change', msg)
+            storage.set('settings', { theme: theme }, function (error) {
+              if (error) throw error;
+            });
           }
         }
       ]
@@ -86,6 +104,17 @@ function createWindow() {
   //   scanDir(temp);
 
   // });
+
+  storage.has('settings', function (error, hasKey) {
+    if (error) throw error;
+    if (hasKey) {
+      storage.get('settings', function (error, data) {
+        if (error) throw error;
+
+        scanDir([data.path.toString()]);
+      });
+    }
+  })
 
   // Open the DevTools.
   // win.webContents.openDevTools()
@@ -120,10 +149,14 @@ function openFolderDialog() {
   }, function (filePath) {
 
     if (filePath) {
-      fs.writeFile('path.txt', filePath, function (err, data) {
-        if (err) console.log(err);
-      });
+      // fs.writeFile('path.txt', filePath, function (err, data) {
+      //   if (err) console.log(err);
+      // });
       // console.log(walkSync(filePath[0]));
+
+      storage.set('settings', { path: filePath }, function (error) {
+        if (error) throw error;
+      });
 
       scanDir(filePath)
     }

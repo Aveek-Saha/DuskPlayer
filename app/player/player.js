@@ -26,26 +26,44 @@ angular.module('Player.player', ['ngRoute'])
     const jsmediatags = require("jsmediatags");
     const fs = require('fs')
     const path = require('path')
+    const storage = require('electron-json-storage');
 
-    fs.readFile('theme.txt', 'utf-8', function (err, buf) {
-      if (err)
-        return
-      var temp = buf.toString();
-      if(temp == "light")
-        $location.path('/player/light')
-      console.log(temp);
-    });
+    const dataPath = storage.getDataPath();
 
-    fs.readFile('path.txt', 'utf-8', function (err, buf) {
-      if (err) {
-        return
+    // fs.readFile('theme.txt', 'utf-8', function (err, buf) {
+    //   if (err)
+    //     return
+    //   var temp = buf.toString();
+    //   if(temp == "light")
+    //     $location.path('/player/light')
+    //   console.log(temp);
+    // });
+
+    storage.has('settings', function (error, hasKey) {
+      if (error) throw error;
+      if (hasKey) {
+        storage.get('settings', function (error, data) {
+          if (error) throw error;
+          console.log(data.theme);
+          if (data.theme == "light")
+            $location.path('/player/light')
+
+          scanDir([data.path.toString()]);
+        });
       }
-      var temp = [buf.toString()];
-      scanDir(temp);
+    })
 
-      console.log(temp);
 
-    });
+    // fs.readFile('path.txt', 'utf-8', function (err, buf) {
+    //   if (err) {
+    //     return
+    //   }
+    //   var temp = [buf.toString()];
+    //   scanDir(temp);
+
+    //   console.log(temp);
+
+    // });
 
     var walkSync = function (dir, filelist) {
       files = fs.readdirSync(dir);
