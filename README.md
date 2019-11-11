@@ -35,6 +35,11 @@ Clone the repository, then navigate to it on your terminal and run ```npm instal
   <li>Reads ID3 tags and displays the artist and album art (if they exist)</li>
 </ul>
 
+# Screenshots
+<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot1.png" width="34%"></img> 
+<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot3.png" width="33%"></img> 
+<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot2.png" width="33%"></img> 
+
 # New Features/Changes (v3.0.0)
 * Now choose between a Dark and Light mode!
 * Recursively finds audio files in all sub directories of the chosen directory
