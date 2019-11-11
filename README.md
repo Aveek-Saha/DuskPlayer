@@ -36,11 +36,16 @@ Clone the repository, then navigate to it on your terminal and run ```npm instal
 </ul>
 
 # Screenshots
-<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot1.png" width="32%"></img> 
-<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot3.png" width="31%"></img> 
-<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot2.png" width="31%"></img> 
+<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot1.png" width="33%"></img> 
+<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot3.png" width="32%"></img> 
+<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot2.png" width="32%"></img> 
 
-# New Features/Changes (v3.0.0)
+# New Features
+Some new features and under the hood stuff that'll be included in the next update
+* The progress bar now feels more responsive when seeking.
+* Setting are now stored in a JSON store instead of in files
+
+# v3.0.0
 * Now choose between a Dark and Light mode!
 * Recursively finds audio files in all sub directories of the chosen directory
 
