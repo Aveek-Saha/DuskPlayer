@@ -43,7 +43,8 @@ Clone the repository, then navigate to it on your terminal and run ```npm instal
 # New Features
 Some new features and under the hood stuff that'll be included in the next update
 * The progress bar now feels more responsive when seeking.
-* Setting are now stored in a JSON store instead of in files
+* Setting are now stored in a JSON store instead of in files.
+* Fixed a bug where the title and artist name would flicker while playing/pausing or skipping tracks
 
 # v3.0.0
 * Now choose between a Dark and Light mode!
