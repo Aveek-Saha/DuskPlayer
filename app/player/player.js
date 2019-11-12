@@ -152,6 +152,10 @@ angular.module('Player.player', ['ngRoute'])
               $scope.trackName = tag.tags.title;
               $scope.trackArtist = tag.tags.artist;
             }
+            else {
+              $scope.trackName = data.name;
+              $scope.trackArtist = "";
+            }
             var image = tag.tags.picture;
             if (image) {
               // var pic = document.getElementById('picture')
@@ -261,8 +265,8 @@ angular.module('Player.player', ['ngRoute'])
 
         index = typeof index === 'number' ? index : self.index;
         var data = self.playlist[index];
-        $scope.trackName = data.name;
-        $scope.trackArtist = "";
+        // $scope.trackName = data.name;
+        // $scope.trackArtist = "";
         // console.log(data);
         tag(data);
 
