@@ -40,7 +40,7 @@ Clone the repository, then navigate to it on your terminal and run ```npm instal
 <img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot2.png" width="32%"></img>
  
 # Upcoming Features
-Some new features and under the hood stuff that have already been implemented and they'll be included in the next update
+Some new features and under the hood stuff that have already been implemented. They'll be included in the next update
 * The progress bar now feels more responsive when seeking.
 * Setting are now stored in a JSON store instead of in files.
 * Fixed a bug where the title and artist name would flicker while playing/pausing or skipping tracks
