@@ -18,7 +18,7 @@ Download here: [Releases](https://github.com/Aveek-Saha/MusicPlayer/releases)
  
 # How to use
 ### 1. The Player
-Download the build for your OS. Start the application and then click on the Folders tab on the top left corner, this will bring up a window where you can select the folder where you want to play your mp3 files from.
+Download the build for your OS. Start the application and then click on the Folders tab on the top left corner, this will bring up a window where you can select the folder where you want to play your audio files from.
 Once you select a folder with songs, just click play.
 ### 2. Building from the repo
 Clone the repository, then navigate to it on your terminal and run ```npm install```, once all the dependencies have finished downloading, run ```npm start ``` to test it, and ```npm run dist ``` to build it for your platform.
