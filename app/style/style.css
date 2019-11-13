@@ -44,25 +44,39 @@ body{
     max-width: 40%;
 
     position: absolute;
-    top: 10px;
+    top: 50px;
     bottom: 10px;
     left: 0px;
 }
 
-  .text-center{
-      margin-bottom: 5%
-  }
+/* #parentDiv { position:relative; } */
+#search { 
+    /* position:fixed;
+    margin-top:-1px; */
+    float: left;
+    z-index: 5;
+    max-width: 40%;
 
-  
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 0px;
+}
 
-  #playlistBtn{
-      float: right;
-  }
+.text-center{
+    margin-bottom: 5%
+}
 
-  #shuffleBtn{
-      float: right;
-      margin-right:5% 
-  }
+
+
+#playlistBtn{
+    float: right;
+}
+
+#shuffleBtn{
+    float: right;
+    margin-right:5% 
+}
 #checkboxrn{
     float: right;
     margin-right:5%
