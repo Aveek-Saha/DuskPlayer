@@ -22,7 +22,11 @@ function createWindow() {
     }
   })
 
-    var light = false
+  var light = false
+  var dark = false
+  var disco = false
+
+
 
   // fs.readFile('theme.txt', 'utf-8', function (err, buf) {
   //   if (err)
@@ -41,9 +45,20 @@ function createWindow() {
         console.log(data.theme);
         if (data.theme == "light")
           light = true
+        else if (data.theme == "disco")
+          disco = true
+        else
+          dark = true
       });
     }
   });
+
+  function handleClick(menuItem, browserWindow, event) {
+    console.log(menuItem.label.toLowerCase());
+    storage.set('theme', { theme: menuItem.label.toLowerCase() }, function (error) {
+      if (error) throw error;
+    });
+  }
 
   var menu = Menu.buildFromTemplate([
     {
@@ -56,28 +71,9 @@ function createWindow() {
     {
       label: 'Theme',
       submenu:[
-        {
-          label: 'Toggle',
-          checked: light,
-          click: function () {
-            var theme = ""
-            if(light){
-              theme = "dark"
-              light = false
-            }
-            else{
-              theme = "light"
-              light = true
-            }
-            // fs.writeFile('theme.txt', theme, function (err, data) {
-            //     if (err) console.log(err);
-            //   });
-            // win.webContents.send('theme-change', msg)
-            storage.set('theme', { theme: theme }, function (error) {
-              if (error) throw error;
-            });
-          }
-        }
+        { label: 'Light', type: 'radio', click: handleClick, checked: light },
+        { label: 'Dark', type: 'radio', click: handleClick, checked: dark },
+        { label: 'Disco', type: 'radio', click: handleClick, checked: disco }
       ]
     },
     {

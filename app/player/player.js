@@ -60,6 +60,9 @@ angular.module('Player.player', ['ngRoute'])
             $location.path('/player/light')
             $scope.theme = 'light'
           }
+          else if (data.theme == "disco") {
+            $scope.theme = 'disco'
+          }
         });
       }
     })
@@ -182,7 +185,7 @@ angular.module('Player.player', ['ngRoute'])
                 var vibrant = new Vibrant(img, 128, 3);
                 var swatches = vibrant.swatches()
 
-                if ($scope.theme == 'dark') {
+                if ($scope.theme == 'disco') {
                   document.body.style.backgroundColor = swatches['DarkMuted'].getHex()
                   document.body.style.color = swatches['LightVibrant'].getHex()
                 }
