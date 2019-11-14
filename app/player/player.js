@@ -39,20 +39,30 @@ angular.module('Player.player', ['ngRoute'])
     //   console.log(temp);
     // });
 
-    storage.has('settings', function (error, hasKey) {
+    storage.has('path', function (error, hasKey) {
       if (error) throw error;
       if (hasKey) {
-        storage.get('settings', function (error, data) {
+        storage.get('path', function (error, data) {
           if (error) throw error;
-          console.log(data.theme);
-          if (data.theme == "light")
-            $location.path('/player/light')
-
+          console.log(data);
           scanDir([data.path.toString()]);
         });
       }
     })
 
+    storage.has('theme', function (error, hasKey) {
+      if (error) throw error;
+      if (hasKey) {
+        storage.get('theme', function (error, data) {
+          if (error) throw error;
+          console.log(data);
+          if (data.theme == "light") {
+            $location.path('/player/light')
+            $scope.theme = 'light'
+          }
+        });
+      }
+    })
 
     // fs.readFile('path.txt', 'utf-8', function (err, buf) {
     //   if (err) {
@@ -163,11 +173,20 @@ angular.module('Player.player', ['ngRoute'])
               for (var i = 0; i < image.data.length; i++) {
                 base64String += String.fromCharCode(image.data[i]);
               }
-              var base64 = "data:image/jpeg;base64," +
-                window.btoa(base64String);
-              document.getElementById('picture').style.display = "block";
-              document.getElementById('picture').setAttribute('src', base64);
-              // pic.style.backgroundImage = "url('" + base64 +"') ";
+              var base64 = "data:image/jpeg;base64," + window.btoa(base64String);
+
+              var img = document.getElementById('picture')
+              img.style.display = "block";
+              img.setAttribute('src', base64);
+              img.addEventListener('load', function () {
+                var vibrant = new Vibrant(img, 128, 3);
+                var swatches = vibrant.swatches()
+
+                if ($scope.theme == 'dark') {
+                  document.body.style.backgroundColor = swatches['DarkMuted'].getHex()
+                  document.body.style.color = swatches['LightVibrant'].getHex()
+                }
+              })
             } else {
               document.getElementById('picture').style.display = "none";
               // pic.style.backgroundImage = "none";                  

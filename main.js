@@ -33,10 +33,10 @@ function createWindow() {
   //   // console.log(temp);
   // });
 
-  storage.has('settings', function (error, hasKey) {
+  storage.has('theme', function (error, hasKey) {
     if (error) throw error;
     if (hasKey) {
-      storage.get('settings', function (error, data) {
+      storage.get('theme', function (error, data) {
         if (error) throw error;
         console.log(data.theme);
         if (data.theme == "light")
@@ -73,7 +73,7 @@ function createWindow() {
             //     if (err) console.log(err);
             //   });
             // win.webContents.send('theme-change', msg)
-            storage.set('settings', { theme: theme }, function (error) {
+            storage.set('theme', { theme: theme }, function (error) {
               if (error) throw error;
             });
           }
@@ -105,10 +105,10 @@ function createWindow() {
 
   // });
 
-  storage.has('settings', function (error, hasKey) {
+  storage.has('path', function (error, hasKey) {
     if (error) throw error;
     if (hasKey) {
-      storage.get('settings', function (error, data) {
+      storage.get('path', function (error, data) {
         if (error) throw error;
 
         scanDir([data.path.toString()]);
@@ -117,7 +117,7 @@ function createWindow() {
   })
 
   // Open the DevTools.
-  // win.webContents.openDevTools()
+  win.webContents.openDevTools()
 
   // Emitted when the window is closed.
   win.on('closed', () => {
@@ -154,7 +154,7 @@ function openFolderDialog() {
       // });
       // console.log(walkSync(filePath[0]));
 
-      storage.set('settings', { path: filePath }, function (error) {
+      storage.set('path', { path: filePath }, function (error) {
         if (error) throw error;
       });
 
