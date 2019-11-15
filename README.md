@@ -41,6 +41,7 @@ Clone the repository, then navigate to it on your terminal and run ```npm instal
  
 # Upcoming Features
 Some new features and under the hood stuff that have already been implemented. They'll be included in the next update
+* Brand new theme! The Disco theme changes the background color based on the song album art. Select it from the themes menu.
 * Search for songs from the search bar.
 * The progress bar now feels more responsive when seeking.
 * Setting are now stored in a JSON store instead of in files.
