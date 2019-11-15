@@ -57,8 +57,17 @@ angular.module('Player.player', ['ngRoute'])
           if (error) throw error;
           console.log(data);
           if (data.theme == "light") {
-            $location.path('/player/light')
+            // $location.path('/player/light')
             $scope.theme = 'light'
+            document.body.style.backgroundColor = "#F5F5F5"
+            document.body.style.color = "#212529"
+            var icons = document.body.querySelectorAll("svg");
+            console.log(icons);
+            
+            icons.forEach(icon => {
+              icon.style.color = "#212529"; 
+            });
+            
           }
           else if (data.theme == "disco") {
             $scope.theme = 'disco'
