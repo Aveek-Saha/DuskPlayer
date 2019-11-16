@@ -3,6 +3,10 @@
   "version": "3.0.0",
   "homepage": "https://aveek-saha.github.io",
   "description": "A music player for your desktop",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Aveek-Saha/MusicPlayer.git"
+  },
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
