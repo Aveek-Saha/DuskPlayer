@@ -35,9 +35,13 @@ Clone the repository, then navigate to it on your terminal and run ```npm instal
 </ul>
  
 # Screenshots
-<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot1.png" width="33%"></img>
-<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot3.png" width="32%"></img>
-<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot2.png" width="32%"></img>
+<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot4.png" width="30%"></img>
+<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot3.png" width="30%"></img>
+<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot2.png" width="30%"></img>
+
+<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot5.png" width="30%"></img>
+<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot7.png" width="30%"></img>
+<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot6.png" width="30%"></img>
  
 # Upcoming Features
 Some new features and under the hood stuff that have already been implemented. They'll be included in the next update
