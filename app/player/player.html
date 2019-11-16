@@ -82,7 +82,7 @@
     <input class="form-control" id="search" type="search" ng-model="search.name" ng-show="playListVisible" placeholder="Search" aria-label="Search">
     <div id="playlist" ng-show="playListVisible" class="list-group style-3">
         <!-- <input type="text" ng-model="search.name"> -->
-        <a href="" class="list-group-item list-group-item-action list" ng-repeat="song in player.playlist | filter:search" ng-click="playPlaylistSong($index)">{{song.name}}</a>
+        <a href="" class="list-group-item list-group-item-action list" ng-repeat="song in player.playlist | filter:search" ng-click="playPlaylistSong(song.index)">{{song.name}}</a>
     </div>
 
     <!-- <div id="playlist" ng-show="playListVisible">

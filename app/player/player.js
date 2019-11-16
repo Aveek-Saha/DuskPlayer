@@ -153,7 +153,8 @@ angular.module('Player.player', ['ngRoute'])
           title: $scope.songList.files[i],
           file: $scope.songList.files[i],
           name: $scope.songList.files[i].split("/")[len],
-          howl: null
+          howl: null,
+          index: i
         });
       }
 
@@ -214,6 +215,7 @@ angular.module('Player.player', ['ngRoute'])
       $scope.player.seek($event.offsetX / sk.offsetWidth);
     }
     $scope.playPlaylistSong = function (index) {
+      console.log(index)
       $scope.player.skipTo(index);
     }
     $scope.nextSong = function () {
