@@ -21,17 +21,17 @@ Download here: [Releases](https://github.com/Aveek-Saha/MusicPlayer/releases)
 Download the build for your OS. Start the application and then click on the Folders tab on the top left corner, this will bring up a window where you can select the folder where you want to play your audio files from.
 Once you select a folder with songs, just click play.
 ### 2. Building from the repo
-Clone the repository, then navigate to it on your terminal and run ```npm install```, once all the dependencies have finished downloading, run ```npm start ``` to test it, and ```npm run dist ``` to build it for your platform.
+Clone the repository, make it your working directory, and then on your terminal run ```npm install```. 
+Once all the dependencies have finished downloading, run ```npm start``` to test it, and ```npm run dist``` to build it for your platform.
  
  
 # Features
 <ul>
  <li>Supports: mp3, opus, ogg, wav, aac, m4a and webm.</li>
- <li>Quickly switch tracks in the same folder, from the playlist button.</li>
- <li>Fine tune the volume from the volume slider</li>
- <li>Plays tracks on Shuffle</li>
- <li>Choose between a Dark and Light mode</li>
  <li>Reads ID3 tags and displays the artist and album art (if they exist)</li>
+ <li>Quickly switch tracks from the playlist.</li>
+ <li>Search for songs from the search bar.</li>
+ <li>Choose between a Dark, Light and Disco modes</li>
 </ul>
  
 # Screenshots
@@ -45,6 +45,9 @@ Clone the repository, then navigate to it on your terminal and run ```npm instal
  
 # Upcoming Features
 Some new features and under the hood stuff that have already been implemented. They'll be included in the next update
+* Nothing here yet!
+
+# v4.0.0
 * Brand new theme! The Disco theme changes the background color based on the song album art. Select it from the themes menu.
 * Search for songs from the search bar.
 * The progress bar now feels more responsive when seeking.
