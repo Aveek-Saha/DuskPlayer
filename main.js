@@ -79,7 +79,12 @@ function createWindow() {
     {
       label: 'Info',
         click: function () {
-            openAboutWindow({ product_name: "Dusk Player", copyright: "By Aveek Saha", icon_path: join(__dirname, 'build/icon.png'),})
+            openAboutWindow({ 
+              product_name: "Dusk Player",
+              homepage: "https://home.aveek.io",
+              copyright: "By Aveek Saha", 
+              icon_path: join(__dirname, 'build/icon.png'),
+            })
         }
     }
   ])
