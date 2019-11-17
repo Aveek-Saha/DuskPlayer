@@ -35,10 +35,10 @@ function createWindow() {
   //   // console.log(temp);
   // });
 
-  storage.has('theme', function(error, hasKey) {
+  storage.has('theme', function (error, hasKey) {
     if (error) throw error
     if (hasKey) {
-      storage.get('theme', function(error, data) {
+      storage.get('theme', function (error, data) {
         if (error) throw error
         console.log(data.theme)
         if (data.theme == 'light') light = true
@@ -50,7 +50,7 @@ function createWindow() {
 
   function handleClick(menuItem, browserWindow, event) {
     console.log(menuItem.label.toLowerCase())
-    storage.set('theme', { theme: menuItem.label.toLowerCase() }, function(
+    storage.set('theme', { theme: menuItem.label.toLowerCase() }, function (
       error
     ) {
       if (error) throw error
@@ -65,14 +65,14 @@ function createWindow() {
   var openFolder = {
     label: 'Folders',
     accelerator: 'CommandOrControl+o',
-    click: function() {
+    click: function () {
       openFolderDialog()
     }
   }
 
   var info = {
     label: 'Info',
-    click: function() {
+    click: function () {
       openAboutWindow({
         product_name: 'Dusk Player',
         homepage: 'https://home.aveek.io',
@@ -98,7 +98,7 @@ function createWindow() {
         {
           label: 'Open folder',
           accelerator: 'CommandOrControl+o',
-          click: function() {
+          click: function () {
             openFolderDialog()
           }
         }
@@ -111,7 +111,7 @@ function createWindow() {
         {
           label: 'Show info',
 
-          click: function() {
+          click: function () {
             openAboutWindow({
               product_name: 'Dusk Player',
               homepage: 'https://home.aveek.io',
@@ -146,10 +146,10 @@ function createWindow() {
 
   // });
 
-  storage.has('path', function(error, hasKey) {
+  storage.has('path', function (error, hasKey) {
     if (error) throw error
     if (hasKey) {
-      storage.get('path', function(error, data) {
+      storage.get('path', function (error, data) {
         if (error) throw error
 
         scanDir([data.path.toString()])
@@ -190,14 +190,14 @@ function openFolderDialog() {
     {
       properties: ['openDirectory']
     },
-    function(filePath) {
+    function (filePath) {
       if (filePath) {
         // fs.writeFile('path.txt', filePath, function (err, data) {
         //   if (err) console.log(err);
         // });
         // console.log(walkSync(filePath[0]));
 
-        storage.set('path', { path: filePath }, function(error) {
+        storage.set('path', { path: filePath }, function (error) {
           if (error) throw error
         })
 
@@ -207,10 +207,10 @@ function openFolderDialog() {
   )
 }
 
-var walkSync = function(dir, filelist) {
+var walkSync = function (dir, filelist) {
   files = fs.readdirSync(dir)
   filelist = filelist || []
-  files.forEach(function(file) {
+  files.forEach(function (file) {
     if (fs.statSync(path.join(dir, file)).isDirectory()) {
       filelist = walkSync(path.join(dir, file), filelist)
     } else {
