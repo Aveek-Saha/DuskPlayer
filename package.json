@@ -67,7 +67,6 @@
     "jquery": "^3.4.0",
     "jsmediatags": "^3.8.1",
     "path": "^0.12.7",
-    "popper.js": "^1.14.1",
-    "rabin-bindings": "^1.7.4"
+    "popper.js": "^1.14.1"
   }
 }
