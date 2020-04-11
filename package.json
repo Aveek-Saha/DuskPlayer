@@ -68,6 +68,7 @@
     "howler": "^2.0.9",
     "jquery": "^3.4.0",
     "jsmediatags": "^3.8.1",
+    "music-metadata": "^6.3.7",
     "path": "^0.12.7",
     "popper.js": "^1.14.1"
   }

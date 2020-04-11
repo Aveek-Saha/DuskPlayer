@@ -27,6 +27,7 @@ angular.module('Player.player', ['ngRoute'])
     const fs = require('fs')
     const path = require('path')
     const storage = require('electron-json-storage');
+    const mm = require('music-metadata');
 
     const dataPath = storage.getDataPath();
 
@@ -44,7 +45,7 @@ angular.module('Player.player', ['ngRoute'])
       if (hasKey) {
         storage.get('path', function (error, data) {
           if (error) throw error;
-          console.log(data);
+          // console.log(data);
           scanDir([data.path.toString()]);
         });
       }
@@ -55,14 +56,14 @@ angular.module('Player.player', ['ngRoute'])
       if (hasKey) {
         storage.get('theme', function (error, data) {
           if (error) throw error;
-          console.log(data);
+          // console.log(data);
           if (data.theme == "light") {
             // $location.path('/player/light')
             $scope.theme = 'light'
             document.body.style.backgroundColor = "#F5F5F5"
             document.body.style.color = "#212529"
             var icons = document.body.querySelectorAll("svg");
-            console.log(icons);
+            // console.log(icons);
             
             icons.forEach(icon => {
               icon.style.color = "#212529"; 
@@ -106,15 +107,30 @@ angular.module('Player.player', ['ngRoute'])
       return filelist;
     };
 
-    function scanDir(filePath) {
+    async function parseFiles(audioFiles) {
+      var titles = []
+      for (const audioFile of audioFiles) {
+
+        // await will ensure the metadata parsing is completed before we move on to the next file
+        const metadata = await mm.parseFile(audioFile, { skipCovers: true });
+        titles.push(metadata.common.title);
+        
+        // Do great things with the metadata
+      }
+      return titles
+    }
+
+    async function scanDir(filePath) {
       if (!filePath || filePath[0] == 'undefined') return;
 
       var arr = walkSync(filePath[0]);
-
       var arg = {};
+      var names = await parseFiles(arr)
+      console.log(names);
+      
       arg.files = arr;
       arg.path = filePath;
-
+      arg.names = names
       startPlayer(arg)
     }
     function themeChange() {
@@ -152,7 +168,7 @@ angular.module('Player.player', ['ngRoute'])
           // file: arg.path + '/' + $scope.songList.files[i],
           title: $scope.songList.files[i],
           file: $scope.songList.files[i],
-          name: $scope.songList.files[i].split("/")[len],
+          name: $scope.songList.names[i],
           howl: null,
           index: i
         });
@@ -215,7 +231,7 @@ angular.module('Player.player', ['ngRoute'])
       $scope.player.seek($event.offsetX / sk.offsetWidth);
     }
     $scope.playPlaylistSong = function (index) {
-      console.log(index)
+      // console.log(index)
       $scope.player.skipTo(index);
     }
     $scope.nextSong = function () {
@@ -350,7 +366,7 @@ angular.module('Player.player', ['ngRoute'])
         }
         else if (direction === 'random') {
           index = Math.floor(Math.random() * self.playlist.length) + 1;
-          console.log(index);
+          // console.log(index);
 
         }
         else {
