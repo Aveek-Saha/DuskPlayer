@@ -3,8 +3,6 @@ angular.module('Player.player', ['ngRoute'])
   .config(['$routeProvider', ($routeProvider) => {
     $routeProvider.when('/player', {
       templateUrl: 'player/player.html', controller: 'Playerctrl'
-    }).when('/player/light', {
-      templateUrl: 'player/themes/light/index.html', controller: 'Playerctrl'
     })
   }])
   .controller('Playerctrl', ['$scope', '$location', function ($scope, $location) {
@@ -51,28 +49,40 @@ angular.module('Player.player', ['ngRoute'])
       }
     })
 
+    function setTheme(data) {
+      // var theme = data.theme
+      if (data.theme == "light") {
+        $scope.theme = 'light'
+        document.body.style.backgroundColor = "#F5F5F5"
+        document.body.style.color = "#212529"
+        var icons = document.body.querySelectorAll("svg");
+
+        icons.forEach(icon => {
+          icon.style.color = "#212529";
+        });
+
+      }
+      else if (data.theme == "dark") {
+        $scope.theme = 'dark'
+        document.body.style.backgroundColor = "#212121"
+        document.body.style.color = "azure"
+        var icons = document.body.querySelectorAll("svg");
+
+        icons.forEach(icon => {
+          icon.style.color = "azure";
+        });
+      }
+      else if (data.theme == "disco") {
+        $scope.theme = 'disco'
+      }
+    }
+
     storage.has('theme', function (error, hasKey) {
       if (error) throw error;
       if (hasKey) {
         storage.get('theme', function (error, data) {
           if (error) throw error;
-          // console.log(data);
-          if (data.theme == "light") {
-            // $location.path('/player/light')
-            $scope.theme = 'light'
-            document.body.style.backgroundColor = "#F5F5F5"
-            document.body.style.color = "#212529"
-            var icons = document.body.querySelectorAll("svg");
-            // console.log(icons);
-            
-            icons.forEach(icon => {
-              icon.style.color = "#212529"; 
-            });
-            
-          }
-          else if (data.theme == "disco") {
-            $scope.theme = 'disco'
-          }
+          setTheme(data)
         });
       }
     })
@@ -133,13 +143,15 @@ angular.module('Player.player', ['ngRoute'])
       arg.names = names
       startPlayer(arg)
     }
-    function themeChange() {
-      $location.path('/player/light')
+    function themeChange(data) {
+      
+      console.log(data);
+      setTheme(data)
+      
     }
     ipc.on('theme-change', function (event, arg) {
       // $location.path('/player/light')
-      
-      themeChange()
+      themeChange(arg)
     });
 
     ipc.on('selected-files', function (event, arg) {
@@ -246,8 +258,13 @@ angular.module('Player.player', ['ngRoute'])
                 var swatches = vibrant.swatches()
                 if (swatches['DarkMuted'])
                   document.body.style.backgroundColor = swatches['DarkMuted'].getHex()
+                else
+                  document.body.style.backgroundColor = "#212121"
                 if (swatches['LightVibrant'])
                   document.body.style.color = swatches['LightVibrant'].getHex()
+                else 
+                  document.body.style.color = "azure"
+
               }
             })
           } else {

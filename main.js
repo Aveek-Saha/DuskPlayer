@@ -40,7 +40,7 @@ function createWindow() {
     if (hasKey) {
       storage.get('theme', function (error, data) {
         if (error) throw error
-        console.log(data.theme)
+        // console.log(data.theme)
         if (data.theme == 'light') light = true
         else if (data.theme == 'disco') disco = true
         else dark = true
@@ -49,7 +49,9 @@ function createWindow() {
   })
 
   function handleClick(menuItem, browserWindow, event) {
-    console.log(menuItem.label.toLowerCase())
+    // console.log(menuItem.label.toLowerCase())
+    
+    win.webContents.send('theme-change', { theme: menuItem.label.toLowerCase() })
     storage.set('theme', { theme: menuItem.label.toLowerCase() }, function (
       error
     ) {
