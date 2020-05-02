@@ -46,7 +46,9 @@ Once all the dependencies have finished downloading, run ```npm start``` to test
  
 # Upcoming Features
 Some new features and under the hood stuff that will be or has already been implemented. They'll be included in the next update
-* Show Song titles in the plalist instead of showing the file path
+* Show Song titles in the playlist instead of showing the file path
+* Fixed a bug where track name and artist would not change on changing tracks
+* Theme can now be changed without restarting the application
 
 # v4.0.0
 * Brand new theme! The Disco theme changes the background color based on the song album art. Select it from the themes menu.
