@@ -33,15 +33,6 @@ function createWindow() {
   var dark = false
   var disco = false
 
-  // fs.readFile('theme.txt', 'utf-8', function (err, buf) {
-  //   if (err)
-  //     return
-  //   var temp = buf.toString();
-  //   if (temp == "light")
-  //     light = true
-  //   // console.log(temp);
-  // });
-
   storage.has('theme', function (error, hasKey) {
     if (error) throw error
     if (hasKey) {
@@ -146,14 +137,6 @@ function createWindow() {
     })
   )
 
-  // fs.readFile('path.txt', 'utf-8', function (err, buf) {
-  //   if (err) {
-  //     return
-  //   }
-  //   var temp = [buf.toString()];
-  //   scanDir(temp);
-
-  // });
 
   storage.has('path', function (error, hasKey) {
     if (error) throw error
@@ -202,10 +185,6 @@ function openFolderDialog() {
     },
     function (filePath) {
       if (filePath) {
-        // fs.writeFile('path.txt', filePath, function (err, data) {
-        //   if (err) console.log(err);
-        // });
-        // console.log(walkSync(filePath[0]));
 
         storage.set('path', { path: filePath }, function (error) {
           if (error) throw error

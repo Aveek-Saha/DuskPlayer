@@ -29,14 +29,6 @@ angular.module('Player.player', ['ngRoute'])
 
     const dataPath = storage.getDataPath();
 
-    // fs.readFile('theme.txt', 'utf-8', function (err, buf) {
-    //   if (err)
-    //     return
-    //   var temp = buf.toString();
-    //   if(temp == "light")
-    //     $location.path('/player/light')
-    //   console.log(temp);
-    // });
 
     storage.has('path', function (error, hasKey) {
       if (error) throw error;
@@ -87,16 +79,6 @@ angular.module('Player.player', ['ngRoute'])
       }
     })
 
-    // fs.readFile('path.txt', 'utf-8', function (err, buf) {
-    //   if (err) {
-    //     return
-    //   }
-    //   var temp = [buf.toString()];
-    //   scanDir(temp);
-
-    //   console.log(temp);
-
-    // });
 
     var walkSync = function (dir, filelist) {
       files = fs.readdirSync(dir);
@@ -129,7 +111,6 @@ angular.module('Player.player', ['ngRoute'])
         else
           titles.push(audioFile.split(path.sep).slice(-1)[0]);
         
-        // Do great things with the metadata
       }
       return titles
     }
@@ -154,7 +135,6 @@ angular.module('Player.player', ['ngRoute'])
       
     }
     ipc.on('theme-change', function (event, arg) {
-      // $location.path('/player/light')
       themeChange(arg)
     });
 
@@ -174,14 +154,10 @@ angular.module('Player.player', ['ngRoute'])
       $scope.songList = arg;
       // console.log($scope.songList)
       var songArr = [];
-      // console.log($scope.songList.files.length)
-      // var pth = arg.path;
 
       for (let i = 0; i < $scope.songList.files.length; i++) {
         var len = $scope.songList.files[i].split("/").length - 1
         songArr.push({
-          // title: arg.path + '/' + $scope.songList.files[i],
-          // file: arg.path + '/' + $scope.songList.files[i],
           title: $scope.songList.files[i],
           file: $scope.songList.files[i],
           name: $scope.songList.names[i],
@@ -233,8 +209,7 @@ angular.module('Player.player', ['ngRoute'])
                 }
               })
             } else {
-              document.getElementById('picture').style.display = "none";
-              // pic.style.backgroundImage = "none";                  
+              document.getElementById('picture').style.display = "none";             
             }
           },
           onError: function (error) {
@@ -379,11 +354,6 @@ angular.module('Player.player', ['ngRoute'])
 
         index = typeof index === 'number' ? index : self.index;
         var data = self.playlist[index];
-        // $scope.trackName = data.name;
-        // $scope.trackArtist = "";
-        // console.log(data);
-        // tag(data);
-        // getTags(data.file)
 
         if (data.howl) {
           sound = data.howl;
@@ -444,9 +414,6 @@ angular.module('Player.player', ['ngRoute'])
         }
 
         var data = self.playlist[self.index];
-        // console.log(data);
-        // getTags(data.file)
-        // tag(data);
 
         self.skipTo(index);
       },
@@ -455,7 +422,6 @@ angular.module('Player.player', ['ngRoute'])
         var self = this;
 
         if (self.playlist[self.index].howl) {
-          // console.log(self.playlist[self.index].howl);
           self.playlist[self.index].howl.stop();
         }
         var data = self.playlist[index];
@@ -467,8 +433,6 @@ angular.module('Player.player', ['ngRoute'])
         }
         else
           self.play(index);
-        // getTags(data.file)
-        // tag(data);
 
       },
 
