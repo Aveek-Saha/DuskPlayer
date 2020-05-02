@@ -148,7 +148,8 @@ body{
 }
 #picture{
     /* z-index: -1; */
-    width: 40vw;
-    margin-right: 3%
+    /* width: 40vw;
+    margin-right: 3% */
+    width: 100%;
     
 }

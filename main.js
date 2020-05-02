@@ -5,14 +5,16 @@ const join = require('path').join
 const { autoUpdater } = require('electron-updater')
 const fs = require('fs')
 const openAboutWindow = require('about-window').default
+const isDev = require('electron-is-dev');
 const storage = require('electron-json-storage')
 
 const dataPath = storage.getDataPath()
 
+if (isDev) {
 require('electron-reload')(__dirname, {
-  // Note that the path to electron may vary according to the main file
   electron: require(`${__dirname}/node_modules/electron`)
 });
+}
 
 let win
 
@@ -165,7 +167,8 @@ function createWindow() {
   })
 
   // Open the DevTools.
-  win.webContents.openDevTools()
+  if (isDev)
+    win.webContents.openDevTools()
 
   // Emitted when the window is closed.
   win.on('closed', () => {
