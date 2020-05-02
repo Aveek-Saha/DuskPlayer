@@ -227,6 +227,42 @@ angular.module('Player.player', ['ngRoute'])
         });
     }
 
+    function getTags(audioFile) {
+      var titles = []
+      const metadata = mm.parseFile(audioFile, { skipCovers: false })
+        .then(metadata => {
+          console.log(metadata.common);
+          $scope.trackName = metadata.common.title;
+          $scope.trackArtist = metadata.common.artist;
+          var img = document.getElementById('picture')
+
+          if (metadata.common.picture) {
+            var picture = metadata.common.picture[0]
+            img.style.display = "block";
+            img.src = `data:${picture.format};base64,${picture.data.toString('base64')}`;
+            img.addEventListener('load', function () {
+              if ($scope.theme == 'disco') {
+                var vibrant = new Vibrant(img, 128, 3);
+                var swatches = vibrant.swatches()
+                if (swatches['DarkMuted'])
+                  document.body.style.backgroundColor = swatches['DarkMuted'].getHex()
+                if (swatches['LightVibrant'])
+                  document.body.style.color = swatches['LightVibrant'].getHex()
+              }
+            })
+          } else {
+            img.style.display = "none";
+
+          }
+          $scope.$apply()
+        })
+        .catch(err => {
+          console.error(err.message);
+        });
+
+      return titles
+    }
+
     $scope.seekToTime = function ($event) {
       $scope.player.seek($event.offsetX / sk.offsetWidth);
     }
@@ -317,7 +353,8 @@ angular.module('Player.player', ['ngRoute'])
         // $scope.trackName = data.name;
         // $scope.trackArtist = "";
         // console.log(data);
-        tag(data);
+        // tag(data);
+        // getTags(data.file)
 
         if (data.howl) {
           sound = data.howl;
@@ -340,8 +377,9 @@ angular.module('Player.player', ['ngRoute'])
             }
           });
         }
-
+        // getTags(data.file)
         sound.play();
+        getTags(data.file)
 
         self.index = index;
       },
@@ -378,7 +416,8 @@ angular.module('Player.player', ['ngRoute'])
 
         var data = self.playlist[self.index];
         // console.log(data);
-        tag(data);
+        // getTags(data.file)
+        // tag(data);
 
         self.skipTo(index);
       },
@@ -390,10 +429,8 @@ angular.module('Player.player', ['ngRoute'])
           // console.log(self.playlist[self.index].howl);
           self.playlist[self.index].howl.stop();
         }
-
         var data = self.playlist[index];
-        // console.log(data);
-        tag(data);
+        // console.log(!self.playlist[self.index].howl);
 
         if (!$scope.songPlaying) {
           $scope.songPlaying = true;
@@ -401,6 +438,9 @@ angular.module('Player.player', ['ngRoute'])
         }
         else
           self.play(index);
+        // getTags(data.file)
+        // tag(data);
+
       },
 
       step: function () {
