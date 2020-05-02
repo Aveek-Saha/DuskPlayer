@@ -225,13 +225,13 @@ var walkSync = function (dir, filelist) {
       filelist = walkSync(path.join(dir, file), filelist)
     } else {
       if (
-        file.substr(-4) === '.mp3' ||
-        file.substr(-4) === '.m4a' ||
-        file.substr(-5) === '.webm' ||
-        file.substr(-4) === '.wav' ||
-        file.substr(-4) === '.aac' ||
-        file.substr(-4) === '.ogg' ||
-        file.substr(-5) === '.opus'
+        file.endsWith('.mp3') 
+        || file.endsWith('.m4a')
+        || file.endsWith('.webm') 
+        || file.endsWith('.wav')
+        || file.endsWith('.aac') 
+        || file.endsWith('.ogg')
+        || file.endsWith('.opus')
       ) {
         filelist.push(path.join(dir, file))
       }

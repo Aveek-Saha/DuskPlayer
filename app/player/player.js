@@ -123,7 +123,11 @@ angular.module('Player.player', ['ngRoute'])
 
         // await will ensure the metadata parsing is completed before we move on to the next file
         const metadata = await mm.parseFile(audioFile, { skipCovers: true });
-        titles.push(metadata.common.title);
+        var title = metadata.common.title
+        if(title)
+          titles.push(metadata.common.title);
+        else
+          titles.push(audioFile.split(path.sep).slice(-1)[0]);
         
         // Do great things with the metadata
       }
@@ -244,8 +248,16 @@ angular.module('Player.player', ['ngRoute'])
       const metadata = mm.parseFile(audioFile, { skipCovers: false })
         .then(metadata => {
           console.log(metadata.common);
-          $scope.trackName = metadata.common.title;
-          $scope.trackArtist = metadata.common.artist;
+          var title = metadata.common.title
+          var artist = metadata.common.artist
+          if(title)
+            $scope.trackName = title;
+          else
+            $scope.trackName = audioFile.split(path.sep).slice(-1)[0]
+          if(artist)
+            $scope.trackArtist = artist;
+          else
+            $scope.trackArtist = ""
           var img = document.getElementById('picture')
 
           if (metadata.common.picture) {
