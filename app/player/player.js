@@ -51,6 +51,8 @@ angular.module('Player.player', ['ngRoute'])
         icons.forEach(icon => {
           icon.style.color = "#212529";
         });
+        album.classList.remove("text-white")
+        album.classList.add("text-muted")
 
       }
       else if (data.theme == "dark") {
@@ -62,6 +64,8 @@ angular.module('Player.player', ['ngRoute'])
         icons.forEach(icon => {
           icon.style.color = "azure";
         });
+        album.classList.remove("text-white")
+        album.classList.add("text-muted")
       }
       else if (data.theme == "disco") {
         $scope.theme = 'disco'
@@ -189,6 +193,8 @@ angular.module('Player.player', ['ngRoute'])
           console.log(metadata.common);
           var title = metadata.common.title
           var artist = metadata.common.artist
+          var album = metadata.common.album
+
           if(title)
             $scope.trackName = title;
           else
@@ -197,7 +203,12 @@ angular.module('Player.player', ['ngRoute'])
             $scope.trackArtist = artist;
           else
             $scope.trackArtist = ""
+          if (album)
+            $scope.trackAlbum = album;
+          else
+            $scope.trackAlbum = ""
           var img = document.getElementById('picture')
+          var album = document.getElementById('album')
 
           if (metadata.common.picture) {
             var picture = metadata.common.picture[0]
@@ -215,6 +226,9 @@ angular.module('Player.player', ['ngRoute'])
                   document.body.style.color = swatches['LightVibrant'].getHex()
                 else 
                   document.body.style.color = "azure"
+
+                album.classList.remove("text-muted")
+                album.classList.add("text-white")
 
               }
             })
