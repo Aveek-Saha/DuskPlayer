@@ -132,13 +132,16 @@ angular.module('Player.player', ['ngRoute'])
       var arr = walkSync(filePath[0]);
       var arg = {};
       var names = await parseFiles(arr)
-      console.log(names);
       
       arg.files = arr;
       arg.path = filePath;
       arg.names = names
+      // console.log(arg);
+      
+      // if (arg.files.length > 0)
       startPlayer(arg)
     }
+    
     function themeChange(data) {
       
       console.log(data);
@@ -151,7 +154,7 @@ angular.module('Player.player', ['ngRoute'])
 
     ipc.on('selected-files', function (event, arg) {
       // console.log(arg)
-
+      // if (arg.files.length > 0)
       startPlayer(arg)
 
     });
@@ -159,8 +162,8 @@ angular.module('Player.player', ['ngRoute'])
     function startPlayer(arg) {
 
       if ($scope.songPlaying) {
-        $scope.songPlaying = false;
         $scope.player.pause();
+        $scope.songPlaying = false;
       }
       $scope.songList = arg;
       // console.log($scope.songList)
@@ -180,10 +183,11 @@ angular.module('Player.player', ['ngRoute'])
 
       $scope.player = new Player(songArr);
       $scope.musicSelected = true;
-      $scope.$apply()
 
       $scope.playMusic()
       $scope.playMusic()
+      $scope.$apply()
+
     }
 
     function getTags(audioFile) {
@@ -284,13 +288,14 @@ angular.module('Player.player', ['ngRoute'])
 
     $scope.playMusic = function () {
       if ($scope.songPlaying) {
-        $scope.songPlaying = false;
         $scope.player.pause();
+        $scope.songPlaying = false;
       }
       else {
-        $scope.songPlaying = true;
         $scope.player.play();
+        $scope.songPlaying = true;
       }
+
     }
 
     $scope.toggleShuffle = function () {

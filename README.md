@@ -49,6 +49,7 @@ Some new features and under the hood stuff that will be or has already been impl
 * Show Song titles in the playlist instead of showing the file path
 * Fixed a bug where track name and artist would not change on changing tracks
 * Theme can now be changed without restarting the application
+* Show the album name next to the artist's name
 
 # v4.0.0
 * Brand new theme! The Disco theme changes the background color based on the song album art. Select it from the themes menu.
