@@ -21,7 +21,6 @@ angular.module('Player.player', ['ngRoute'])
     var checkbox = document.getElementById("checkboxrn")
 
     const ipc = require('electron').ipcRenderer;
-    const jsmediatags = require("jsmediatags");
     const fs = require('fs')
     const path = require('path')
     const storage = require('electron-json-storage');
@@ -172,50 +171,6 @@ angular.module('Player.player', ['ngRoute'])
 
       $scope.playMusic()
       $scope.playMusic()
-    }
-
-    function tag(data) {
-      new jsmediatags.Reader(data.file)
-        .setTagsToRead(["title", "artist", "picture"])
-        .read({
-          onSuccess: function (tag) {
-            if (tag.tags.title) {
-              $scope.trackName = tag.tags.title;
-              $scope.trackArtist = tag.tags.artist;
-            }
-            else {
-              $scope.trackName = data.name;
-              $scope.trackArtist = "";
-            }
-            var image = tag.tags.picture;
-            if (image) {
-              // var pic = document.getElementById('picture')
-              var base64String = "";
-              for (var i = 0; i < image.data.length; i++) {
-                base64String += String.fromCharCode(image.data[i]);
-              }
-              var base64 = "data:image/jpeg;base64," + window.btoa(base64String);
-
-              var img = document.getElementById('picture')
-              img.style.display = "block";
-              img.setAttribute('src', base64);
-              img.addEventListener('load', function () {
-                var vibrant = new Vibrant(img, 128, 3);
-                var swatches = vibrant.swatches()
-
-                if ($scope.theme == 'disco') {
-                  document.body.style.backgroundColor = swatches['DarkMuted'].getHex()
-                  document.body.style.color = swatches['LightVibrant'].getHex()
-                }
-              })
-            } else {
-              document.getElementById('picture').style.display = "none";             
-            }
-          },
-          onError: function (error) {
-            console.log(':(', error.type, error.info);
-          }
-        });
     }
 
     function getTags(audioFile) {
