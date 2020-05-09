@@ -46,15 +46,18 @@ Once all the dependencies have finished downloading, run ```npm start``` to test
  
 # Upcoming Features
 Some new features and under the hood stuff that will be or has already been implemented. They'll be included in the next update
-* Show Song titles in the playlist instead of showing the file path
-* Fixed a bug where track name and artist would not change on changing tracks
 * Theme can now be changed without restarting the application
+* Show Song titles in the playlist instead of showing the file path
+* Resume playback from the most recent track on restart
+* Fixed a bug where track name and artist would not change on changing tracks
 * Show the album name next to the artist's name
 * Show a spinning loader when audio files are being loaded
 
 # Changelog
 You can find the changelog for all releases [here](https://github.com/Aveek-Saha/MusicPlayer/blob/master/CHANGELOG.md)
- 
+
+<br>
+<br>
 ### If you liked this, check out My Blog where I post tutorials and write about projects like this
 https://home.aveek.io/blog/
 

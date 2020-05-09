@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 * Show the album name next to the artist's name
 * Show a spinning loader when audio files are being loaded
+* Playback can now be resumed from the most recent track on restart
 
 ### Changed
 * Theme can now be changed without restarting the application
