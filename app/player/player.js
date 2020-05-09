@@ -13,6 +13,7 @@ angular.module('Player.player', ['ngRoute'])
     $scope.playListVisible = false;
     $scope.shuffle = false;
     $scope.mute = false;
+    $scope.loading = false;
     $scope.theme = "dark";
     // $scope.playMusic();
 
@@ -104,6 +105,9 @@ angular.module('Player.player', ['ngRoute'])
 
     async function parseFiles(audioFiles) {
       var titles = []
+
+      $scope.loading = true;
+      $scope.$apply()
       for (const audioFile of audioFiles) {
 
         // await will ensure the metadata parsing is completed before we move on to the next file
@@ -123,6 +127,8 @@ angular.module('Player.player', ['ngRoute'])
         titles.push(data)
         
       }
+      $scope.loading = false;
+      $scope.$apply()
       return titles
     }
 
@@ -155,7 +161,9 @@ angular.module('Player.player', ['ngRoute'])
     ipc.on('selected-files', function (event, arg) {
       // console.log(arg)
       // if (arg.files.length > 0)
-      startPlayer(arg)
+      // startPlayer(arg)
+
+      scanDir(arg)
 
     });
 
@@ -194,7 +202,7 @@ angular.module('Player.player', ['ngRoute'])
       var titles = []
       const metadata = mm.parseFile(audioFile, { skipCovers: false })
         .then(metadata => {
-          console.log(metadata.common);
+          // console.log(metadata.common);
           var title = metadata.common.title
           var artist = metadata.common.artist
           var album = metadata.common.album
