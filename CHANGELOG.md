@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 * Show the album name next to the artist's name
+* Show a spinning loader when audio files are being loaded
 
 ### Changed
 * Theme can now be changed without restarting the application
