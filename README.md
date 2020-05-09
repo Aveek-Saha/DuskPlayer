@@ -58,6 +58,7 @@ You can find the changelog for all releases [here](https://github.com/Aveek-Saha
 
 <br>
 <br>
+
 ### If you liked this, check out My Blog where I post tutorials and write about projects like this
 https://home.aveek.io/blog/
 

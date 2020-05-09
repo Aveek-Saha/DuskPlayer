@@ -1,6 +1,6 @@
 {
   "name": "DuskPlayer",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "homepage": "https://aveek-saha.github.io",
   "description": "A music player for your desktop",
   "repository": {
@@ -10,8 +10,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "pack": "build --dir",
-    "dist": "build"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "build": {
     "publish": [
