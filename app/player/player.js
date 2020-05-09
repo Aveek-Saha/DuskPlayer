@@ -159,9 +159,6 @@ angular.module('Player.player', ['ngRoute'])
     });
 
     ipc.on('selected-files', function (event, arg) {
-      // console.log(arg)
-      // if (arg.files.length > 0)
-      // startPlayer(arg)
 
       scanDir(arg)
 
@@ -189,12 +186,27 @@ angular.module('Player.player', ['ngRoute'])
         });
       }
 
-      $scope.player = new Player(songArr);
-      $scope.musicSelected = true;
+      storage.has('last-played', function (error, hasKey) {
+        if (error) throw error;
+        if (hasKey) {
+          storage.get('last-played', function (error, data) {
+            if (error) throw error;
+            var index = arg.files.indexOf(data.path)
+            
+            if (index != -1){
+              $scope.player = new Player(songArr, index);
+            } else {
+              $scope.player = new Player(songArr, 0);
+            }
+            $scope.musicSelected = true;
 
-      $scope.playMusic()
-      $scope.playMusic()
-      $scope.$apply()
+            $scope.playMusic()
+            $scope.playMusic()
+            $scope.$apply()
+          });
+        }
+      })
+
 
     }
 
@@ -332,9 +344,9 @@ angular.module('Player.player', ['ngRoute'])
       $scope.mute = false;
     }
 
-    var Player = function (playlist) {
+    var Player = function (playlist, index) {
       this.playlist = playlist;
-      this.index = 0;
+      this.index = index;
     }
 
     Player.prototype = {
@@ -367,7 +379,10 @@ angular.module('Player.player', ['ngRoute'])
             }
           });
         }
-        // getTags(data.file)
+        
+        storage.set('last-played', { path: data.file }, function (error) {
+          if (error) throw error
+        })
         sound.play();
         getTags(data.file)
 
