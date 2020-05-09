@@ -35,6 +35,11 @@ body{
   text-overflow: ellipsis
 }
 
+.centerBlock {
+  display: table;
+  margin: auto;
+}
+
 #playlist{
     float: left;
     z-index: 5;

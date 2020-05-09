@@ -5,7 +5,6 @@ const join = require('path').join
 const { autoUpdater } = require('electron-updater')
 const fs = require('fs')
 const openAboutWindow = require('about-window').default
-const mm = require('music-metadata');
 const isDev = require('electron-is-dev');
 const storage = require('electron-json-storage')
 
@@ -138,18 +137,6 @@ function createWindow() {
     })
   )
 
-
-  storage.has('path', function (error, hasKey) {
-    if (error) throw error
-    if (hasKey) {
-      storage.get('path', function (error, data) {
-        if (error) throw error
-
-        scanDir([data.path.toString()])
-      })
-    }
-  })
-
   // Open the DevTools.
   if (isDev)
     win.webContents.openDevTools()
@@ -220,43 +207,11 @@ var walkSync = function (dir, filelist) {
   return filelist
 }
 
-async function parseFiles(audioFiles) {
-  var titles = []
-  for (const audioFile of audioFiles) {
 
-    // await will ensure the metadata parsing is completed before we move on to the next file
-    const metadata = await mm.parseFile(audioFile, { skipCovers: true });
-    data = {}
-    var title = metadata.common.title
-    var artist = metadata.common.artist
-    if (title)
-      data.title = metadata.common.title;
-    else
-      data.title = audioFile.split(path.sep).slice(-1)[0];
-    if (artist)
-      data.artist = metadata.common.artist;
-    else
-      data.artist = '';
-
-    titles.push(data)
-
-  }
-  return titles
-}
-
-async function scanDir(filePath) {
+ function scanDir(filePath) {
   if (!filePath || filePath[0] == 'undefined') return
 
-  var arr = walkSync(filePath[0])
-
-  var objToSend = {}
-  objToSend.files = arr
-  objToSend.path = filePath
-  var names = await parseFiles(arr)
-  objToSend.names = names 
-
-
-  win.webContents.send('selected-files', objToSend)
+   win.webContents.send('selected-files', filePath)
 }
 
 function createMenuOther(openFolder, theme, info) {
