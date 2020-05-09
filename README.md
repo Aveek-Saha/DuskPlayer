@@ -11,7 +11,7 @@
 <img src ="https://img.shields.io/github/workflow/status/Aveek-Saha/MusicPlayer/CD?style=for-the-badge">
 </h3>
  
-A minimalistic music player, designed for simplicity. Built on electron, uses Howler for handling music playback, AngularJS and Bootstrap for the frontend, and jsmediatags to retrieve the ID3 tags.
+A minimalistic music player, designed for simplicity. Built on electron, uses Howler for handling music playback, AngularJS and Bootstrap for the frontend, and music-metadata to retrieve ID3 tags.
  
 This can also serve as a starting point to implement your own front-end/UI for a music Player.
  
@@ -32,7 +32,7 @@ Once all the dependencies have finished downloading, run ```npm start``` to test
  <li>Reads ID3 tags and displays the artist and album art (if they exist)</li>
  <li>Quickly switch tracks from the playlist.</li>
  <li>Search for songs from the search bar.</li>
- <li>Choose between a Dark, Light and Disco modes</li>
+ <li>Instantly switch between Dark, Light and Disco modes</li>
 </ul>
  
 # Screenshots
@@ -51,25 +51,8 @@ Some new features and under the hood stuff that will be or has already been impl
 * Theme can now be changed without restarting the application
 * Show the album name next to the artist's name
 
-# v4.0.0
-* Brand new theme! The Disco theme changes the background color based on the song album art. Select it from the themes menu.
-* Search for songs from the search bar.
-* The progress bar now feels more responsive when seeking.
-* Setting are now stored in a JSON store instead of in files.
-* Fixed a bug where the title and artist name would flicker while playing/pausing or skipping tracks.
- 
-# v3.0.0
-* Now choose between a Dark and Light mode!
-* Recursively finds audio files in all sub directories of the chosen directory
- 
-# v2.0.0
-* When you open the app, it starts playing music from the directory that you last played music from. This means that you can skip having to select a directory when you open the app.
-* Changed the name to Dusk Player, Music player was too generic.
-* You can now play tracks on shuffle.
-* New location and style for the playlist.
-* Volume slider has indicators.
-* New app Icon
-* Small style changes.
+## Changelog
+You can find the changelog for all releases [here](https://github.com/Aveek-Saha/MusicPlayer/blob/master/CHANGELOG.md)
  
 ### If you liked this, check out My Blog where I post tutorials and write about projects like this
 https://home.aveek.io/blog/
