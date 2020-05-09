@@ -50,8 +50,9 @@ Some new features and under the hood stuff that will be or has already been impl
 * Fixed a bug where track name and artist would not change on changing tracks
 * Theme can now be changed without restarting the application
 * Show the album name next to the artist's name
+* Show a spinning loader when audio files are being loaded
 
-## Changelog
+# Changelog
 You can find the changelog for all releases [here](https://github.com/Aveek-Saha/MusicPlayer/blob/master/CHANGELOG.md)
  
 ### If you liked this, check out My Blog where I post tutorials and write about projects like this
