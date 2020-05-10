@@ -3,11 +3,11 @@ name: CD
 # Controls when the action will run. Triggers the workflow on push 
 # events but only for the master branch
 on:
-  create:
-    tags:
-      - v*
-  # push:
-  #   branches: [ master ]
+  # create:
+  #   tags:
+  #     - v*
+  push:
+    branches: [ master ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:

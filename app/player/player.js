@@ -43,11 +43,12 @@ angular.module('Player.player', ['ngRoute'])
 
     function setTheme(data) {
       // var theme = data.theme
+      var icons = document.body.querySelectorAll("svg");
+      
       if (data.theme == "light") {
         $scope.theme = 'light'
         document.body.style.backgroundColor = "#F5F5F5"
         document.body.style.color = "#212529"
-        var icons = document.body.querySelectorAll("svg");
 
         icons.forEach(icon => {
           icon.style.color = "#212529";
@@ -60,7 +61,6 @@ angular.module('Player.player', ['ngRoute'])
         $scope.theme = 'dark'
         document.body.style.backgroundColor = "#212121"
         document.body.style.color = "azure"
-        var icons = document.body.querySelectorAll("svg");
 
         icons.forEach(icon => {
           icon.style.color = "azure";
@@ -70,6 +70,9 @@ angular.module('Player.player', ['ngRoute'])
       }
       else if (data.theme == "disco") {
         $scope.theme = 'disco'
+        icons.forEach(icon => {
+          icon.style.color = "azure";
+        });
       }
     }
 
@@ -204,6 +207,13 @@ angular.module('Player.player', ['ngRoute'])
             $scope.playMusic()
             $scope.$apply()
           });
+        }
+        else {
+          $scope.player = new Player(songArr, 0);
+
+          $scope.playMusic()
+          $scope.playMusic()
+          $scope.$apply()
         }
       })
 
