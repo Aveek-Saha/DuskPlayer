@@ -13,10 +13,7 @@
 
 <h3 align="center"> A minimalistic music player, designed for simplicity. <h3>
 
-
-Built on electron, uses Howler for handling music playback, AngularJS and Bootstrap for the frontend, and music-metadata to retrieve ID3 tags.
- 
-This can also serve as a starting point to implement your own front-end/UI for a music Player.
+Built on electron, uses Howler for handling music playback, AngularJS and Bootstrap for the frontend, and music-metadata to retrieve ID3 tags. This can also serve as a starting point to implement your own front-end/UI for a music Player.
  
 Download here: [Releases](https://github.com/Aveek-Saha/MusicPlayer/releases)
 
