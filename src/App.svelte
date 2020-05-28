@@ -275,7 +275,7 @@ var playPlaylistSong = function (index) {
 }
 var nextSong = function () {
 	if (shuffle) {
-		player.skip('random');
+		player.skip('random-next');
 	}
 	else {
 		player.skip('next');
@@ -284,7 +284,7 @@ var nextSong = function () {
 }
 var prevSong = function () {
 	if (shuffle) {
-		player.skip('random');
+		player.skip('random-prev');
 	}
 	else {
 		player.skip('prev');
@@ -337,10 +337,21 @@ var togglecheckbox = function() {
 	}
 }
 
+function randomize(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 
 var Player = function (playlist, index) {
 	this.playlist = playlist;
 	this.index = index;
+	this.randomIndex = index;
+	this.randomArray = randomize(Array.from({length: playlist.length}, (_, i) => i))
 }
 
     Player.prototype = {
@@ -400,18 +411,30 @@ var Player = function (playlist, index) {
             index = self.playlist.length - 1;
           }
         }
-        else if (direction === 'random') {
-          index = Math.floor(Math.random() * self.playlist.length) + 1;
-
+        else if (direction === 'random-next') {
+			self.randomIndex += 1
+			if (self.randomIndex >= self.randomArray.length) {
+				self.randomIndex = 0;
+			}
+			index = self.randomArray[self.randomIndex]
+		}
+		else if (direction === 'random-prev') {
+			self.randomIndex -= 1
+			if (self.randomIndex < 0) {
+				self.randomIndex = self.randomArray.length - 1;
+			}
+			index = self.randomArray[self.randomIndex]
         }
         else {
           index = self.index + 1;
           if (index >= self.playlist.length) {
             index = 0;
           }
-        }
+		}
+		console.log(index);
+		
 
-        var data = self.playlist[self.index];
+        // var data = self.playlist[self.index];
 
         self.skipTo(index);
       },
