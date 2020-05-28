@@ -46,7 +46,7 @@ Once all the dependencies have finished downloading, run ```npm run app-dev``` t
  
 # Upcoming Features
 Some new features and under the hood stuff that will be or has already been implemented. They'll be included in the next update
-* Nothing here yet! Feel free create an issue with a feature that you think is missing or raise a PR.
+* New function to shuffle songs.
 
 # Changelog
 You can find the changelog for all releases [here](https://github.com/Aveek-Saha/MusicPlayer/blob/master/CHANGELOG.md)
