@@ -7,11 +7,13 @@
     "type": "git",
     "url": "https://github.com/Aveek-Saha/MusicPlayer.git"
   },
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
-    "start": "electron .",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "build": "rollup -c && electron-builder",
+    "dev": "rollup -c -w",
+    "start": "sirv public",
+    "app": "electron .",
+    "app-dev": "concurrently \"npm:dev\" \"npm:app\""
   },
   "build": {
     "publish": [
@@ -55,22 +57,27 @@
   "author": "Aveek Saha",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^6.1.10",
-    "electron-builder": "^22.4.0",
-    "electron-reload": "^1.5.0"
+    "@rollup/plugin-commonjs": "11.0.2",
+    "@rollup/plugin-node-resolve": "^7.0.0",
+    "concurrently": "^5.2.0",
+    "electron": "^6.1.11",
+    "electron-builder": "^22.6.0",
+    "electron-is-dev": "^1.2.0",
+    "electron-reload": "^1.5.0",
+    "rollup": "^1.20.0",
+    "rollup-plugin-livereload": "^1.0.0",
+    "rollup-plugin-svelte": "^5.0.3",
+    "rollup-plugin-terser": "^5.1.2",
+    "sirv-cli": "^0.4.4",
+    "svelte": "^3.0.0"
   },
   "dependencies": {
-    "about-window": "1.12.1",
-    "angular": "^1.7.9",
-    "angular-route": "^1.6.9",
-    "bootstrap": "4.3.1",
-    "electron-is-dev": "^1.2.0",
+    "about-window": "^1.13.2",
+    "bootstrap": "^4.4.1",
     "electron-json-storage": "^4.1.8",
-    "electron-updater": "^4.0.6",
     "howler": "^2.1.3",
-    "jquery": "^3.5.0",
+    "jquery": "^3.5.1",
     "music-metadata": "^6.3.7",
-    "path": "^0.12.7",
-    "popper.js": "^1.14.1"
+    "popper.js": "^1.16.1"
   }
 }

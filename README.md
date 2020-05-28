@@ -11,14 +11,11 @@
 <img src ="https://img.shields.io/github/workflow/status/Aveek-Saha/MusicPlayer/CD?style=for-the-badge">
 </h3>
  
-A minimalistic music player, designed for simplicity. Built on electron, uses Howler for handling music playback, AngularJS and Bootstrap for the frontend, and music-metadata to retrieve ID3 tags.
+A minimalistic music player, designed for simplicity. Built on electron, uses Howler for handling music playback, Svelte for the UI, and music-metadata to retrieve ID3 tags.
  
 This can also serve as a starting point to implement your own front-end/UI for a music Player.
  
 Download here: [Releases](https://github.com/Aveek-Saha/MusicPlayer/releases)
-
-### Important notice:
-There's potentially going to be some big changes to this application with regards to the choice of framework, [read about it](https://gist.io/@Aveek-Saha/639903d6573d42593057640af1439226) and [vote for your preference](https://github.com/Aveek-Saha/MusicPlayer/issues/26).
  
 # How to use
 ### 1. The Player
@@ -26,7 +23,7 @@ Download the build for your OS. Start the application and then click on the Fold
 Once you select a folder with songs, just click play.
 ### 2. Building from the repo
 Clone the repository, make it your working directory, and then on your terminal run ```npm install```. 
-Once all the dependencies have finished downloading, run ```npm start``` to test it, and ```npm run dist``` to build it for your platform.
+Once all the dependencies have finished downloading, run ```npm run app-dev``` to test it, and ```npm run dist``` to build it for your platform.
  
  
 # Features
