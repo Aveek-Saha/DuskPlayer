@@ -36,13 +36,13 @@ Once all the dependencies have finished downloading, run ```npm run app-dev``` t
 </ul>
  
 # Screenshots
-<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot4.png" width="30%"></img>
-<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot3.png" width="30%"></img>
-<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot2.png" width="30%"></img>
+<img src="https://home.aveek.io/blog/DuskPlayer/Screenshot4.png" width="30%"></img>
+<img src="https://home.aveek.io/blog/DuskPlayer/Screenshot3.png" width="30%"></img>
+<img src="https://home.aveek.io/blog/DuskPlayer/Screenshot2.png" width="30%"></img>
 
-<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot5.png" width="30%"></img>
-<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot7.png" width="30%"></img>
-<img src="https://aveeksaha.gitlab.io/DuskPlayer/Screenshot6.png" width="30%"></img>
+<img src="https://home.aveek.io/blog/DuskPlayer/Screenshot5.png" width="30%"></img>
+<img src="https://home.aveek.io/blog/DuskPlayer/Screenshot7.png" width="30%"></img>
+<img src="https://home.aveek.io/blog/DuskPlayer/Screenshot6.png" width="30%"></img>
  
 # Upcoming Features
 Some new features and under the hood stuff that will be or has already been implemented. They'll be included in the next update
