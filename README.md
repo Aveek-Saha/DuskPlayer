@@ -23,7 +23,7 @@ Download the build for your OS. Start the application and then click on the Fold
 Once you select a folder with songs, just click play.
 ### 2. Building from the repo
 Clone the repository, make it your working directory, and then on your terminal run ```npm install```. 
-Once all the dependencies have finished downloading, run ```npm run app-dev``` to test it, and ```npm run dist``` to build it for your platform.
+Once all the dependencies have finished downloading, run ```npm run app-dev``` to test it, and ```npm run build``` to build it for your platform.
  
  
 # Features
