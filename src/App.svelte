@@ -511,27 +511,50 @@ var volumnDown = function() {
 		player.volume(slider/100)
 	}
 }
+
 var handleKeyboardPress = function (keycode) {
 	switch (keycode) {
-		case 'Space':
+		//--Spacebar
+		case " ":
 			playMusic();
 			break;
-		case 'MediaPlayPause':
-			songPlaying = false;
+		case "MediaPlayPause":
+			songPlaying = !songPlaying;
 			break;
-		case 'MediaNextTrack':
+		case "MediaTrackNext":
 			nextSong();
 			break;
-		case 'MediaPreviousTrack':
+		case "MediaTrackPrevious":
 			prevSong();
+			break;
+		case "ArrowRight":
+			nextSong();
+			break;
+		case "ArrowLeft":
+			prevSong();
+			break;
+		case "ArrowUp":
+			volumnUp();
+			break;
+		case "ArrowDown":
+			volumnDown();
+			break;
+		case "AudioVolumeUp":
+			volumnUp();
+			break;
+		case "AudioVolumeDown":
+			volumnDown();
+			break;
+		case "AudioVolumeMute":
+			mute = !mute
 			break;
 		default:
 			break;
 	}
 }
 
-document.onkeypress = function (event) {
-    handleKeyboardPress(event.code)
+document.onkeydown = function (event) {
+    handleKeyboardPress(event.key)
 };
 
 </script>
