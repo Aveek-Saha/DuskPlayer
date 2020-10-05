@@ -498,6 +498,19 @@ $: if(player) {
 	mute = false;
 }
 
+var volumnUp = function() {
+	if(slider !== 100) {
+		slider = slider + 2;
+		player.volume(slider/100)
+	}
+}
+
+var volumnDown = function() {
+	if(slider !== 0) {
+		slider = slider - 2;
+		player.volume(slider/100)
+	}
+}
 var handleKeyboardPress = function (keycode) {
 	switch (keycode) {
 		case 'Space':
