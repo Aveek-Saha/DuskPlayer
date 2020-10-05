@@ -498,6 +498,29 @@ $: if(player) {
 	mute = false;
 }
 
+var handleKeyboardPress = function (keycode) {
+	switch (keycode) {
+		case 'Space':
+			playMusic();
+			break;
+		case 'MediaPlayPause':
+			songPlaying = false;
+			break;
+		case 'MediaNextTrack':
+			nextSong();
+			break;
+		case 'MediaPreviousTrack':
+			prevSong();
+			break;
+		default:
+			break;
+	}
+}
+
+document.onkeypress = function (event) {
+    handleKeyboardPress(event.code)
+};
+
 </script>
 
 <div class="container-fluid">
