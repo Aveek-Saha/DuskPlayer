@@ -498,6 +498,67 @@ $: if(player) {
 	mute = false;
 }
 
+var volumnUp = function() {
+	if(slider !== 100) {
+		slider = slider + 2;
+		player.volume(slider/100)
+	}
+}
+
+var volumnDown = function() {
+	if(slider !== 0) {
+		slider = slider - 2;
+		player.volume(slider/100)
+	}
+}
+
+var handleKeyboardPress = function (keycode) {
+	switch (keycode) {
+		//--Spacebar
+		case " ":
+			playMusic();
+			break;
+		case "MediaPlayPause":
+			songPlaying = !songPlaying;
+			break;
+		case "MediaTrackNext":
+			nextSong();
+			break;
+		case "MediaTrackPrevious":
+			prevSong();
+			break;
+		case "ArrowRight":
+			nextSong();
+			break;
+		case "ArrowLeft":
+			prevSong();
+			break;
+		case "ArrowUp":
+			volumnUp();
+			break;
+		case "ArrowDown":
+			volumnDown();
+			break;
+		case "AudioVolumeUp":
+			volumnUp();
+			break;
+		case "AudioVolumeDown":
+			volumnDown();
+			break;
+		case "AudioVolumeMute":
+			mute = !mute
+			break;
+		default:
+			break;
+	}
+}
+
+document.onkeydown = function (event) {
+	if(!playListVisible){
+		handleKeyboardPress(event.key)
+	}
+};
+
 </script>
 
 <div class="container-fluid">
