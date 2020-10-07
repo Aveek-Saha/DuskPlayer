@@ -554,7 +554,9 @@ var handleKeyboardPress = function (keycode) {
 }
 
 document.onkeydown = function (event) {
-    handleKeyboardPress(event.key)
+	if(!playListVisible){
+		handleKeyboardPress(event.key)
+	}
 };
 
 </script>
