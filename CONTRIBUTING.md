@@ -12,6 +12,8 @@ We love your input! We want to make contributing to this project as easy and tra
 - Proposing new features
 - Becoming a maintainer
 
+Please use the correct templates when creating an issue for a bug, a feature request or a pull request.
+
 ## We Develop with Github
 We use github to host code, to track issues and feature requests, as well as accept pull requests. Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)). We actively welcome your pull requests.
 
