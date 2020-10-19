@@ -219,16 +219,13 @@ function startPlayer(arg) {
 			} else {
 				player = new Player(songArr, 0);
 			}
-
-			playMusic()
-			playMusic()
+			
+			getTags(player.playlist[player.index].file)
 			});
 		}
 		else {
 			player = new Player(songArr, 0);
-			
-			playMusic()
-			playMusic()
+			getTags(player.playlist[player.index].file)
 		}
 	})
 
@@ -556,8 +553,7 @@ $: if(player) {
 					<div id="duration"> {duration} </div><br>
 			
 					<div class="progress" id="seek" bind:clientWidth={offsetWidth} on:click={e => seekToTime(e)}>
-						<div class="progress-bar bg-danger" 
-						style="transition: width .2s cubic-bezier(0.22, 0.61, 0.36, 1);"
+						<div class="progress-bar bg-danger"
 							role="progressbar" id="progress" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 				</div>
@@ -570,3 +566,11 @@ $: if(player) {
 		</div>
 	</div>
 </div>
+
+<style>
+.progress .progress-bar {
+  -webkit-transition: none;
+       -o-transition: none;
+          transition: none;
+}
+</style>
