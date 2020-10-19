@@ -1,4 +1,4 @@
-const { app, BrowserWindow, dialog, Menu } = require('electron')
+const { app, BrowserWindow, dialog, Menu, ipcMain } = require('electron')
 const path = require('path')
 const url = require('url')
 const fs = require('fs')
@@ -7,6 +7,7 @@ const isDev = require('electron-is-dev');
 const storage = require('electron-json-storage')
 
 const dataPath = storage.getDataPath()
+let status=0;
 
 if (isDev) {
     require('electron-reload')(__dirname, {
@@ -139,11 +140,28 @@ function createWindow() {
     if (isDev)
         win.webContents.openDevTools()
 
+    win.on('close', (e) => {
+        if(status == 0){
+            if(win){
+                e.preventDefault();
+                win.webContents.send('save-settings');
+            }
+        }
+    })
+
     // Emitted when the window is closed.
     win.on('closed', () => {
         win = null
     })
 }
+
+ipcMain.on('closed', () => {
+    status = 1;
+    mainWindow = null;
+    if (process.platform !== 'darwin') {
+      app.quit();
+    }
+})
 
 app.on('ready', () => {
     createWindow()

@@ -20,8 +20,6 @@ let trackAlbum = "";
 let songList = null;
 let songPlaying = false;
 let playListVisible = false;
-let shuffle = false;
-let mute = false;
 let loading = false;
 let theme = "dark";
 
@@ -33,8 +31,24 @@ let player = null
 
 let search = ""
 
-let slider = 100
 let offsetWidth;
+
+let shuffle = false;
+let mute = false;
+let slider = 100;
+
+storage.has('settings', function (error, hasKey) {
+	if (error) throw error;
+	if (hasKey) {
+	storage.get('settings', function (error, data) {
+		if (error) throw error;
+		if (data.shuffle)
+			shuffle = true;
+		if (data.volume)
+			slider = data.volume;
+	});
+	}
+})
 
 storage.has('path', function (error, hasKey) {
 	if (error) throw error;
@@ -154,8 +168,15 @@ function themeChange(data) {
 	setTheme(data)
 	
 }
+
 ipc.on('theme-change', function (event, arg) {
 	themeChange(arg)
+});
+
+ipc.on('save-settings', function (event, arg) {
+	storage.set('settings', { shuffle: shuffle, mute: mute, volume: slider }, function (error) {
+		ipc.send('closed');
+	})
 });
 
 ipc.on('selected-files', function (event, arg) {
@@ -324,6 +345,9 @@ var toggleShuffle = function () {
 	else {
 		shuffle = true;
 	}
+	storage.set('settings', { shuffle: shuffle, volume: slider }, function (error) {
+		if (error) throw error
+	})
 }
 
 var togglecheckbox = function() {
@@ -335,6 +359,9 @@ var togglecheckbox = function() {
 		mute = true;
 		player.volume(0);
 	}
+	storage.set('settings', { shuffle: shuffle, volume: slider }, function (error) {
+		if (error) throw error
+	})
 }
 
 function randomize(array) {
