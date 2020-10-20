@@ -193,24 +193,19 @@ app.on('activate', () => {
 })
 
 function openFolderDialog() {
-    // console.log("here");
     dialog.showOpenDialog(
         win,
-        {
-            properties: ['openDirectory']
-        },
-        function (filePath) {
-            // console.log(filePath);
-            if (filePath) {
-
-                storage.set('path', { path: filePath }, function (error) {
-                    if (error) throw error
-                })                
-
-                scanDir(filePath)
-            }
+        { properties: ['openDirectory']}
+    ) .then((result) => {
+        const filePath = result.filePaths[0];
+        if (filePath) {
+          storage.set('path', { path: filePath }, function (error) {
+            if (error) throw error;
+          });
+  
+          scanDir(filePath);
         }
-    )
+      });
 }
 
 var walkSync = function (dir, filelist) {
