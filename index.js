@@ -205,6 +205,8 @@ function openFolderDialog() {
   
           scanDir(filePath);
         }
+    }, (error) => {
+        throw error;
     });
 }
 
