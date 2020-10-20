@@ -196,7 +196,7 @@ function openFolderDialog() {
     dialog.showOpenDialog(
         win,
         { properties: ['openDirectory']}
-    ) .then((result) => {
+    ).then((result) => {
         const filePath = result.filePaths[0];
         if (filePath) {
           storage.set('path', { path: filePath }, function (error) {
@@ -205,7 +205,7 @@ function openFolderDialog() {
   
           scanDir(filePath);
         }
-      });
+    });
 }
 
 var walkSync = function (dir, filelist) {
