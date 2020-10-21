@@ -15,8 +15,8 @@ function toggleShuffle() {
     dispatch('toggleShuffle');
 }
 
-function togglecheckbox() {
-    dispatch('togglecheckbox');
+function togglemute() {
+    dispatch('togglemute');
 }
 </script>
 
@@ -37,7 +37,8 @@ function togglecheckbox() {
         <button
             type="button"
             id="checkboxrn"
-            on:click={togglecheckbox}
+            on:focus={(e) => e.target.blur()}
+            on:click={togglemute}
             class="btn btn-primary-outline btn-lg justify-content-end">
             <i class="fas fa-volume-off fa-lg fa-inverse" />
         </button>
@@ -45,7 +46,8 @@ function togglecheckbox() {
         <button
             type="button"
             id="checkboxrn"
-            on:click={togglecheckbox}
+            on:focus={(e) => e.target.blur()}
+            on:click={togglemute}
             class="btn btn-primary-outline btn-lg justify-content-end">
             <i class="fas fa-volume-up fa-lg fa-inverse" />
         </button>
@@ -55,6 +57,7 @@ function togglecheckbox() {
         <button
             type="button"
             id="shuffleBtn"
+            on:focus={(e) => e.target.blur()}
             on:click={toggleShuffle}
             class="btn btn-primary-outline btn-lg">
             <i class="fas fa-random fa-lg fa-inverse" />
@@ -63,6 +66,7 @@ function togglecheckbox() {
         <button
             type="button"
             id="shuffleBtn"
+            on:focus={(e) => e.target.blur()}
             on:click={toggleShuffle}
             class="btn btn-primary-outline btn-lg justify-content-end">
             <i class="fas fa-sync-alt fa-lg fa-inverse" />
@@ -72,6 +76,7 @@ function togglecheckbox() {
     <button
         type="button"
         id="playlistBtn"
+        on:focus={(e) => e.target.blur()}
         on:click={showPlaylist}
         class="btn btn-primary-outline btn-lg justify-content-end">
         <i class="fas fa-bars fa-lg fa-inverse" />

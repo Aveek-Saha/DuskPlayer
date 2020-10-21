@@ -317,7 +317,7 @@ var toggleShuffle = function () {
     });
 };
 
-var togglecheckbox = function () {
+var togglemute = function () {
     if (mute) {
         mute = false;
         player.volume(slider / 100);
@@ -474,6 +474,45 @@ Player.prototype = {
     }
 };
 
+var volumnUp = function () {
+    if (slider !== 100) {
+        slider = slider + 2;
+        player.volume(slider / 100);
+    }
+};
+
+var volumnDown = function () {
+    if (slider !== 0) {
+        slider = slider - 2;
+        player.volume(slider / 100);
+    }
+};
+
+var handleKeyboardPress = function (keycode) {
+    switch (keycode) {
+        case 'MediaPlayPause':
+        case ' ':
+            playMusic();
+            break;
+        case 'ArrowRight':
+        case 'MediaTrackNext':
+            nextSong();
+            break;
+        case 'ArrowLeft':
+        case 'MediaTrackPrevious':
+            prevSong();
+            break;
+        case 'ArrowUp':
+            volumnUp();
+            break;
+        case 'ArrowDown':
+            volumnDown();
+            break;
+        default:
+            break;
+    }
+};
+
 $: if (player) {
     player.volume(slider / 100);
     mute = false;
@@ -487,6 +526,11 @@ $: if (player) {
     transition: none;
 }
 </style>
+
+<svelte:window
+    on:keyup={(e) => {
+        if (!playListVisible) handleKeyboardPress(e.key);
+    }} />
 
 <div class="container-fluid">
     <div class="row">
@@ -547,7 +591,7 @@ $: if (player) {
                         on:showPlaylist={showPlaylist}
                         on:toggleShuffle={toggleShuffle}
                         {shuffle}
-                        on:togglecheckbox={togglecheckbox}
+                        on:togglemute={togglemute}
                         bind:slider
                         {mute} />
                 </div>
