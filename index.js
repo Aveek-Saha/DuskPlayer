@@ -1,13 +1,13 @@
-const { app, BrowserWindow, dialog, Menu, ipcMain } = require('electron')
-const path = require('path')
-const url = require('url')
-const fs = require('fs')
-const openAboutWindow = require('about-window').default
+const { app, BrowserWindow, dialog, Menu, ipcMain } = require('electron');
+const path = require('path');
+const url = require('url');
+const fs = require('fs');
+const openAboutWindow = require('about-window').default;
 const isDev = require('electron-is-dev');
-const storage = require('electron-json-storage')
+const storage = require('electron-json-storage');
 
-const dataPath = storage.getDataPath()
-let status=0;
+storage.getDataPath();
+let status = 0;
 
 if (isDev) {
     require('electron-reload')(__dirname, {
@@ -16,16 +16,15 @@ if (isDev) {
 }
 
 function createMenu(light, dark, disco) {
-
     function handleClick(menuItem, browserWindow, event) {
-        // console.log(menuItem.label.toLowerCase())
-
-        win.webContents.send('theme-change', { theme: menuItem.label.toLowerCase() })
+        win.webContents.send('theme-change', {
+            theme: menuItem.label.toLowerCase()
+        });
         storage.set('theme', { theme: menuItem.label.toLowerCase() }, function (
             error
         ) {
-            if (error) throw error
-        })
+            if (error) throw error;
+        });
     }
 
     /**
@@ -37,9 +36,9 @@ function createMenu(light, dark, disco) {
         label: 'Folders',
         accelerator: 'CommandOrControl+o',
         click: function () {
-            openFolderDialog()
+            openFolderDialog();
         }
-    }
+    };
 
     var info = {
         label: 'Info',
@@ -49,18 +48,28 @@ function createMenu(light, dark, disco) {
                 homepage: 'https://home.aveek.io',
                 copyright: 'By Aveek Saha',
                 icon_path: path.join(__dirname, 'build/icon.png')
-            })
+            });
         }
-    }
+    };
 
     var theme = {
         label: 'Theme',
         submenu: [
-            { label: 'Light', type: 'radio', click: handleClick, checked: light },
+            {
+                label: 'Light',
+                type: 'radio',
+                click: handleClick,
+                checked: light
+            },
             { label: 'Dark', type: 'radio', click: handleClick, checked: dark },
-            { label: 'Disco', type: 'radio', click: handleClick, checked: disco }
+            {
+                label: 'Disco',
+                type: 'radio',
+                click: handleClick,
+                checked: disco
+            }
         ]
-    }
+    };
 
     if (process.platform === 'darwin') {
         openFolder = {
@@ -70,11 +79,11 @@ function createMenu(light, dark, disco) {
                     label: 'Open folder',
                     accelerator: 'CommandOrControl+o',
                     click: function () {
-                        openFolderDialog()
+                        openFolderDialog();
                     }
                 }
             ]
-        }
+        };
 
         info = {
             label: 'Info',
@@ -88,19 +97,19 @@ function createMenu(light, dark, disco) {
                             homepage: 'https://home.aveek.io',
                             copyright: 'By Aveek Saha',
                             icon_path: path.join(__dirname, 'build/icon.png')
-                        })
+                        });
                     }
                 }
             ]
-        }
+        };
 
-        createMenuMac(openFolder, theme, info)
+        createMenuMac(openFolder, theme, info);
     } else {
-        createMenuOther(openFolder, theme, info)
+        createMenuOther(openFolder, theme, info);
     }
 }
 
-let win
+let win;
 
 function createWindow() {
     // Create the browser window.
@@ -113,31 +122,29 @@ function createWindow() {
             enableRemoteModule: true,
             backgroundThrottling: false
         }
-    })
+    });
 
-    var light = false
-    var dark = false
-    var disco = false
+    var light = false;
+    var dark = false;
+    var disco = false;
 
     storage.has('theme', function (error, hasKey) {
-        if (error) throw error
+        if (error) throw error;
         if (hasKey) {
             storage.get('theme', function (error, data) {
-                if (error) throw error
-                // console.log(data.theme)
-                if (data.theme == 'light') light = true
-                else if (data.theme == 'disco') disco = true
-                else dark = true
+                if (error) throw error;
 
-                createMenu(light, dark, disco)
-            })
-        } else{
-            dark = true
-            createMenu(light, dark, disco)
+                if (data.theme == 'light') light = true;
+                else if (data.theme == 'disco') disco = true;
+                else dark = true;
+
+                createMenu(light, dark, disco);
+            });
+        } else {
+            dark = true;
+            createMenu(light, dark, disco);
         }
-    })
-
-    
+    });
 
     // and load the index.html of the app.
     win.loadURL(
@@ -146,104 +153,101 @@ function createWindow() {
             protocol: 'file:',
             slashes: true
         })
-    )
+    );
 
     // Open the DevTools.
-    if (isDev)
-        win.webContents.openDevTools()
+    if (isDev) win.webContents.openDevTools();
 
     win.on('close', (e) => {
-        if(status == 0){
-            if(win){
+        if (status == 0) {
+            if (win) {
                 e.preventDefault();
                 win.webContents.send('save-settings');
             }
         }
-    })
+    });
 
     // Emitted when the window is closed.
     win.on('closed', () => {
-        win = null
-    })
+        win = null;
+    });
 }
 
 ipcMain.on('closed', () => {
     status = 1;
     mainWindow = null;
     if (process.platform !== 'darwin') {
-      app.quit();
+        app.quit();
     }
-})
+});
 
 app.on('ready', () => {
-    createWindow()
-})
+    createWindow();
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
-        app.quit()
+        app.quit();
     }
-})
+});
 
 app.on('activate', () => {
     if (win === null) {
-        createWindow()
+        createWindow();
     }
-})
+});
 
 function openFolderDialog() {
-    dialog.showOpenDialog(
-        win,
-        { properties: ['openDirectory']}
-    ).then((result) => {
-        const filePath = result.filePaths[0];
-        if (filePath) {
-          storage.set('path', { path: filePath }, function (error) {
-            if (error) throw error;
-          });
-  
-          scanDir(filePath);
+    dialog.showOpenDialog(win, { properties: ['openDirectory'] }).then(
+        (result) => {
+            const filePath = result.filePaths[0];
+            if (filePath) {
+                storage.set('path', { path: filePath }, function (error) {
+                    if (error) throw error;
+                });
+
+                scanDir(filePath);
+            }
+        },
+        (error) => {
+            throw error;
         }
-    }, (error) => {
-        throw error;
-    });
+    );
 }
 
 var walkSync = function (dir, filelist) {
-    files = fs.readdirSync(dir)
-    filelist = filelist || []
+    files = fs.readdirSync(dir);
+    filelist = filelist || [];
     files.forEach(function (file) {
         if (fs.statSync(path.join(dir, file)).isDirectory()) {
-            filelist = walkSync(path.join(dir, file), filelist)
+            filelist = walkSync(path.join(dir, file), filelist);
         } else {
             if (
-                file.endsWith('.mp3')
-                || file.endsWith('.m4a')
-                || file.endsWith('.webm')
-                || file.endsWith('.wav')
-                || file.endsWith('.aac')
-                || file.endsWith('.ogg')
-                || file.endsWith('.opus')
+                file.endsWith('.mp3') ||
+                file.endsWith('.m4a') ||
+                file.endsWith('.webm') ||
+                file.endsWith('.wav') ||
+                file.endsWith('.aac') ||
+                file.endsWith('.ogg') ||
+                file.endsWith('.opus')
             ) {
-                filelist.push(path.join(dir, file))
+                filelist.push(path.join(dir, file));
             }
         }
-    })
-    return filelist
-}
-
+    });
+    return filelist;
+};
 
 function scanDir(filePath) {
-    if (!filePath || filePath[0] == 'undefined') return
-    // console.log(filePath);
-    
-    win.webContents.send('selected-files', filePath)
+    if (!filePath || filePath[0] == 'undefined') return;
+
+    win.webContents.send('selected-files', filePath);
 }
 
 function createMenuOther(openFolder, theme, info) {
-    var menu = Menu.buildFromTemplate([openFolder, theme, info])
-    Menu.setApplicationMenu(menu)
+    var menu = Menu.buildFromTemplate([openFolder, theme, info]);
+    Menu.setApplicationMenu(menu);
 }
 
 function createMenuMac(openFolder, theme, info) {
@@ -260,6 +264,6 @@ function createMenuMac(openFolder, theme, info) {
         openFolder,
         theme,
         info
-    ])
-    Menu.setApplicationMenu(menu)
+    ]);
+    Menu.setApplicationMenu(menu);
 }
