@@ -209,7 +209,7 @@ function openFolderDialog() {
                     if (error) throw error;
                 });
 
-                scanDir(filePath);
+                scanDir([filePath]);
             }
         },
         (error) => {
