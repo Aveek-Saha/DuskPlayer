@@ -124,6 +124,7 @@ async function parseFiles(audioFiles) {
     for (const audioFile of audioFiles) {
         // await will ensure the metadata parsing is completed before we move on to the next file
         const metadata = await mm.parseFile(audioFile, { skipCovers: true });
+        const stats = fs.statSync(audioFile);
         var data = {};
         var title = metadata.common.title;
         var artist = metadata.common.artist;
@@ -131,6 +132,7 @@ async function parseFiles(audioFiles) {
         else data.title = audioFile.split(path.sep).slice(-1)[0];
         if (artist) data.artist = metadata.common.artist;
         else data.artist = '';
+        data.modDate = stats.mtime;
 
         titles.push(data);
     }
@@ -166,6 +168,82 @@ ipc.on('theme-change', function (event, arg) {
     themeChange(arg);
 });
 
+function sortByTitle(arr, des = false) {
+    arr.sort((a, b) => {
+        let fa, fb;
+        if (!des) {
+            fa = a.name.toLowerCase();
+            fb = b.name.toLowerCase();
+        } else {
+            fa = b.name.toLowerCase();
+            fb = a.name.toLowerCase();
+        }
+        if (fa < fb) return -1;
+        if (fa > fb) return 1;
+        return 0;
+    });
+    return arr;
+}
+
+function sortByArtist(arr, des = false) {
+    arr.sort((a, b) => {
+        let fa, fb;
+        if (!des) {
+            fa = a.artist.toLowerCase();
+            fb = b.artist.toLowerCase();
+        } else {
+            fa = b.artist.toLowerCase();
+            fb = a.artist.toLowerCase();
+        }
+        if (fa < fb) return -1;
+        if (fa > fb) return 1;
+        return 0;
+    });
+    return arr;
+}
+
+function sortByDate(arr, des = false) {
+    arr.sort((a, b) => {
+        if (!des) return b.date - a.date;
+        return a.date - b.date;
+    });
+    return arr;
+}
+
+function sortDefault(arr, des = false) {
+    arr.sort((a, b) => {
+        if (!des) return a.index - b.index;
+        return b.index - a.index;
+    });
+    return arr;
+}
+
+ipc.on('sort-change', function (event, arg) {
+    if (player) {
+        var index = player.playlist[player.index].index;
+
+        if (arg.items[0].checked)
+            player.playlist = sortByDate(player.playlist, arg.items[6].checked);
+        else if (arg.items[1].checked)
+            player.playlist = sortByTitle(
+                player.playlist,
+                arg.items[6].checked
+            );
+        else if (arg.items[2].checked)
+            player.playlist = sortByArtist(
+                player.playlist,
+                arg.items[6].checked
+            );
+        else if (arg.items[3].checked)
+            player.playlist = sortDefault(
+                player.playlist,
+                arg.items[6].checked
+            );
+
+        player.index = player.playlist.findIndex((x) => x.index == index);
+    }
+});
+
 ipc.on('save-settings', function (event, arg) {
     storage.set(
         'settings',
@@ -183,6 +261,7 @@ ipc.on('selected-files', function (event, arg) {
 async function addSongToPlaylist(path) {
     if (player) {
         const metadata = await mm.parseFile(path, { skipCovers: true });
+        const stats = fs.statSync(audioFile);
         var data = {};
         var title = metadata.common.title;
         var artist = metadata.common.artist;
@@ -190,6 +269,7 @@ async function addSongToPlaylist(path) {
         else data.title = path.split(path.sep).slice(-1)[0];
         if (artist) data.artist = metadata.common.artist;
         else data.artist = '';
+        data.modDate = stats.mtime;
 
         var len = player.playlist.length;
 
@@ -198,6 +278,7 @@ async function addSongToPlaylist(path) {
             file: path,
             name: data.title,
             artist: data.artist,
+            date: data.modDate,
             howl: null,
             index: len
         });
@@ -230,6 +311,7 @@ function startPlayer(arg) {
             file: songList.files[i],
             name: songList.names[i].title,
             artist: songList.names[i].artist,
+            date: songList.names[i].modDate,
             howl: null,
             index: i
         });
@@ -471,7 +553,7 @@ Player.prototype = {
             }
         }
 
-        self.skipTo(index);
+        self.skipTo(this.playlist[index].index);
     },
 
     skipTo: function (index) {
@@ -481,6 +563,7 @@ Player.prototype = {
             self.playlist[self.index].howl.stop();
         }
         var data = self.playlist[index];
+        index = this.playlist.findIndex((x) => x.index == index);
 
         if (!songPlaying) {
             songPlaying = true;

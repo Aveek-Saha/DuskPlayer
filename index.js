@@ -15,7 +15,7 @@ if (isDev) {
     });
 }
 
-function createMenu(light, dark, disco) {
+function createMenu(theme, sort) {
     function handleClick(menuItem, browserWindow, event) {
         win.webContents.send('theme-change', {
             theme: menuItem.label.toLowerCase()
@@ -25,6 +25,11 @@ function createMenu(light, dark, disco) {
         ) {
             if (error) throw error;
         });
+    }
+
+    function handleSort(menuItem, browserWindow, event) {
+        var items = menuItem.menu.items;
+        win.webContents.send('sort-change', { items: items });
     }
 
     /**
@@ -61,14 +66,62 @@ function createMenu(light, dark, disco) {
                 label: 'Light',
                 type: 'radio',
                 click: handleClick,
-                checked: light
+                checked: theme.light
             },
-            { label: 'Dark', type: 'radio', click: handleClick, checked: dark },
+            {
+                label: 'Dark',
+                type: 'radio',
+                click: handleClick,
+                checked: theme.dark
+            },
             {
                 label: 'Disco',
                 type: 'radio',
                 click: handleClick,
-                checked: disco
+                checked: theme.disco
+            }
+        ]
+    };
+
+    var sort = {
+        label: 'Sort',
+        submenu: [
+            {
+                label: 'Date added',
+                type: 'radio',
+                click: handleSort,
+                checked: sort.by.dateAdded
+            },
+            {
+                label: 'Song name',
+                type: 'radio',
+                click: handleSort,
+                checked: sort.by.songName
+            },
+            {
+                label: 'Artist name',
+                type: 'radio',
+                click: handleSort,
+                checked: sort.by.artistName
+            },
+            {
+                label: 'Default',
+                type: 'radio',
+                click: handleSort,
+                checked: true
+            },
+            { type: 'separator' },
+            {
+                label: 'Ascending',
+                type: 'radio',
+                click: handleSort,
+                checked: sort.order.asc
+            },
+            {
+                label: 'Descending',
+                type: 'radio',
+                click: handleSort,
+                checked: sort.order.dec
             }
         ]
     };
@@ -105,9 +158,9 @@ function createMenu(light, dark, disco) {
             ]
         };
 
-        createMenuMac(openFolder, theme, info);
+        createMenuMac(openFolder, theme, info, sort);
     } else {
-        createMenuOther(openFolder, theme, info);
+        createMenuOther(openFolder, theme, info, sort);
     }
 }
 
@@ -130,21 +183,31 @@ function createWindow() {
     var dark = false;
     var disco = false;
 
+    var asc = true;
+    var dec = false;
+
+    var songName = false;
+    var artistName = false;
+    var dateAdded = false;
+
+    var theme = { light, dark, disco };
+    var sort = { order: { asc, dec }, by: { songName, artistName, dateAdded } };
+
     storage.has('theme', function (error, hasKey) {
         if (error) throw error;
         if (hasKey) {
             storage.get('theme', function (error, data) {
                 if (error) throw error;
 
-                if (data.theme == 'light') light = true;
-                else if (data.theme == 'disco') disco = true;
-                else dark = true;
+                if (data.theme == 'light') theme.light = true;
+                else if (data.theme == 'disco') theme.disco = true;
+                else theme.dark = true;
 
-                createMenu(light, dark, disco);
+                createMenu(theme, sort);
             });
         } else {
             dark = true;
-            createMenu(light, dark, disco);
+            createMenu(theme, sort);
         }
     });
 
@@ -209,7 +272,7 @@ function openFolderDialog() {
                     if (error) throw error;
                 });
 
-                scanDir([filePath]);
+                scanDir(filePath);
             }
         },
         (error) => {
@@ -247,12 +310,12 @@ function scanDir(filePath) {
     win.webContents.send('selected-files', filePath);
 }
 
-function createMenuOther(openFolder, theme, info) {
-    var menu = Menu.buildFromTemplate([openFolder, theme, info]);
+function createMenuOther(openFolder, theme, info, sort) {
+    var menu = Menu.buildFromTemplate([openFolder, theme, sort, info]);
     Menu.setApplicationMenu(menu);
 }
 
-function createMenuMac(openFolder, theme, info) {
+function createMenuMac(openFolder, theme, sort, info) {
     var menu = Menu.buildFromTemplate([
         {
             label: require('electron').app.getName(),
@@ -265,6 +328,7 @@ function createMenuMac(openFolder, theme, info) {
         },
         openFolder,
         theme,
+        sort,
         info
     ]);
     Menu.setApplicationMenu(menu);
