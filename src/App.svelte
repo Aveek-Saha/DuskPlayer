@@ -44,8 +44,6 @@ storage.has('settings', function (error, hasKey) {
 		if (error) throw error;
 		if (data.shuffle)
 			shuffle = true;
-		if (data.shuffle)
-			shuffle = true;
 		if (data.volume)
 			slider = data.volume;
 	});
@@ -347,7 +345,7 @@ var toggleShuffle = function () {
 	else {
 		shuffle = true;
 	}
-	storage.set('settings', { shuffle: shuffle, mute: mute }, function (error) {
+	storage.set('settings', { shuffle: shuffle, volume: slider }, function (error) {
 		if (error) throw error
 	})
 }
@@ -361,7 +359,7 @@ var togglecheckbox = function() {
 		mute = true;
 		player.volume(0);
 	}
-	storage.set('settings', { shuffle: shuffle, mute: mute }, function (error) {
+	storage.set('settings', { shuffle: shuffle, volume: slider }, function (error) {
 		if (error) throw error
 	})
 }
