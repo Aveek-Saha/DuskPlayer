@@ -20,8 +20,6 @@ let trackAlbum = "";
 let songList = null;
 let songPlaying = false;
 let playListVisible = false;
-let shuffle = false;
-let mute = false;
 let loading = false;
 let theme = "dark";
 
@@ -35,6 +33,22 @@ let search = ""
 
 let slider = 100
 let offsetWidth;
+
+let shuffle = false;
+let mute = false;
+
+storage.has('settings', function (error, hasKey) {
+	if (error) throw error;
+	if (hasKey) {
+	storage.get('settings', function (error, data) {
+		if (error) throw error;
+		if (data.shuffle)
+			shuffle = true;
+		if (data.shuffle)
+			shuffle = true;
+	});
+	}
+})
 
 storage.has('path', function (error, hasKey) {
 	if (error) throw error;
@@ -324,6 +338,9 @@ var toggleShuffle = function () {
 	else {
 		shuffle = true;
 	}
+	storage.set('settings', { shuffle: shuffle, mute: mute }, function (error) {
+		if (error) throw error
+	})
 }
 
 var togglecheckbox = function() {
@@ -335,6 +352,9 @@ var togglecheckbox = function() {
 		mute = true;
 		player.volume(0);
 	}
+	storage.set('settings', { shuffle: shuffle, mute: mute }, function (error) {
+		if (error) throw error
+	})
 }
 
 function randomize(array) {
