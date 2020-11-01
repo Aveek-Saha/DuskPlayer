@@ -15,37 +15,7 @@ if (isDev) {
     });
 }
 
-let win
-
-function createWindow() {
-    // Create the browser window.
-    win = new BrowserWindow({
-        width: 1000,
-        height: 620,
-        icon: __dirname + '/dusk.png',
-        webPreferences: {
-            nodeIntegration: true,
-            enableRemoteModule: true,
-            backgroundThrottling: false
-        }
-    })
-
-    var light = false
-    var dark = false
-    var disco = false
-
-    storage.has('theme', function (error, hasKey) {
-        if (error) throw error
-        if (hasKey) {
-            storage.get('theme', function (error, data) {
-                if (error) throw error
-                // console.log(data.theme)
-                if (data.theme == 'light') light = true
-                else if (data.theme == 'disco') disco = true
-                else dark = true
-            })
-        }
-    })
+function createMenu(light, dark, disco) {
 
     function handleClick(menuItem, browserWindow, event) {
         // console.log(menuItem.label.toLowerCase())
@@ -128,6 +98,46 @@ function createWindow() {
     } else {
         createMenuOther(openFolder, theme, info)
     }
+}
+
+let win
+
+function createWindow() {
+    // Create the browser window.
+    win = new BrowserWindow({
+        width: 1000,
+        height: 620,
+        icon: __dirname + '/dusk.png',
+        webPreferences: {
+            nodeIntegration: true,
+            enableRemoteModule: true,
+            backgroundThrottling: false
+        }
+    })
+
+    var light = false
+    var dark = false
+    var disco = false
+
+    storage.has('theme', function (error, hasKey) {
+        if (error) throw error
+        if (hasKey) {
+            storage.get('theme', function (error, data) {
+                if (error) throw error
+                // console.log(data.theme)
+                if (data.theme == 'light') light = true
+                else if (data.theme == 'disco') disco = true
+                else dark = true
+
+                createMenu(light, dark, disco)
+            })
+        } else{
+            dark = true
+            createMenu(light, dark, disco)
+        }
+    })
+
+    
 
     // and load the index.html of the app.
     win.loadURL(

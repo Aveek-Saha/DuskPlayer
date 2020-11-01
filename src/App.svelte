@@ -219,18 +219,13 @@ function startPlayer(arg) {
 			} else {
 				player = new Player(songArr, 0);
 			}
-
-			// playMusic()
-			// playMusic()
 			
 			getTags(player.playlist[player.index].file)
 			});
 		}
 		else {
 			player = new Player(songArr, 0);
-			
-			// playMusic()
-			// playMusic()
+			getTags(player.playlist[player.index].file)
 		}
 	})
 
