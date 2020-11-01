@@ -60,7 +60,7 @@
     "@rollup/plugin-commonjs": "11.0.2",
     "@rollup/plugin-node-resolve": "^7.0.0",
     "concurrently": "^5.2.0",
-    "electron": "^6.1.11",
+    "electron": "^7.3.3",
     "electron-builder": "^22.6.0",
     "electron-is-dev": "^1.2.0",
     "electron-reload": "^1.5.0",

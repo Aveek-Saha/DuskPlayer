@@ -24,7 +24,9 @@ function createWindow() {
         height: 620,
         icon: __dirname + '/dusk.png',
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            enableRemoteModule: true,
+            backgroundThrottling: false
         }
     })
 
