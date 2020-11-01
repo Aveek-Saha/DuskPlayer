@@ -381,64 +381,64 @@ var Player = function (playlist, index) {
 	this.randomArray = randomize(Array.from({length: playlist.length}, (_, i) => i))
 }
 
-    Player.prototype = {
+Player.prototype = {
 
-      play: function (index) {
-        var self = this;
-        var sound;
+	play: function (index) {
+		var self = this;
+		var sound;
 
-        index = typeof index === 'number' ? index : self.index;
-        var data = self.playlist[index];
+		index = typeof index === 'number' ? index : self.index;
+		var data = self.playlist[index];
 
-        if (data.howl) {
-          sound = data.howl;
-        } else {
-          sound = data.howl = new Howl({
-            src: [data.file],
-            html5: true,
-            onplay: function () {
-              duration = self.formatTime(Math.round(sound.duration()));
-              requestAnimationFrame(self.step.bind(self));
-            },
-            onend: function () {
-              if (shuffle) {
-                self.skip('random');
-              }
-              else {
-                self.skip('right');
-              }
-            }
-          });
-        }
-        
-        storage.set('last-played', { path: data.file }, function (error) {
-          if (error) throw error
-        })
-        sound.play();
-        getTags(data.file)
+		if (data.howl) {
+			sound = data.howl;
+		} else {
+			sound = data.howl = new Howl({
+			src: [data.file],
+			html5: true,
+			onplay: function () {
+				duration = self.formatTime(Math.round(sound.duration()));
+				requestAnimationFrame(self.step.bind(self));
+			},
+			onend: function () {
+				if (shuffle) {
+				self.skip('random');
+				}
+				else {
+				self.skip('right');
+				}
+			}
+			});
+		}
+		
+		storage.set('last-played', { path: data.file }, function (error) {
+			if (error) throw error
+		})
+		sound.play();
+		getTags(data.file)
 
-        self.index = index;
-      },
+		self.index = index;
+	},
 
-      pause: function () {
-        var self = this;
+	pause: function () {
+		var self = this;
 
-        var sound = self.playlist[self.index].howl;
+		var sound = self.playlist[self.index].howl;
 
-        sound.pause();
-      },
+		sound.pause();
+	},
 
-      skip: function (direction) {
-        var self = this;
+	skip: function (direction) {
+		var self = this;
 
-        var index = 0;
-        if (direction === 'prev') {
-          index = self.index - 1;
-          if (index < 0) {
-            index = self.playlist.length - 1;
-          }
-        }
-        else if (direction === 'random-next') {
+		var index = 0;
+		if (direction === 'prev') {
+			index = self.index - 1;
+			if (index < 0) {
+			index = self.playlist.length - 1;
+			}
+		}
+		else if (direction === 'random-next') {
 			self.randomIndex += 1
 			if (self.randomIndex >= self.randomArray.length) {
 				self.randomIndex = 0;
@@ -451,73 +451,68 @@ var Player = function (playlist, index) {
 				self.randomIndex = self.randomArray.length - 1;
 			}
 			index = self.randomArray[self.randomIndex]
-        }
-        else {
-          index = self.index + 1;
-          if (index >= self.playlist.length) {
-            index = 0;
-          }
 		}
-		console.log(index);
-		
+		else {
+			index = self.index + 1;
+			if (index >= self.playlist.length) {
+			index = 0;
+			}
+		}
 
-        // var data = self.playlist[self.index];
+		self.skipTo(index);
+	},
 
-        self.skipTo(index);
-      },
+	skipTo: function (index) {
+		var self = this;
 
-      skipTo: function (index) {
-        var self = this;
+		if (self.playlist[self.index].howl) {
+			self.playlist[self.index].howl.stop();
+		}
+		var data = self.playlist[index];
 
-        if (self.playlist[self.index].howl) {
-          self.playlist[self.index].howl.stop();
-        }
-        var data = self.playlist[index];
+		if (!songPlaying) {
+			songPlaying = true;
+			self.play(index);
+		}
+		else
+			self.play(index);
 
-        if (!songPlaying) {
-          songPlaying = true;
-          self.play(index);
-        }
-        else
-          self.play(index);
+	},
 
-      },
+	step: function () {
+		var self = this;
 
-      step: function () {
-        var self = this;
+		var sound = self.playlist[self.index].howl;
 
-        var sound = self.playlist[self.index].howl;
+		var seek = sound.seek() || 0;
+		timer = self.formatTime(Math.round(seek));
+		progress.style.width = (((seek / sound.duration()) * 100) || 0) + '%';
 
-        var seek = sound.seek() || 0;
-        timer = self.formatTime(Math.round(seek));
-        progress.style.width = (((seek / sound.duration()) * 100) || 0) + '%';
+		if (sound.playing()) {
+			requestAnimationFrame(self.step.bind(self));
+		}
+	},
+	formatTime: function (secs) {
+		var minutes = Math.floor(secs / 60) || 0;
+		var seconds = (secs - minutes * 60) || 0;
 
-        if (sound.playing()) {
-          requestAnimationFrame(self.step.bind(self));
-        }
-      },
-      formatTime: function (secs) {
-        var minutes = Math.floor(secs / 60) || 0;
-        var seconds = (secs - minutes * 60) || 0;
+		return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+	},
+	volume: function (val) {
+		Howler.volume(val);
 
-        return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-      },
-      volume: function (val) {
-        var self = this;
-        Howler.volume(val);
+	},
+	seek: function (time) {
+		var self = this;
 
-      },
-      seek: function (time) {
-        var self = this;
+		var sound = self.playlist[self.index].howl;
 
-        var sound = self.playlist[self.index].howl;
-
-        if (sound.playing() || true) {
-          sound.seek(sound.duration() * time);
-          requestAnimationFrame(self.step.bind(self));
-        }
-      }
-    }
+		if (sound.playing() || true) {
+			sound.seek(sound.duration() * time);
+			requestAnimationFrame(self.step.bind(self));
+		}
+	}
+}
 
 
 $: if(player) {
