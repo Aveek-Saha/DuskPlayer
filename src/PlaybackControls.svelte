@@ -17,6 +17,8 @@ function nextSong() {
 }
 </script>
 
+<div class="btn-group" role="group">
+
 <button type="button" id="prevBtn" class="btn btn-primary-outline btn-lg" on:click={prevSong}>
     <i class="fas fa-step-backward fa-2x fa-inverse"></i>
 </button>
@@ -33,3 +35,4 @@ function nextSong() {
 <button type="button" id="nextBtn" class="btn btn-primary-outline btn-lg" on:click={nextSong}>
     <i class="fas fa-step-forward fa-2x fa-inverse"></i>
 </button>
+</div>

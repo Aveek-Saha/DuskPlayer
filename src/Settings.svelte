@@ -28,25 +28,7 @@ function togglecheckbox() {
     <input type="range" min="0" max="100" class="slider" bind:value={slider} id="myRange">
 </div>
 
-
-<button type="button" id="playlistBtn" on:click={showPlaylist}
-    class="btn btn-primary-outline btn-lg justify-content-end" >
-    <i class="fas fa-bars fa-lg fa-inverse"></i>
-</button>
-
-{#if shuffle}
-    <button type="button" id="shuffleBtn" on:click={toggleShuffle}
-        class="btn btn-primary-outline btn-lg justify-content-end" >
-        <i class="fas fa-random fa-lg fa-inverse"></i>
-    </button>
-{:else}
-    <button type="button" id="shuffleBtn" on:click={toggleShuffle}
-        class="btn btn-primary-outline btn-lg justify-content-end" >
-        <i class="fas fa-sync-alt fa-lg fa-inverse"></i>
-    </button>
-{/if}
-
-
+<div class="btn-group float-right" role="group">
 {#if mute}
     <button type="button" id="checkboxrn" on:click={togglecheckbox}
     class="btn btn-primary-outline btn-lg justify-content-end">
@@ -58,4 +40,24 @@ function togglecheckbox() {
         <i class="fas fa-volume-up fa-lg fa-inverse"></i>
     </button>
 {/if}
+
+{#if shuffle}
+    <button type="button" id="shuffleBtn" on:click={toggleShuffle}
+        class="btn btn-primary-outline btn-lg" >
+        <i class="fas fa-random fa-lg fa-inverse"></i>
+    </button>
+{:else}
+    <button type="button" id="shuffleBtn" on:click={toggleShuffle}
+        class="btn btn-primary-outline btn-lg justify-content-end" >
+        <i class="fas fa-sync-alt fa-lg fa-inverse"></i>
+    </button>
+{/if}
+
+<button type="button" id="playlistBtn" on:click={showPlaylist}
+    class="btn btn-primary-outline btn-lg justify-content-end" >
+    <i class="fas fa-bars fa-lg fa-inverse"></i>
+</button>
+
+</div>
+
 

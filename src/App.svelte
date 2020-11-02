@@ -525,7 +525,7 @@ $: if(player) {
 	{#if playListVisible}
 		<Playlist player={player} on:changeSong={(event) => playPlaylistSong(event.detail.index) }></Playlist>
 	{/if}
-		<div class="col-5  my-auto">
+		<div class="col-5 my-auto">
 			{#if loading}
 				<div class="spinner-border text-danger centerBlock" style="width: 5rem; height: 5rem;" role="status">
 					<span class="sr-only">Loading...</span>
