@@ -13,7 +13,9 @@
     "dev": "rollup -c -w",
     "start": "sirv public",
     "app": "electron .",
-    "app-dev": "concurrently \"npm:dev\" \"npm:app\""
+    "app-dev": "concurrently \"npm:dev\" \"npm:app\"",
+    "fix": "eslint --fix \"{,!(node_modules|public)/**/}*.{js,svelte}\"",
+    "format": "prettier --write \"{,!(node_modules|public)/**/}*.{js,svelte}\""
   },
   "build": {
     "publish": [
@@ -64,6 +66,10 @@
     "electron-builder": "^22.6.0",
     "electron-is-dev": "^1.2.0",
     "electron-reload": "^1.5.0",
+    "eslint": "^7.11.0",
+    "eslint-plugin-svelte3": "^2.7.3",
+    "prettier": "^2.1.2",
+    "prettier-plugin-svelte": "^1.4.1",
     "rollup": "^1.20.0",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
