@@ -14,7 +14,8 @@
     "start": "sirv public",
     "app": "electron .",
     "app-dev": "concurrently \"npm:dev\" \"npm:app\"",
-    "format": "prettier --write \"{,!(node_modules|public)/**/}*.{js,svelte}\""
+    "format-check": "prettier --check \"{,!(node_modules|public)/**/}*.{js,svelte}\"",
+      "format": "prettier --write \"{,!(node_modules|public)/**/}*.{js,svelte}\""
   },
   "build": {
     "publish": [
