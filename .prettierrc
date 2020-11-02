@@ -2,6 +2,7 @@
     "tabWidth": 4,
     "semi": true,
     "trailingComma": "none",
+    "singleQuote": true,
     "svelteSortOrder" : "scripts-styles-markup",
     "svelteIndentScriptAndStyle": false,
     "plugins": ["prettier-plugin-svelte"]
