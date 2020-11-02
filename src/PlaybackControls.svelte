@@ -17,19 +17,36 @@ function nextSong() {
 }
 </script>
 
-<button type="button" id="prevBtn" class="btn btn-primary-outline btn-lg" on:click={prevSong}>
-    <i class="fas fa-step-backward fa-2x fa-inverse"></i>
-</button>
-{#if !songPlaying}
-    <button type="button" id="playBtn" class="btn btn-primary-outline btn-lg" on:click={playMusic}>
-        <i class="far fa-play-circle fa-4x fa-inverse"></i>
+<div class="btn-group" role="group">
+    <button
+        type="button"
+        id="prevBtn"
+        class="btn btn-primary-outline btn-lg"
+        on:click={prevSong}>
+        <i class="fas fa-step-backward fa-2x fa-inverse" />
     </button>
-{:else}
-
-    <button type="button" id="pauseBtn" class="btn btn-primary-outline btn-lg" on:click={playMusic}>
-        <i class="far fa-pause-circle fa-4x fa-inverse"></i>
+    {#if !songPlaying}
+        <button
+            type="button"
+            id="playBtn"
+            class="btn btn-primary-outline btn-lg"
+            on:click={playMusic}>
+            <i class="far fa-play-circle fa-4x fa-inverse" />
+        </button>
+    {:else}
+        <button
+            type="button"
+            id="pauseBtn"
+            class="btn btn-primary-outline btn-lg"
+            on:click={playMusic}>
+            <i class="far fa-pause-circle fa-4x fa-inverse" />
+        </button>
+    {/if}
+    <button
+        type="button"
+        id="nextBtn"
+        class="btn btn-primary-outline btn-lg"
+        on:click={nextSong}>
+        <i class="fas fa-step-forward fa-2x fa-inverse" />
     </button>
-{/if}
-<button type="button" id="nextBtn" class="btn btn-primary-outline btn-lg" on:click={nextSong}>
-    <i class="fas fa-step-forward fa-2x fa-inverse"></i>
-</button>
+</div>
