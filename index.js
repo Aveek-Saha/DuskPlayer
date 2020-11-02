@@ -6,7 +6,7 @@ const openAboutWindow = require('about-window').default;
 const isDev = require('electron-is-dev');
 const storage = require('electron-json-storage');
 
-const dataPath = storage.getDataPath();
+storage.getDataPath();
 let status = 0;
 
 if (isDev) {
@@ -17,8 +17,6 @@ if (isDev) {
 
 function createMenu(light, dark, disco) {
     function handleClick(menuItem, browserWindow, event) {
-        // console.log(menuItem.label.toLowerCase())
-
         win.webContents.send('theme-change', {
             theme: menuItem.label.toLowerCase()
         });
@@ -135,7 +133,7 @@ function createWindow() {
         if (hasKey) {
             storage.get('theme', function (error, data) {
                 if (error) throw error;
-                // console.log(data.theme)
+
                 if (data.theme == 'light') light = true;
                 else if (data.theme == 'disco') disco = true;
                 else dark = true;
@@ -243,7 +241,6 @@ var walkSync = function (dir, filelist) {
 
 function scanDir(filePath) {
     if (!filePath || filePath[0] == 'undefined') return;
-    // console.log(filePath);
 
     win.webContents.send('selected-files', filePath);
 }

@@ -10,7 +10,7 @@ const path = require('path');
 const storage = require('electron-json-storage');
 const mm = require('music-metadata');
 
-const dataPath = storage.getDataPath();
+storage.getDataPath();
 
 let trackName = '';
 let trackArtist = '';
@@ -26,8 +26,6 @@ let timer = '00:00';
 
 let files = null;
 let player = null;
-
-let search = '';
 
 let offsetWidth;
 
@@ -153,7 +151,6 @@ async function scanDir(filePath) {
 }
 
 function themeChange(data) {
-    // console.log(data);
     setTheme(data);
 }
 
@@ -172,8 +169,6 @@ ipc.on('save-settings', function (event, arg) {
 });
 
 ipc.on('selected-files', function (event, arg) {
-    // console.log(arg);
-
     scanDir(arg);
 });
 
@@ -183,7 +178,6 @@ function startPlayer(arg) {
         songPlaying = false;
     }
     songList = arg;
-    // console.log(songList)
     var songArr = [];
 
     for (let i = 0; i < songList.files.length; i++) {
@@ -224,7 +218,6 @@ function getTags(audioFile) {
     const metadata = mm
         .parseFile(audioFile, { skipCovers: false })
         .then((metadata) => {
-            // console.log(metadata.common);
             var title = metadata.common.title;
             var artist = metadata.common.artist;
             var album = metadata.common.album;
@@ -296,10 +289,8 @@ var prevSong = function () {
 var showPlaylist = function () {
     if (playListVisible) {
         playListVisible = false;
-        // console.log(playListVisible)
     } else {
         playListVisible = true;
-        // console.log(playListVisible)
     }
 };
 

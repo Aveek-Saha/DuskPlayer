@@ -3,6 +3,7 @@
     "semi": true,
     "trailingComma": "none",
     "singleQuote": true,
+    "endOfLine": "lf",
     "svelteSortOrder" : "scripts-styles-markup",
     "svelteIndentScriptAndStyle": false,
     "plugins": ["prettier-plugin-svelte"]
