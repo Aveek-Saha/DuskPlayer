@@ -317,7 +317,7 @@ var toggleShuffle = function () {
     });
 };
 
-var togglecheckbox = function () {
+var togglemute = function () {
     if (mute) {
         mute = false;
         player.volume(slider / 100);
@@ -508,9 +508,6 @@ var handleKeyboardPress = function (keycode) {
         case 'ArrowDown':
             volumnDown();
             break;
-        case 'AudioVolumeMute':
-            mute = !mute;
-            break;
         default:
             break;
     }
@@ -531,7 +528,7 @@ $: if (player) {
 </style>
 
 <svelte:window
-    on:keydown={(e) => {
+    on:keyup={(e) => {
         if (!playListVisible) handleKeyboardPress(e.key);
     }} />
 
@@ -594,7 +591,7 @@ $: if (player) {
                         on:showPlaylist={showPlaylist}
                         on:toggleShuffle={toggleShuffle}
                         {shuffle}
-                        on:togglecheckbox={togglecheckbox}
+                        on:togglemute={togglemute}
                         bind:slider
                         {mute} />
                 </div>

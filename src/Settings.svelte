@@ -15,8 +15,8 @@ function toggleShuffle() {
     dispatch('toggleShuffle');
 }
 
-function togglecheckbox() {
-    dispatch('togglecheckbox');
+function togglemute() {
+    dispatch('togglemute');
 }
 </script>
 
@@ -38,7 +38,7 @@ function togglecheckbox() {
             type="button"
             id="checkboxrn"
             on:focus={(e) => e.target.blur()}
-            on:click={togglecheckbox}
+            on:click={togglemute}
             class="btn btn-primary-outline btn-lg justify-content-end">
             <i class="fas fa-volume-off fa-lg fa-inverse" />
         </button>
@@ -47,7 +47,7 @@ function togglecheckbox() {
             type="button"
             id="checkboxrn"
             on:focus={(e) => e.target.blur()}
-            on:click={togglecheckbox}
+            on:click={togglemute}
             class="btn btn-primary-outline btn-lg justify-content-end">
             <i class="fas fa-volume-up fa-lg fa-inverse" />
         </button>
