@@ -478,7 +478,6 @@ $: if (player) {
     player.volume(slider / 100);
     mute = false;
 }
-<<<<<<< HEAD
 
 var volumnUp = function() {
 	if(slider !== 100) {
@@ -496,7 +495,6 @@ var volumnDown = function() {
 
 var handleKeyboardPress = function (keycode) {
 	switch (keycode) {
-		//--Spacebar
 		case " ":
 			playMusic();
 			break;
@@ -521,12 +519,6 @@ var handleKeyboardPress = function (keycode) {
 		case "ArrowDown":
 			volumnDown();
 			break;
-		case "AudioVolumeUp":
-			volumnUp();
-			break;
-		case "AudioVolumeDown":
-			volumnDown();
-			break;
 		case "AudioVolumeMute":
 			mute = !mute
 			break;
@@ -541,8 +533,6 @@ document.onkeydown = function (event) {
 	}
 };
 
-=======
->>>>>>> master
 </script>
 
 <style>
