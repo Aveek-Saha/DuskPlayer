@@ -48,6 +48,7 @@ Once all the dependencies have finished downloading, run ```npm run app-dev``` t
 Some new features and under the hood stuff that will be or has already been implemented. They'll be included in the next update
 * New function to shuffle songs.
 * Volume and shuffle settings are now stored.
+* You can now control playback using keyboard shortcuts.
 
 # Contributing
 Please read [CONTRIBUTING.md](https://github.com/Aveek-Saha/MusicPlayer/blob/master/CONTRIBUTING.md) before raising a PR or creating an issue.

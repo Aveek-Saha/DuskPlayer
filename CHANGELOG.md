@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 * Volume and shuffle settings are now stored persistently.
+* You can now control playback using keyboard shortcuts.
 
 ### Changed
 * New function to shuffle songs instead of just randomly selecting a song.
