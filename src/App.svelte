@@ -474,59 +474,52 @@ Player.prototype = {
     }
 };
 
+var volumnUp = function () {
+    if (slider !== 100) {
+        slider = slider + 2;
+        player.volume(slider / 100);
+    }
+};
+
+var volumnDown = function () {
+    if (slider !== 0) {
+        slider = slider - 2;
+        player.volume(slider / 100);
+    }
+};
+
+var handleKeyboardPress = function (keycode) {
+    switch (keycode) {
+        case 'MediaPlayPause':
+        case ' ':
+            playMusic();
+            break;
+        case 'ArrowRight':
+        case 'MediaTrackNext':
+            nextSong();
+            break;
+        case 'ArrowLeft':
+        case 'MediaTrackPrevious':
+            prevSong();
+            break;
+        case 'ArrowUp':
+            volumnUp();
+            break;
+        case 'ArrowDown':
+            volumnDown();
+            break;
+        case 'AudioVolumeMute':
+            mute = !mute;
+            break;
+        default:
+            break;
+    }
+};
+
 $: if (player) {
     player.volume(slider / 100);
     mute = false;
 }
-
-var volumnUp = function() {
-	if(slider !== 100) {
-		slider = slider + 2;
-		player.volume(slider/100)
-	}
-}
-
-var volumnDown = function() {
-	if(slider !== 0) {
-		slider = slider - 2;
-		player.volume(slider/100)
-	}
-}
-
-var handleKeyboardPress = function (keycode) {
-	switch (keycode) {
-		case " ":
-			playMusic();
-			break;
-		case "MediaPlayPause":
-			songPlaying = !songPlaying;
-			break;
-		case "MediaTrackNext":
-			nextSong();
-			break;
-		case "MediaTrackPrevious":
-			prevSong();
-			break;
-		case "ArrowRight":
-			nextSong();
-			break;
-		case "ArrowLeft":
-			prevSong();
-			break;
-		case "ArrowUp":
-			volumnUp();
-			break;
-		case "ArrowDown":
-			volumnDown();
-			break;
-		case "AudioVolumeMute":
-			mute = !mute
-			break;
-		default:
-			break;
-	}
-}
-
 </script>
 
 <style>
@@ -537,7 +530,10 @@ var handleKeyboardPress = function (keycode) {
 }
 </style>
 
-<svelte:window on:keydown={ (e) => {if(!playListVisible) handleKeyboardPress(e.key)}}/>
+<svelte:window
+    on:keydown={(e) => {
+        if (!playListVisible) handleKeyboardPress(e.key);
+    }} />
 
 <div class="container-fluid">
     <div class="row">
