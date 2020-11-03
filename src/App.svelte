@@ -527,12 +527,6 @@ var handleKeyboardPress = function (keycode) {
 	}
 }
 
-document.onkeydown = function (event) {
-	if(!playListVisible){
-		handleKeyboardPress(event.key)
-	}
-};
-
 </script>
 
 <style>
@@ -542,6 +536,8 @@ document.onkeydown = function (event) {
     transition: none;
 }
 </style>
+
+<svelte:window on:keydown={ (e) => {if(!playListVisible) handleKeyboardPress(e.key)}}/>
 
 <div class="container-fluid">
     <div class="row">
