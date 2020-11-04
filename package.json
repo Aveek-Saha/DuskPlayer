@@ -2,7 +2,7 @@
   "name": "DuskPlayer",
   "version": "5.0.0",
   "homepage": "https://aveek-saha.github.io",
-  "description": "A music player for your desktop",
+  "description": "A minimal music player for your desktop",
   "repository": {
     "type": "git",
     "url": "https://github.com/Aveek-Saha/MusicPlayer.git"

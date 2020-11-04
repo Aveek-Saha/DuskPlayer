@@ -47,6 +47,8 @@ function createMenu(light, dark, disco) {
                 product_name: 'Dusk Player',
                 homepage: 'https://home.aveek.io',
                 copyright: 'By Aveek Saha',
+                description: "A minimal music player for your desktop",
+                license: "MIT",
                 icon_path: path.join(__dirname, 'build/icon.png')
             });
         }
