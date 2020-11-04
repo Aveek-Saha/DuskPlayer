@@ -18,23 +18,26 @@ This can also serve as a starting point to implement your own front-end/UI for a
 Download here: [Releases](https://github.com/Aveek-Saha/MusicPlayer/releases)
  
 # How to use
-### 1. The Player
+
+### The Player
 Download the build for your OS. Start the application and then click on the Folders tab on the top left corner, this will bring up a window where you can select the folder where you want to play your audio files from.
 Once you select a folder with songs, just click play.
-### 2. Building from the repo
+
+### Building from the repo
 Clone the repository, make it your working directory, and then on your terminal run ```npm install```. 
 Once all the dependencies have finished downloading, run ```npm run app-dev``` to test it, and ```npm run build``` to build it for your platform.
  
  
 # Features
 <ul>
- <li>Supports: mp3, opus, ogg, wav, aac, m4a and webm.</li>
- <li>Reads ID3 tags and displays the artist and album art (if they exist)</li>
- <li>Quickly switch tracks from the playlist.</li>
- <li>Search for songs from the search bar.</li>
- <li>Instantly switch between Dark, Light and Disco modes</li>
+    <li>Supports: mp3, opus, ogg, wav, aac, m4a and webm.</li>
+    <li>Reads ID3 tags and displays the artist and album art (if it exists)</li>
+    <li>Quickly switch tracks from the playlist.</li>
+    <li>Search for songs from the search bar.</li>
+    <li>Instantly switch between Dark, Light and Disco modes</li>
+    <li>Use keyboard shortcuts to control playback</li>
 </ul>
- 
+
 # Screenshots
 <img src="https://home.aveek.io/blog/DuskPlayer/Screenshot4.png" width="30%"></img>
 <img src="https://home.aveek.io/blog/DuskPlayer/Screenshot3.png" width="30%"></img>
@@ -49,6 +52,13 @@ Some new features and under the hood stuff that will be or has already been impl
 * New function to shuffle songs.
 * Volume and shuffle settings are now stored.
 * You can now control playback using keyboard shortcuts.
+
+### Shortcuts
+Next track: <kbd>🠊</kbd> | 
+Previous track: <kbd>🠈</kbd> | 
+Volume up: <kbd>🠉</kbd> | 
+Volume down: <kbd>🠋</kbd> | 
+Play/pause: <kbd>Space</kbd>
 
 # Contributing
 Please read [CONTRIBUTING.md](https://github.com/Aveek-Saha/MusicPlayer/blob/master/CONTRIBUTING.md) before raising a PR or creating an issue.
