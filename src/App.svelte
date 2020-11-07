@@ -143,9 +143,9 @@ async function scanDir(filePath) {
     if (!filePath || filePath[0] == 'undefined') return;
 
     watcher = chokidar.watch(filePath[0], {
-            ignored: /[\/\\]\./,
-            persistent: true
-        });
+        ignored: /[\/\\]\./,
+        persistent: true
+    });
 
     var arr = walkSync(filePath[0]);
     var arg = {};
@@ -181,7 +181,7 @@ ipc.on('selected-files', function (event, arg) {
 });
 
 async function addSongToPlaylist(path) {
-    if(player) {
+    if (player) {
         const metadata = await mm.parseFile(path, { skipCovers: true });
         var data = {};
         var title = metadata.common.title;
@@ -191,24 +191,23 @@ async function addSongToPlaylist(path) {
         if (artist) data.artist = metadata.common.artist;
         else data.artist = '';
 
-        var len = player.playlist.length
+        var len = player.playlist.length;
 
         player.playlist.push({
-                title: path,
-                file: path,
-                name: data.title,
-                artist: data.artist,
-                howl: null,
-                index: len
-            });
+            title: path,
+            file: path,
+            name: data.title,
+            artist: data.artist,
+            howl: null,
+            index: len
+        });
     }
-    
 }
 
 function removeSongFromPlaylist(path) {
-    if(player){
-        var remIndex = player.playlist.findIndex(x => x.file == path);
-        if(remIndex != -1) {
+    if (player) {
+        var remIndex = player.playlist.findIndex((x) => x.file == path);
+        if (remIndex != -1) {
             player.playlist.splice(remIndex, 1);
             player.randomArray = randomize(
                 Array.from({ length: player.playlist.length }, (_, i) => i)
@@ -235,10 +234,10 @@ function startPlayer(arg) {
             index: i
         });
     }
-    
+
     watcher
-    .on('add', path => addSongToPlaylist(path))
-    .on('unlink', path => removeSongFromPlaylist(path));
+        .on('add', (path) => addSongToPlaylist(path))
+        .on('unlink', (path) => removeSongFromPlaylist(path));
 
     storage.has('last-played', function (error, hasKey) {
         if (error) throw error;
