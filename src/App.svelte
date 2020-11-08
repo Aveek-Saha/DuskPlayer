@@ -167,12 +167,25 @@ ipc.on('theme-change', function (event, arg) {
 });
 
 function sortByTitle(arr) {
-    
+    arr.sort((a, b) => {
+        let fa = a.name.toLowerCase(),
+            fb = b.name.toLowerCase();
+        if (fa < fb) {
+            return -1;
+        }
+        if (fa > fb) {
+            return 1;
+        }
+        return 0;
+    });
+    return arr;
 }
 
 ipc.on('sort-change', function (event, arg) {
     if (player) {
-        // Player.playlist
+        player.playlist = sortByTitle(player.playlist)
+        player.index = player.playlist.findIndex(x => x.index == player.index)
+        // console.log(player.playlist);
     }
 });
 
@@ -481,7 +494,7 @@ Player.prototype = {
             }
         }
 
-        self.skipTo(index);
+        self.skipTo(this.playlist[index].index);
     },
 
     skipTo: function (index) {
@@ -491,6 +504,7 @@ Player.prototype = {
             self.playlist[self.index].howl.stop();
         }
         var data = self.playlist[index];
+        index = this.playlist.findIndex(x => x.index == index)
 
         if (!songPlaying) {
             songPlaying = true;

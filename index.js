@@ -104,11 +104,6 @@ function createMenu(theme, sort) {
                 click: handleSort,
                 checked: sort.by.artistName
             },
-            {
-                label: 'Default',
-                type: 'radio',
-                checked: true
-            },
             { type: 'separator' },
             {
                 label: 'Ascending',
@@ -185,7 +180,7 @@ function createWindow() {
     var asc = true;
     var dec = false;
 
-    var songName = false;
+    var songName = true;
     var artistName = false;
     var dateAdded = false;
 
