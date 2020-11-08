@@ -170,22 +170,47 @@ function sortByTitle(arr) {
     arr.sort((a, b) => {
         let fa = a.name.toLowerCase(),
             fb = b.name.toLowerCase();
-        if (fa < fb) {
+        if (fa < fb)
             return -1;
-        }
-        if (fa > fb) {
+        if (fa > fb)
             return 1;
-        }
         return 0;
+    });
+    return arr;
+}
+
+function sortByArtist(arr) {
+    arr.sort((a, b) => {
+        let fa = a.artist.toLowerCase(),
+            fb = b.artist.toLowerCase();
+        if (fa < fb)
+            return -1;
+        if (fa > fb)
+            return 1;
+        return 0;
+    });
+    return arr;
+}
+
+function sortByDate(arr) {
+    arr.sort((a, b) => {
+        return b.modDate - a.modDate
     });
     return arr;
 }
 
 ipc.on('sort-change', function (event, arg) {
     if (player) {
-        player.playlist = sortByTitle(player.playlist)
-        player.index = player.playlist.findIndex(x => x.index == player.index)
-        // console.log(player.playlist);
+        var index = player.playlist[player.index].index
+
+        if(arg.items[0].checked)
+            player.playlist = sortByDate(player.playlist)
+        else if(arg.items[1].checked)
+            player.playlist = sortByTitle(player.playlist)
+        else if(arg.items[2].checked)
+            player.playlist = sortByArtist(player.playlist)
+
+        player.index = player.playlist.findIndex(x => x.index == index)
     }
 });
 
