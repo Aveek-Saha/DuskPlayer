@@ -166,6 +166,16 @@ ipc.on('theme-change', function (event, arg) {
     themeChange(arg);
 });
 
+function sortByTitle(arr) {
+    
+}
+
+ipc.on('sort-change', function (event, arg) {
+    if (player) {
+        // Player.playlist
+    }
+});
+
 ipc.on('save-settings', function (event, arg) {
     storage.set(
         'settings',
