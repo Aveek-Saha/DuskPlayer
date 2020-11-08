@@ -28,7 +28,7 @@ function createMenu(theme, sort) {
     }
 
     function handleSort(menuItem, browserWindow, event) {
-        var items = menuItem.menu.items
+        var items = menuItem.menu.items;
         win.webContents.send('sort-change', { items: items });
     }
 
