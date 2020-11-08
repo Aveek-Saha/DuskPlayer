@@ -168,10 +168,16 @@ ipc.on('theme-change', function (event, arg) {
     themeChange(arg);
 });
 
-function sortByTitle(arr) {
+function sortByTitle(arr, des=false) {
     arr.sort((a, b) => {
-        let fa = a.name.toLowerCase(),
-            fb = b.name.toLowerCase();
+        let fa, fb;
+        if(!des){
+            fa = a.name.toLowerCase()
+            fb = b.name.toLowerCase()
+        } else {
+            fa = b.name.toLowerCase()
+            fb = a.name.toLowerCase()
+        }
         if (fa < fb)
             return -1;
         if (fa > fb)
@@ -181,10 +187,16 @@ function sortByTitle(arr) {
     return arr;
 }
 
-function sortByArtist(arr) {
+function sortByArtist(arr, des=false) {
     arr.sort((a, b) => {
-        let fa = a.artist.toLowerCase(),
-            fb = b.artist.toLowerCase();
+        let fa, fb;
+        if(!des){
+            fa = a.artist.toLowerCase()
+            fb = b.artist.toLowerCase()
+        } else {
+            fa = b.artist.toLowerCase()
+            fb = a.artist.toLowerCase()
+        }
         if (fa < fb)
             return -1;
         if (fa > fb)
@@ -194,9 +206,20 @@ function sortByArtist(arr) {
     return arr;
 }
 
-function sortByDate(arr) {
+function sortByDate(arr, des=false) {
     arr.sort((a, b) => {
-        return b.date - a.date
+        if(!des)
+            return b.date - a.date
+        return a.date - b.date
+    });
+    return arr;
+}
+
+function sortDefault(arr, des=false) {
+    arr.sort((a, b) => {
+        if(!des)
+            return a.index - b.index
+        return b.index - a.index
     });
     return arr;
 }
@@ -206,11 +229,13 @@ ipc.on('sort-change', function (event, arg) {
         var index = player.playlist[player.index].index
 
         if(arg.items[0].checked)
-            player.playlist = sortByDate(player.playlist)
+            player.playlist = sortByDate(player.playlist, arg.items[6].checked)
         else if(arg.items[1].checked)
-            player.playlist = sortByTitle(player.playlist)
+            player.playlist = sortByTitle(player.playlist, arg.items[6].checked)
         else if(arg.items[2].checked)
-            player.playlist = sortByArtist(player.playlist)
+            player.playlist = sortByArtist(player.playlist, arg.items[6].checked)
+        else if(arg.items[3].checked)
+            player.playlist = sortDefault(player.playlist, arg.items[6].checked)
 
         player.index = player.playlist.findIndex(x => x.index == index)
     }
