@@ -124,6 +124,7 @@ async function parseFiles(audioFiles) {
     for (const audioFile of audioFiles) {
         // await will ensure the metadata parsing is completed before we move on to the next file
         const metadata = await mm.parseFile(audioFile, { skipCovers: true });
+        const stats = fs.statSync(audioFile)
         var data = {};
         var title = metadata.common.title;
         var artist = metadata.common.artist;
@@ -131,6 +132,7 @@ async function parseFiles(audioFiles) {
         else data.title = audioFile.split(path.sep).slice(-1)[0];
         if (artist) data.artist = metadata.common.artist;
         else data.artist = '';
+        data.modDate = stats.mtime;
 
         titles.push(data);
     }
@@ -194,7 +196,7 @@ function sortByArtist(arr) {
 
 function sortByDate(arr) {
     arr.sort((a, b) => {
-        return b.modDate - a.modDate
+        return b.date - a.date
     });
     return arr;
 }
@@ -231,6 +233,7 @@ ipc.on('selected-files', function (event, arg) {
 async function addSongToPlaylist(path) {
     if (player) {
         const metadata = await mm.parseFile(path, { skipCovers: true });
+        const stats = fs.statSync(audioFile)
         var data = {};
         var title = metadata.common.title;
         var artist = metadata.common.artist;
@@ -238,6 +241,7 @@ async function addSongToPlaylist(path) {
         else data.title = path.split(path.sep).slice(-1)[0];
         if (artist) data.artist = metadata.common.artist;
         else data.artist = '';
+        data.modDate = stats.mtime;
 
         var len = player.playlist.length;
 
@@ -246,6 +250,7 @@ async function addSongToPlaylist(path) {
             file: path,
             name: data.title,
             artist: data.artist,
+            date: data.modDate,
             howl: null,
             index: len
         });
@@ -278,6 +283,7 @@ function startPlayer(arg) {
             file: songList.files[i],
             name: songList.names[i].title,
             artist: songList.names[i].artist,
+            date: songList.names[i].modDate,
             howl: null,
             index: i
         });
