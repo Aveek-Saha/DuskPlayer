@@ -12,7 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 * New function to shuffle songs instead of just randomly selecting a song.
 * Fixed a bug where the current theme wouldn't show on the menu checkbox.
-* Fix animation issues with the song progress bar
+* Fix animation issues with the song progress bar.
+* Playlist updates when files are added or removed to the selected folder without a restart.
 
 ## [5.0.0] - 2020-05-10
 ### Added

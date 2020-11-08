@@ -52,6 +52,7 @@ Some new features and under the hood stuff that will be or has already been impl
 * New function to shuffle songs.
 * Volume and shuffle settings are now stored.
 * You can now control playback using keyboard shortcuts.
+* Playlist updates when files are added or removed to the selected folder without a restart.
 
 ### Shortcuts
 Next track: <kbd>🠊</kbd> | 
