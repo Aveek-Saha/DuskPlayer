@@ -31,12 +31,19 @@ Once all the dependencies have finished downloading, run ```npm run app-dev``` t
 # Features
 <ul>
     <li>Supports: mp3, opus, ogg, wav, aac, m4a and webm.</li>
-    <li>Reads ID3 tags and displays the artist and album art (if it exists)</li>
+    <li>Reads ID3 tags and displays the artist and album art (if it exists).</li>
     <li>Quickly switch tracks from the playlist.</li>
     <li>Search for songs from the search bar.</li>
-    <li>Instantly switch between Dark, Light and Disco modes</li>
-    <li>Use keyboard shortcuts to control playback</li>
+    <li>Instantly switch between Dark, Light and Disco modes.</li>
+    <li>Use keyboard shortcuts to control playback.</li>
 </ul>
+
+### Shortcuts
+Next track: <kbd>🠊</kbd> | 
+Previous track: <kbd>🠈</kbd> | 
+Volume up: <kbd>🠉</kbd> | 
+Volume down: <kbd>🠋</kbd> | 
+Play/pause: <kbd>Space</kbd>
 
 # Screenshots
 <img src="https://home.aveek.io/blog/DuskPlayer/Screenshot4.png" width="30%"></img>
@@ -48,18 +55,12 @@ Once all the dependencies have finished downloading, run ```npm run app-dev``` t
 <img src="https://home.aveek.io/blog/DuskPlayer/Screenshot6.png" width="30%"></img>
  
 # Upcoming Features
-Some new features and under the hood stuff that will be or has already been implemented. They'll be included in the next update
+Some new features and under the hood stuff that will be or has already been implemented. They'll be included in the next update.
 * New function to shuffle songs.
 * Volume and shuffle settings are now stored.
 * You can now control playback using keyboard shortcuts.
 * Playlist updates when files are added or removed to the selected folder without a restart.
-
-### Shortcuts
-Next track: <kbd>🠊</kbd> | 
-Previous track: <kbd>🠈</kbd> | 
-Volume up: <kbd>🠉</kbd> | 
-Volume down: <kbd>🠋</kbd> | 
-Play/pause: <kbd>Space</kbd>
+* You can now sort songs by date added, track name or artist name.
 
 # Contributing
 Please read [CONTRIBUTING.md](https://github.com/Aveek-Saha/MusicPlayer/blob/master/CONTRIBUTING.md) before raising a PR or creating an issue.
