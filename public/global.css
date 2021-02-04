@@ -156,5 +156,8 @@ body{
     /* width: 40vw;
     margin-right: 3% */
     width: 100%;
-    
+}
+
+.progress-bar {
+    transition: none;
 }

@@ -94,7 +94,6 @@ storage.has('theme', function (error, hasKey) {
 });
 
 var walkSync = function (dir, filelist) {
-    console.log(dir);
     files = fs.readdirSync(dir);
     filelist = filelist || [];
     files.forEach(function (file) {
@@ -143,7 +142,6 @@ async function parseFiles(audioFiles) {
 }
 
 async function scanDir(filePath) {
-    console.log(filePath);
     if (!filePath || filePath == 'undefined') return;
 
     watcher = chokidar.watch(filePath, {
