@@ -20,11 +20,13 @@ function createMenu(theme, sort) {
         win.webContents.send('theme-change', {
             theme: menuItem.label.toLowerCase()
         });
-        storage.set('theme', { theme: menuItem.label.toLowerCase() }, function (
-            error
-        ) {
-            if (error) throw error;
-        });
+        storage.set(
+            'theme',
+            { theme: menuItem.label.toLowerCase() },
+            function (error) {
+                if (error) throw error;
+            }
+        );
     }
 
     function handleSort(menuItem, browserWindow, event) {

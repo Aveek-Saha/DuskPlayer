@@ -442,11 +442,13 @@ var toggleShuffle = function () {
     } else {
         shuffle = true;
     }
-    storage.set('settings', { shuffle: shuffle, volume: slider }, function (
-        error
-    ) {
-        if (error) throw error;
-    });
+    storage.set(
+        'settings',
+        { shuffle: shuffle, volume: slider },
+        function (error) {
+            if (error) throw error;
+        }
+    );
 };
 
 var togglemute = function () {
@@ -457,11 +459,13 @@ var togglemute = function () {
         mute = true;
         player.volume(0);
     }
-    storage.set('settings', { shuffle: shuffle, volume: slider }, function (
-        error
-    ) {
-        if (error) throw error;
-    });
+    storage.set(
+        'settings',
+        { shuffle: shuffle, volume: slider },
+        function (error) {
+            if (error) throw error;
+        }
+    );
 };
 
 function randomize(array) {
