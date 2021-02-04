@@ -52,7 +52,7 @@ storage.has('path', function (error, hasKey) {
     if (hasKey) {
         storage.get('path', function (error, data) {
             if (error) throw error;
-            scanDir([data.path.toString()]);
+            scanDir(data.path.toString());
         });
     }
 });
@@ -94,6 +94,7 @@ storage.has('theme', function (error, hasKey) {
 });
 
 var walkSync = function (dir, filelist) {
+    console.log(dir);
     files = fs.readdirSync(dir);
     filelist = filelist || [];
     files.forEach(function (file) {
@@ -142,14 +143,15 @@ async function parseFiles(audioFiles) {
 }
 
 async function scanDir(filePath) {
-    if (!filePath || filePath[0] == 'undefined') return;
+    console.log(filePath);
+    if (!filePath || filePath == 'undefined') return;
 
-    watcher = chokidar.watch(filePath[0], {
+    watcher = chokidar.watch(filePath, {
         ignored: /[\/\\]\./,
         persistent: true
     });
 
-    var arr = walkSync(filePath[0]);
+    var arr = walkSync(filePath);
     var arg = {};
     var names = await parseFiles(arr);
 
