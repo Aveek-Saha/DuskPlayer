@@ -56,11 +56,7 @@ Play/pause: <kbd>Space</kbd>
  
 # Upcoming Features
 Some new features and under the hood stuff that will be or has already been implemented. They'll be included in the next update.
-* New function to shuffle songs.
-* Volume and shuffle settings are now stored.
-* You can now control playback using keyboard shortcuts.
-* Playlist updates when files are added or removed to the selected folder without a restart.
-* You can now sort songs by date added, track name or artist name.
+* Nothing new yet!
 
 # Contributing
 Please read [CONTRIBUTING.md](https://github.com/Aveek-Saha/MusicPlayer/blob/master/CONTRIBUTING.md) before raising a PR or creating an issue.
