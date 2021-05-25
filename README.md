@@ -65,6 +65,7 @@ Please read [CONTRIBUTING.md](https://github.com/Aveek-Saha/MusicPlayer/blob/mas
 You can find the changelog for all releases [here](https://github.com/Aveek-Saha/MusicPlayer/blob/master/CHANGELOG.md)
 
 <br>
+<a href="https://www.producthunt.com/posts/dusk-player?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-dusk-player" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=295233&theme=light" alt="Dusk Player - A minimalistic music player, designed for simplicity. | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 <br>
 
 ### If you liked this, check out My Blog where I post tutorials and write about projects like this
