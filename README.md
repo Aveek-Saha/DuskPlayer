@@ -56,7 +56,7 @@ Play/pause: <kbd>Space</kbd>
  
 # Upcoming Features
 Some new features and under the hood stuff that will be or has already been implemented. They'll be included in the next update.
-* Nothing new yet!
+* Added auto update when new version is available. 
 
 # Contributing
 Please read [CONTRIBUTING.md](https://github.com/Aveek-Saha/MusicPlayer/blob/master/CONTRIBUTING.md) before raising a PR or creating an issue.

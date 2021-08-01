@@ -1,4 +1,11 @@
-const { app, BrowserWindow, dialog, Menu, ipcMain } = require('electron');
+const {
+    app,
+    BrowserWindow,
+    dialog,
+    Menu,
+    ipcMain,
+    autoUpdater
+} = require('electron');
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
@@ -13,6 +20,11 @@ if (isDev) {
     require('electron-reload')(__dirname, {
         electron: require(`${__dirname}/node_modules/electron`)
     });
+} else {
+    const server = 'http://hazel-duskplayer.vercel.app/';
+    const url = `${server}/update/${process.platform}/${app.getVersion()}`;
+
+    autoUpdater.setFeedURL({ url });
 }
 
 function createMenu(theme, sort) {
