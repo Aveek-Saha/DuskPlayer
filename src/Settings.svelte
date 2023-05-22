@@ -20,27 +20,42 @@ function togglemute() {
 }
 </script>
 
-<div class="slidecontainer justify-content-start">
-    <i class="fas fa-volume-down" />
-    <i class="fas fa-volume-up" style="float: right" />
-    <input
-        type="range"
-        min="0"
-        max="100"
-        class="slider"
-        bind:value={slider}
-        id="myRange" />
+<div class="col-6">
+    <div class="row">
+        <div class="col d-flex justify-content-between">
+            <i class="fas fa-volume-down" style="font-size: 1rem;" />
+            <i class="fas fa-volume-up" style="font-size: 1rem;" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <input
+                type="range"
+                min="0"
+                max="100"
+                class="slider"
+                bind:value={slider}
+                id="myRange" />
+        </div>
+    </div>
 </div>
 
-<div class="btn-group float-right" role="group">
+<div class="col-6 d-flex justify-content-evenly">
+    <i class="bi bi-volume-mute-fill" style="font-size: 1.5rem;" />
+    <i class="bi bi-shuffle" style="font-size: 1.5rem;" />
+
+    <i class="bi bi-music-note-list" style="font-size: 1.5rem;" />
+
     {#if mute}
         <button
             type="button"
             id="checkboxrn"
             on:focus={(e) => e.target.blur()}
             on:click={togglemute}
-            class="btn btn-primary-outline btn-lg justify-content-end">
-            <i class="fas fa-volume-off fa-lg fa-inverse" />
+            class="btn btn-primary-outline">
+            <i
+                class="fas fa-volume-off fa-inverse"
+                style="font-size: 1.5rem;" />
         </button>
     {:else}
         <button
@@ -48,8 +63,8 @@ function togglemute() {
             id="checkboxrn"
             on:focus={(e) => e.target.blur()}
             on:click={togglemute}
-            class="btn btn-primary-outline btn-lg justify-content-end">
-            <i class="fas fa-volume-up fa-lg fa-inverse" />
+            class="btn btn-primary-outline">
+            <i class="fas fa-volume-up fa-inverse" style="font-size: 1.5rem;" />
         </button>
     {/if}
 
@@ -59,8 +74,8 @@ function togglemute() {
             id="shuffleBtn"
             on:focus={(e) => e.target.blur()}
             on:click={toggleShuffle}
-            class="btn btn-primary-outline btn-lg">
-            <i class="fas fa-random fa-lg fa-inverse" />
+            class="btn btn-primary-outline">
+            <i class="fas fa-random fa-inverse" style="font-size: 1.5rem;" />
         </button>
     {:else}
         <button
@@ -68,8 +83,8 @@ function togglemute() {
             id="shuffleBtn"
             on:focus={(e) => e.target.blur()}
             on:click={toggleShuffle}
-            class="btn btn-primary-outline btn-lg justify-content-end">
-            <i class="fas fa-sync-alt fa-lg fa-inverse" />
+            class="btn btn-primary-outline">
+            <i class="fas fa-sync-alt fa-inverse" style="font-size: 1.5rem;" />
         </button>
     {/if}
 
@@ -78,7 +93,7 @@ function togglemute() {
         id="playlistBtn"
         on:focus={(e) => e.target.blur()}
         on:click={showPlaylist}
-        class="btn btn-primary-outline btn-lg justify-content-end">
-        <i class="fas fa-bars fa-lg fa-inverse" />
+        class="btn btn-primary-outline">
+        <i class="fas fa-bars fa-inverse" style="font-size: 1.5rem;" />
     </button>
 </div>

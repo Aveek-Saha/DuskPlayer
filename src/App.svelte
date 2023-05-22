@@ -15,9 +15,9 @@ let watcher;
 
 storage.getDataPath();
 
-let trackName = '';
-let trackArtist = '';
-let trackAlbum = '';
+let trackName = 'Unknown';
+let trackArtist = 'Unknown';
+let trackAlbum = 'Unknown';
 let songList = null;
 let songPlaying = false;
 let playListVisible = false;
@@ -59,10 +59,12 @@ storage.has('path', function (error, hasKey) {
 
 function setTheme(data) {
     var icons = document.body.querySelectorAll('svg');
+    var artistBadge = document.body.querySelector('#artist');
     if (data.theme == 'light') {
         theme = 'light';
-        document.body.style.backgroundColor = '#F5F5F5';
+        document.body.style.backgroundColor = '#ffffff';
         document.body.style.color = '#212529';
+        artistBadge.style.backgroundColor = '#999999';
 
         icons.forEach((icon) => {
             icon.style.color = '#212529';
@@ -77,6 +79,8 @@ function setTheme(data) {
         });
     } else if (data.theme == 'disco') {
         theme = 'disco';
+        document.body.style.backgroundColor = '#212121';
+        document.body.style.color = 'azure';
         icons.forEach((icon) => {
             icon.style.color = 'azure';
         });
@@ -343,6 +347,37 @@ function startPlayer(arg) {
     });
 }
 
+function luminance(rgb) {
+    const RED = 0.2126;
+    const GREEN = 0.7152;
+    const BLUE = 0.0722;
+
+    const GAMMA = 2.4;
+    var a = rgb.map((v) => {
+        v /= 255;
+        return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, GAMMA);
+    });
+    return a[0] * RED + a[1] * GREEN + a[2] * BLUE;
+}
+
+function contrast(rgb1, rgb2) {
+    var lum1 = luminance(rgb1);
+    var lum2 = luminance(rgb2);
+    var brightest = Math.max(lum1, lum2);
+    var darkest = Math.min(lum1, lum2);
+    return (brightest + 0.05) / (darkest + 0.05);
+}
+
+export function getTextColor(rgb1, rgb2, hsl) {
+    const darken = 7.5;
+    const contrastRatio = contrast(rgb1, rgb2);
+
+    if (contrastRatio < 4.5) {
+        hsl = [hsl[0], hsl[1], hsl[2] - darken * (4.5 - contrastRatio)];
+    }
+    return hsl;
+}
+
 function getTags(audioFile) {
     var titles = [];
     const metadata = mm
@@ -355,9 +390,9 @@ function getTags(audioFile) {
             if (title) trackName = title;
             else trackName = audioFile.split(path.sep).slice(-1)[0];
             if (artist) trackArtist = artist;
-            else trackArtist = '';
+            else trackArtist = 'Unknown';
             if (album) trackAlbum = album;
-            else trackAlbum = '';
+            else trackAlbum = 'Unknown';
             var img = document.getElementById('picture');
 
             if (metadata.common.picture) {
@@ -368,22 +403,39 @@ function getTags(audioFile) {
                 };base64,${picture.data.toString('base64')}`;
                 img.addEventListener('load', function () {
                     if (theme == 'disco') {
-                        var vibrant = new Vibrant(img, 128, 3);
+                        var vibrant = new Vibrant(img);
                         var swatches = vibrant.swatches();
-                        if (swatches['DarkMuted'])
+
+                        const hsl = swatches['DarkMuted'].hsl.map((value) => {
+                            return value * 100;
+                        });
+                        const textHSL = getTextColor(
+                            swatches['DarkMuted'].rgb,
+                            swatches['Muted'].rgb,
+                            hsl
+                        );
+                        if (swatches['Muted'])
                             document.body.style.backgroundColor = swatches[
-                                'DarkMuted'
+                                'Muted'
                             ].getHex();
                         else document.body.style.backgroundColor = '#212121';
-                        if (swatches['LightVibrant'])
-                            document.body.style.color = swatches[
-                                'LightVibrant'
-                            ].getHex();
-                        else document.body.style.color = 'azure';
+                        if (swatches['DarkMuted']) {
+                            document.body.style.color = `hsl(${textHSL[0]} ${textHSL[1]}% ${textHSL[2]}%)`;
+                        } else document.body.style.color = 'azure';
+                        if (swatches['DarkMuted']) {
+                            let artistPill = document.body.querySelector(
+                                '#artist'
+                            );
+                            artistPill.style.backgroundColor = `hsl(${textHSL[0]} ${textHSL[1]}% ${textHSL[2]}%)`;
+                        } else
+                            document.body.querySelector(
+                                '#artist'
+                            ).backgroundColor = 'darkslategrey';
                     }
                 });
             } else {
-                img.style.display = 'none';
+                img.style.display = 'block';
+                img.src = 'assets/placeholder_600_600.png';
             }
         })
         .catch((err) => {
@@ -667,68 +719,86 @@ $: if (player) {
         if (!playListVisible) handleKeyboardPress(e.key);
     }} />
 
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid h-100">
+    <div class="row h-100 align-items-center">
         {#if playListVisible}
             <Playlist
                 {player}
                 on:changeSong={(event) => playPlaylistSong(event.detail.index)} />
         {/if}
-        <div class="col-5 my-auto">
-            {#if loading}
-                <div
-                    class="spinner-border text-danger centerBlock"
-                    style="width: 5rem; height: 5rem;"
-                    role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            {:else}<img id="picture" alt="" />{/if}
-        </div>
-
-        <div class="col">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <TrackDetails
-                        {trackName}
-                        {trackArtist}
-                        {trackAlbum}
-                        {theme} />
-                </div>
-
-                <div class="col-md-12 text-center">
-                    <PLaybackControls
-                        on:prevSong={prevSong}
-                        on:nextSong={nextSong}
-                        on:playMusic={playMusic}
-                        {songPlaying} />
-                </div>
-
-                <div class="col-md-12 text-center">
-                    <div id="timer">{timer}</div>
-                    <div id="duration">{duration}</div><br />
-
-                    <div
-                        class="progress"
-                        id="seek"
-                        bind:clientWidth={offsetWidth}
-                        on:click={(e) => seekToTime(e)}>
-                        <div
-                            class="progress-bar bg-danger"
-                            role="progressbar"
-                            id="progress"
-                            aria-valuemin="0"
-                            aria-valuemax="100" />
+        <div class="col text-center p-3">
+            <div class="card_list h-100">
+                <div class="row">
+                    <div class="col-5 d-flex align-items-center">
+                        <div class="ratio ratio-1x1">
+                            {#if loading}
+                                <div class="placeholder-glow">
+                                    <div
+                                        class="placeholder h-100 w-100 rounded" />
+                                </div>
+                            {:else}
+                                <img
+                                    id="picture"
+                                    class="card-img-top img-fluid rounded album-art"
+                                    style="object-fit: cover"
+                                    alt="Album art"
+                                    height={300}
+                                    width={300} />
+                            {/if}
+                        </div>
                     </div>
-                </div>
-                <br />
-                <div class="col-md-12" id="outerCtrl">
-                    <Settings
-                        on:showPlaylist={showPlaylist}
-                        on:toggleShuffle={toggleShuffle}
-                        {shuffle}
-                        on:togglemute={togglemute}
-                        bind:slider
-                        {mute} />
+                    <div class="col-7 d-flex align-items-center">
+                        <div class="card-body card-body_list p-2 w-100">
+                            <div class="row">
+                                <div class="col">
+                                    <TrackDetails
+                                        {trackName}
+                                        {trackArtist}
+                                        {trackAlbum}
+                                        {theme} />
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <PLaybackControls
+                                    on:prevSong={prevSong}
+                                    on:nextSong={nextSong}
+                                    on:playMusic={playMusic}
+                                    {songPlaying} />
+                            </div>
+
+                            <div class="row mb-1">
+                                <div class="col d-flex justify-content-between">
+                                    <div>{timer}</div>
+                                    <div>{duration}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div
+                                        class="progress"
+                                        id="seek"
+                                        bind:clientWidth={offsetWidth}
+                                        on:click={(e) => seekToTime(e)}>
+                                        <div
+                                            class="progress-bar bg-danger my-0"
+                                            role="progressbar"
+                                            id="progress"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4 d-flex align-items-center">
+                                <Settings
+                                    on:showPlaylist={showPlaylist}
+                                    on:toggleShuffle={toggleShuffle}
+                                    {shuffle}
+                                    on:togglemute={togglemute}
+                                    bind:slider
+                                    {mute} />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

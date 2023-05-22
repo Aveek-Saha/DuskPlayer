@@ -68,7 +68,7 @@ function createMenu(theme, sort) {
                 copyright: 'By Aveek Saha',
                 description: 'A minimal music player for your desktop',
                 license: 'MIT',
-                icon_path: path.join(__dirname, 'build/icon.png')
+                icon_path: path.join(__dirname, 'dusk.png')
             });
         }
     };
@@ -165,7 +165,7 @@ function createMenu(theme, sort) {
                             product_name: 'Dusk Player',
                             homepage: 'https://home.aveek.io',
                             copyright: 'By Aveek Saha',
-                            icon_path: path.join(__dirname, 'build/icon.png')
+                            icon_path: path.join(__dirname, 'dusk.png')
                         });
                     }
                 }
@@ -183,8 +183,8 @@ let win;
 function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({
-        width: 1000,
-        height: 620,
+        width: 750,
+        height: 450,
         icon: __dirname + '/dusk.png',
         webPreferences: {
             nodeIntegration: true,

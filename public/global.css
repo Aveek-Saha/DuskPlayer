@@ -1,116 +1,82 @@
-html, body {
-    height:100%;
-  }
-
-body{
-    background-color: #212121;
-    padding: 3%;
-    display:flex;
-    align-items:center;
-    color: azure;
-    background-repeat: no-repeat;
-    background-position-x: center;
-    background-position-y: center;
-    overflow: hidden;
+html,
+body {
+    height: 100%;
 }
 
-.progress{
+body {
+    background-color: #212121;
+    /* padding: 3%;
+    display:flex;
+    align-items:center; */
+    color: azure;
+    /* background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    overflow: hidden; */
+}
+
+.progress {
     margin: 2%;
     height: 10px;
 }
 
-#timer{
+#timer {
     float: left;
 }
-#duration{
+#duration {
     float: right;
 }
-.outerCtrl{
+.outerCtrl {
     padding-top: 2%;
 }
 
-.list{
+.list {
     /* white-space: nowrap; */
-  /* overflow: hidden; */
-  text-overflow: ellipsis
+    /* overflow: hidden; */
+    text-overflow: ellipsis;
 }
 
 .centerBlock {
-  display: table;
-  margin: auto;
+    display: table;
+    margin: auto;
 }
 
-#playlist{
+.text-center {
+    margin-bottom: 5%;
+}
+
+#playlistBtn {
+    float: right;
+}
+
+#shuffleBtn {
+    float: right;
+    margin-right: 5%;
+}
+#checkboxrn {
+    float: right;
+    margin-right: 5%;
+}
+.slidecontainer {
+    /* display: inline-block; */
     float: left;
-    z-index: 5;
-    overflow-y: auto;
-    overflow-x: hidden;
-
-    max-width: 40%;
-
-    position: absolute;
-    top: 50px;
-    bottom: 10px;
-    left: 0px;
-}
-
-/* #parentDiv { position:relative; } */
-#search { 
-    /* position:fixed;
-    margin-top:-1px; */
-    float: left;
-    z-index: 5;
-    max-width: 40%;
-
-    position: absolute;
-    top: 5px;
-    bottom: 5px;
-    left: 0px;
-}
-
-.text-center{
-    margin-bottom: 5%
-}
-
-
-
-#playlistBtn{
-    float: right;
-}
-
-#shuffleBtn{
-    float: right;
-    margin-right:5% 
-}
-#checkboxrn{
-    float: right;
-    margin-right:5%
-}
-  .slidecontainer {
-      /* display: inline-block; */
-      float: left;
-      width: 40%;
+    width: 40%;
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 0.5rem;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
-    border-radius: 5px;
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #FF3333; 
-    border-radius: 5px;
+    background: inherit;
 }
 
-/* Handle on hover */
+::-webkit-scrollbar-thumb {
+    background: #ff3333;
+}
+
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(207, 42, 42); 
+    background: #ff2828;
 }
 
 .slider {
@@ -135,7 +101,7 @@ body{
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background: #FF3333;
+    background: #ff3333;
     cursor: pointer;
 }
 
@@ -143,19 +109,13 @@ body{
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: #4CAF50;
+    background: #4caf50;
     cursor: pointer;
 }
 
 .btn-primary-outline {
-  background-color: transparent;
-  border-color: transparent
-}
-#picture{
-    /* z-index: -1; */
-    /* width: 40vw;
-    margin-right: 3% */
-    width: 100%;
+    background-color: transparent;
+    border-color: transparent;
 }
 
 .progress-bar {
