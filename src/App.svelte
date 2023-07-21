@@ -15,9 +15,9 @@ let watcher;
 
 storage.getDataPath();
 
-let trackName = '';
-let trackArtist = '';
-let trackAlbum = '';
+let trackName = 'Unknown';
+let trackArtist = 'Unknown';
+let trackAlbum = 'Unknown';
 let songList = null;
 let songPlaying = false;
 let playListVisible = false;
@@ -355,9 +355,9 @@ function getTags(audioFile) {
             if (title) trackName = title;
             else trackName = audioFile.split(path.sep).slice(-1)[0];
             if (artist) trackArtist = artist;
-            else trackArtist = '';
+            else trackArtist = 'Unknown';
             if (album) trackAlbum = album;
-            else trackAlbum = '';
+            else trackAlbum = 'Unknown';
             var img = document.getElementById('picture');
 
             if (metadata.common.picture) {
@@ -368,18 +368,29 @@ function getTags(audioFile) {
                 };base64,${picture.data.toString('base64')}`;
                 img.addEventListener('load', function () {
                     if (theme == 'disco') {
-                        var vibrant = new Vibrant(img, 128, 3);
+                        var vibrant = new Vibrant(img);
                         var swatches = vibrant.swatches();
-                        if (swatches['DarkMuted'])
+                        if (swatches['Muted'])
                             document.body.style.backgroundColor = swatches[
-                                'DarkMuted'
+                                'Muted'
                             ].getHex();
                         else document.body.style.backgroundColor = '#212121';
-                        if (swatches['LightVibrant'])
+                        if (swatches['DarkMuted'])
                             document.body.style.color = swatches[
-                                'LightVibrant'
+                                'DarkMuted'
                             ].getHex();
                         else document.body.style.color = 'azure';
+                        if (swatches['DarkMuted']) {
+                            let artistPill = document.body.querySelector(
+                                '#artist'
+                            );
+                            artistPill.style.backgroundColor = swatches[
+                                'DarkMuted'
+                            ].getHex();
+                        } else
+                            document.body.querySelector(
+                                '#artist'
+                            ).backgroundColor = 'darkslategrey';
                     }
                 });
             } else {
@@ -678,14 +689,12 @@ $: if (player) {
         <div class="col text-center p-3">
             <div class="card_list h-100">
                 <div class="row">
-                    <div class="col-5  d-flex align-items-center">
+                    <div class="col-5 d-flex align-items-center">
                         <div class="ratio ratio-1x1">
                             {#if loading}
-                                <div
-                                    class="spinner-border text-danger centerBlock"
-                                    style="width: 5rem; height: 5rem;"
-                                    role="status">
-                                    <span class="sr-only">Loading...</span>
+                                <div class="placeholder-glow">
+                                    <div
+                                        class="placeholder h-100 w-100 rounded" />
                                 </div>
                             {:else}
                                 <img

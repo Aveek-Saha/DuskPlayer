@@ -12,8 +12,8 @@ export let theme;
 </h2>
 <p class="card-text mt-2">
     <span
-        class="badge rounded-pill album-art mw-100 text-truncate"
-        style="background-color: darkslategrey;">
+        id="artist"
+        class="badge rounded-pill album-art mw-100 text-truncate">
         {trackArtist}
     </span>
 </p>
