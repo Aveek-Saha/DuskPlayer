@@ -1,8 +1,6 @@
 <script>
 export let trackName;
 export let trackArtist;
-export let trackAlbum;
-export let theme;
 </script>
 
 <h2
@@ -11,9 +9,7 @@ export let theme;
     {trackName}
 </h2>
 <p class="card-text mt-2">
-    <span
-        id="artist"
-        class="badge rounded-pill album-art mw-100 text-truncate">
+    <span id="artist" class="badge rounded-pill album-art mw-100 text-truncate">
         {trackArtist}
     </span>
 </p>

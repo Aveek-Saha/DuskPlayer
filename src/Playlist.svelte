@@ -22,24 +22,23 @@ function changeSong(number) {
 }
 </script>
 
-<input
-    class="form-control"
-    id="search"
-    type="search"
-    bind:value={search}
-    placeholder="Search"
-    aria-label="Search" />
-<div id="playlist" class="list-group style-3">
-    {#each list as song, index (song)}
-        <a
-            href="javascript:;"
-            class="list-group-item list-group-item-action list"
-            on:click={changeSong(song.index)}>
-            <h6>
-                {song.name}
-                •
-                <small class="text-muted">{song.artist}</small>
-            </h6>
-        </a>
-    {/each}
+<div class="col-5 z-1 position-absolute d-flex flex-column h-100 p-0">
+    <input
+        type="search"
+        class="sticky-top rounded-0 border border-0 p-2 bg-body bg-opacity-75"
+        bind:value={search}
+        placeholder="Search playlist" />
+
+    <div
+        class="list-group list-group-flush flex-grow-1 overflow-y-scroll rounded-0"
+        style="backdrop-filter: blur(5px);">
+        {#each list as song, index (song)}
+            <button
+                class="list-group-item list-group-item-action bg-body bg-opacity-75 border-light"
+                on:click={changeSong(song.index)}>
+                <h6 class="mb-0 text-truncate">{song.name}</h6>
+                <small class="text-muted text-truncate">{song.artist}</small>
+            </button>
+        {/each}
+    </div>
 </div>

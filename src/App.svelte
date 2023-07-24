@@ -59,10 +59,12 @@ storage.has('path', function (error, hasKey) {
 
 function setTheme(data) {
     var icons = document.body.querySelectorAll('svg');
+    var artistBadge = document.body.querySelector('#artist');
     if (data.theme == 'light') {
         theme = 'light';
-        document.body.style.backgroundColor = '#F5F5F5';
+        document.body.style.backgroundColor = '#ffffff';
         document.body.style.color = '#212529';
+        artistBadge.style.backgroundColor = '#999999';
 
         icons.forEach((icon) => {
             icon.style.color = '#212529';
@@ -77,6 +79,8 @@ function setTheme(data) {
         });
     } else if (data.theme == 'disco') {
         theme = 'disco';
+        document.body.style.backgroundColor = '#212121';
+        document.body.style.color = 'azure';
         icons.forEach((icon) => {
             icon.style.color = 'azure';
         });
@@ -343,6 +347,37 @@ function startPlayer(arg) {
     });
 }
 
+function luminance(rgb) {
+    const RED = 0.2126;
+    const GREEN = 0.7152;
+    const BLUE = 0.0722;
+
+    const GAMMA = 2.4;
+    var a = rgb.map((v) => {
+        v /= 255;
+        return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, GAMMA);
+    });
+    return a[0] * RED + a[1] * GREEN + a[2] * BLUE;
+}
+
+function contrast(rgb1, rgb2) {
+    var lum1 = luminance(rgb1);
+    var lum2 = luminance(rgb2);
+    var brightest = Math.max(lum1, lum2);
+    var darkest = Math.min(lum1, lum2);
+    return (brightest + 0.05) / (darkest + 0.05);
+}
+
+export function getTextColor(rgb1, rgb2, hsl) {
+    const darken = 7.5;
+    const contrastRatio = contrast(rgb1, rgb2);
+
+    if (contrastRatio < 4.5) {
+        hsl = [hsl[0], hsl[1], hsl[2] - darken * (4.5 - contrastRatio)];
+    }
+    return hsl;
+}
+
 function getTags(audioFile) {
     var titles = [];
     const metadata = mm
@@ -370,23 +405,28 @@ function getTags(audioFile) {
                     if (theme == 'disco') {
                         var vibrant = new Vibrant(img);
                         var swatches = vibrant.swatches();
+
+                        const hsl = swatches['DarkMuted'].hsl.map((value) => {
+                            return value * 100;
+                        });
+                        const textHSL = getTextColor(
+                            swatches['DarkMuted'].rgb,
+                            swatches['Muted'].rgb,
+                            hsl
+                        );
                         if (swatches['Muted'])
                             document.body.style.backgroundColor = swatches[
                                 'Muted'
                             ].getHex();
                         else document.body.style.backgroundColor = '#212121';
-                        if (swatches['DarkMuted'])
-                            document.body.style.color = swatches[
-                                'DarkMuted'
-                            ].getHex();
-                        else document.body.style.color = 'azure';
+                        if (swatches['DarkMuted']) {
+                            document.body.style.color = `hsl(${textHSL[0]} ${textHSL[1]}% ${textHSL[2]}%)`;
+                        } else document.body.style.color = 'azure';
                         if (swatches['DarkMuted']) {
                             let artistPill = document.body.querySelector(
                                 '#artist'
                             );
-                            artistPill.style.backgroundColor = swatches[
-                                'DarkMuted'
-                            ].getHex();
+                            artistPill.style.backgroundColor = `hsl(${textHSL[0]} ${textHSL[1]}% ${textHSL[2]}%)`;
                         } else
                             document.body.querySelector(
                                 '#artist'
