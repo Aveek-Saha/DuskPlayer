@@ -58,4 +58,3 @@ function nextSong() {
         <i class="fas fa-step-forward fa-inverse" style="font-size: 2rem;" />
     </button>
 </div>
-
