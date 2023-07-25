@@ -56,7 +56,7 @@ Play/pause: <kbd>Space</kbd>
  
 # Upcoming Features
 Some new features and under the hood stuff that will be or has already been implemented. They'll be included in the next update.
-* Added auto update when new version is available. 
+* Nothing here yet! 
 
 # Contributing
 Please read [CONTRIBUTING.md](https://github.com/Aveek-Saha/MusicPlayer/blob/master/CONTRIBUTING.md) before raising a PR or creating an issue.
@@ -68,7 +68,7 @@ You can find the changelog for all releases [here](https://github.com/Aveek-Saha
 <a href="https://www.producthunt.com/posts/dusk-player?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-dusk-player" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=295233&theme=light" alt="Dusk Player - A minimalistic music player, designed for simplicity. | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 <br>
 
-### If you liked this, check out My Blog where I post tutorials and write about projects like this
-https://home.aveek.io/blog/
+### If you liked this, check out my other projects!
+https://home.aveek.io/
 
 <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
