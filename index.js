@@ -183,8 +183,8 @@ let win;
 function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({
-        width: 1000,
-        height: 620,
+        width: 750,
+        height: 450,
         icon: __dirname + '/dusk.png',
         webPreferences: {
             nodeIntegration: true,
