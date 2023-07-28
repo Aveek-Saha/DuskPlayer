@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 * Complete UI redesign.
 * Better readability in disco mode.
+* Fix icon not showing in the info window
+* Playlist overlay now has a frosted glass effect
 
 ## [6.0.0] - 2021-02-04
 ### Added

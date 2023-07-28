@@ -46,13 +46,13 @@ Volume down: <kbd>🠋</kbd> |
 Play/pause: <kbd>Space</kbd>
 
 # Screenshots
-<img src="https://home.aveek.io/blog/DuskPlayer/Screenshot4.png" width="30%"></img>
-<img src="https://home.aveek.io/blog/DuskPlayer/Screenshot3.png" width="30%"></img>
-<img src="https://home.aveek.io/blog/DuskPlayer/Screenshot2.png" width="30%"></img>
+<img src="https://github.com/Aveek-Saha/MovieBoard/assets/31800695/86064f1e-3378-4f85-8876-7fa7953d820f" width="32%"></img>
+<img src="https://github.com/Aveek-Saha/MovieBoard/assets/31800695/77a0f269-7eba-4bd8-b16e-f3b7677e2c3f" width="32%"></img>
+<img src="https://github.com/Aveek-Saha/MovieBoard/assets/31800695/6b2738ec-3a16-4395-864d-a2942525ab81" width="32%"></img>
 
-<img src="https://home.aveek.io/blog/DuskPlayer/Screenshot5.png" width="30%"></img>
-<img src="https://home.aveek.io/blog/DuskPlayer/Screenshot7.png" width="30%"></img>
-<img src="https://home.aveek.io/blog/DuskPlayer/Screenshot6.png" width="30%"></img>
+<img src="https://github.com/Aveek-Saha/MovieBoard/assets/31800695/1631c7b2-9f77-495c-b480-159e0b498649" width="32%"></img>
+<img src="https://github.com/Aveek-Saha/MovieBoard/assets/31800695/9ac44be0-d871-48f6-91ab-22daa1ca894e" width="32%"></img>
+<img src="https://github.com/Aveek-Saha/MovieBoard/assets/31800695/1d6589cb-bb57-49c5-9b51-5a987c74b5f3" width="32%"></img>
  
 # Upcoming Features
 Some new features and under the hood stuff that will be or has already been implemented. They'll be included in the next update.
