@@ -4,14 +4,14 @@ html, body {
 
 body{
     background-color: #212121;
-    padding: 3%;
+    /* padding: 3%;
     display:flex;
-    align-items:center;
+    align-items:center; */
     color: azure;
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: center;
-    overflow: hidden;
+    overflow: hidden; */
 }
 
 .progress{
@@ -150,12 +150,6 @@ body{
 .btn-primary-outline {
   background-color: transparent;
   border-color: transparent
-}
-#picture{
-    /* z-index: -1; */
-    /* width: 40vw;
-    margin-right: 3% */
-    width: 100%;
 }
 
 .progress-bar {

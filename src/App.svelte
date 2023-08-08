@@ -383,7 +383,8 @@ function getTags(audioFile) {
                     }
                 });
             } else {
-                img.style.display = 'none';
+                img.style.display = 'block';
+                img.src = 'assets/placeholder_600_600.png';
             }
         })
         .catch((err) => {
@@ -667,68 +668,88 @@ $: if (player) {
         if (!playListVisible) handleKeyboardPress(e.key);
     }} />
 
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid h-100">
+    <div class="row h-100 align-items-center">
         {#if playListVisible}
             <Playlist
                 {player}
                 on:changeSong={(event) => playPlaylistSong(event.detail.index)} />
         {/if}
-        <div class="col-5 my-auto">
-            {#if loading}
-                <div
-                    class="spinner-border text-danger centerBlock"
-                    style="width: 5rem; height: 5rem;"
-                    role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            {:else}<img id="picture" alt="" />{/if}
-        </div>
-
-        <div class="col">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <TrackDetails
-                        {trackName}
-                        {trackArtist}
-                        {trackAlbum}
-                        {theme} />
-                </div>
-
-                <div class="col-md-12 text-center">
-                    <PLaybackControls
-                        on:prevSong={prevSong}
-                        on:nextSong={nextSong}
-                        on:playMusic={playMusic}
-                        {songPlaying} />
-                </div>
-
-                <div class="col-md-12 text-center">
-                    <div id="timer">{timer}</div>
-                    <div id="duration">{duration}</div><br />
-
-                    <div
-                        class="progress"
-                        id="seek"
-                        bind:clientWidth={offsetWidth}
-                        on:click={(e) => seekToTime(e)}>
-                        <div
-                            class="progress-bar bg-danger"
-                            role="progressbar"
-                            id="progress"
-                            aria-valuemin="0"
-                            aria-valuemax="100" />
+        <div class="col text-center p-3">
+            <div class="card_list h-100">
+                <div class="row">
+                    <div class="col-5  d-flex align-items-center">
+                        <div class="ratio ratio-1x1">
+                            {#if loading}
+                                <div
+                                    class="spinner-border text-danger centerBlock"
+                                    style="width: 5rem; height: 5rem;"
+                                    role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            {:else}
+                                <img
+                                    id="picture"
+                                    class="card-img-top img-fluid rounded album-art"
+                                    style="object-fit: cover"
+                                    alt="Album art"
+                                    height={300}
+                                    width={300} />
+                            {/if}
+                        </div>
                     </div>
-                </div>
-                <br />
-                <div class="col-md-12" id="outerCtrl">
-                    <Settings
-                        on:showPlaylist={showPlaylist}
-                        on:toggleShuffle={toggleShuffle}
-                        {shuffle}
-                        on:togglemute={togglemute}
-                        bind:slider
-                        {mute} />
+                    <div class="col-7 d-flex align-items-center">
+                        <div class="card-body card-body_list p-2 w-100">
+                            <div class="row">
+                                <div class="col">
+                                    <TrackDetails
+                                        {trackName}
+                                        {trackArtist}
+                                        {trackAlbum}
+                                        {theme} />
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <PLaybackControls
+                                    on:prevSong={prevSong}
+                                    on:nextSong={nextSong}
+                                    on:playMusic={playMusic}
+                                    {songPlaying} />
+                            </div>
+
+                            <div class="row mb-1">
+                                <div class="col d-flex justify-content-between">
+                                    <div>{timer}</div>
+                                    <div>{duration}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div
+                                        class="progress"
+                                        id="seek"
+                                        bind:clientWidth={offsetWidth}
+                                        on:click={(e) => seekToTime(e)}>
+                                        <div
+                                            class="progress-bar bg-danger my-0"
+                                            role="progressbar"
+                                            id="progress"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4 d-flex align-items-center">
+                                <Settings
+                                    on:showPlaylist={showPlaylist}
+                                    on:toggleShuffle={toggleShuffle}
+                                    {shuffle}
+                                    on:togglemute={togglemute}
+                                    bind:slider
+                                    {mute} />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
